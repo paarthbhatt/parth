@@ -820,46 +820,67 @@ function AboutSection() {
 function ProjectsSection() {
   const items = [
     {
-      title: "Delhi Smart City Dashboard",
-      tag: "Sustainable Development",
-      img: "/smart-city-dashboard.png",
-      description: "A real-time dashboard for Delhi's smart city initiative, visualizing urban data to improve city management and citizen engagement.",
-      url: "https://delhi-smart-city.vercel.app/"
+      title: "SecretVault",
+      tag: "Security & Encryption",
+      img: "/secure-app-prototype.png",
+      description: "Enterprise-grade API key management with AES encryption and zero-knowledge architecture for secure storage and access control.",
+      url: "https://github.com/paarthbhatt/SecretVault"
     },
     {
-      title: "STEM Code Lab",
-      tag: "Coding Simulations",
+      title: "WHOIS Lookup Tool",
+      tag: "Threat Intelligence",
       img: "/threat-intel-parser.png",
-      description: "An interactive platform for students to learn coding through hands-on simulations and challenges.",
-      url: "https://stem-codelab.vercel.app/"
+      description: "Python CLI tool for bulk domain WHOIS lookups with parallel processing, rate-limiting, and CSV/JSON export for threat analysis.",
+      url: "https://github.com/paarthbhatt/Whois-Lookup-Terminal-Tool"
     },
     {
-      title: "Eco Track",
-      tag: "Environmental Monitoring",
-      img: "/eco-track.png",
-      description: "A tool for tracking and analyzing environmental data to promote sustainability and eco-friendly practices.",
-      url: "https://eco-track-chi.vercel.app/"
+      title: "SurveillanceOps",
+      tag: "Security Monitoring",
+      img: "/ai-camera.png",
+      description: "Enterprise-grade surveillance platform with real-time object detection, encrypted data transmission, interactive maps, and comprehensive analytics.",
+      url: "https://surveillance-platform-updated.vercel.app/"
     },
     {
       title: "AI-Based Camera",
-      tag: "AI in Surveillance",
+      tag: "Security Surveillance",
       img: "/ai-camera.png",
-      description: "A smart surveillance system using AI to detect and alert on unusual activities in real-time.",
+      description: "A smart surveillance system using AI to detect and alert on unusual activities in real-time with threat detection capabilities.",
       url: "https://circuitech-ai-based-camera.vercel.app/main.html"
     },
     {
+      title: "STEM Code Lab",
+      tag: "Security Education",
+      img: "/threat-intel-parser.png",
+      description: "An interactive platform for students to learn coding and security concepts through hands-on simulations and challenges.",
+      url: "https://stem-codelab.vercel.app/"
+    },
+    {
+      title: "Delhi Smart City Dashboard",
+      tag: "Cybersecurity Infrastructure",
+      img: "/smart-city-dashboard.png",
+      description: "A real-time dashboard for Delhi's smart city initiative with secure data visualization and monitoring for critical infrastructure.",
+      url: "https://delhi-smart-city.vercel.app/"
+    },
+    {
       title: "Machine Learning Model and Interpretations of Netflix dataset",
-      tag: "Visualizations and Statistical summaries",
+      tag: "Data Analysis & Security",
       img: "/ml-netflix.png",
-      description: "Built and interpreted ML models on Netflix data, providing insights through visualizations and statistics.",
+      description: "Built and interpreted ML models on Netflix data, providing insights through visualizations and statistical analysis for security research.",
       url: "https://github.com/paarthbhatt/Netflix-data-files"
     },
     {
       title: "Netflix Clone",
-      tag: "Web Development",
+      tag: "Secure Web Development",
       img: "/netflix-clone.png",
-      description: "A full-stack clone of Netflix with authentication, streaming UI, and personalized recommendations.",
+      description: "A full-stack clone of Netflix with authentication, streaming UI, and security-focused implementation of web applications.",
       url: "https://netflix-clone-tau-black.vercel.app/"
+    },
+    {
+      title: "Eco Track",
+      tag: "IoT Security",
+      img: "/eco-track.png",
+      description: "A tool for tracking and analyzing environmental data with secure IoT integration and data protection practices.",
+      url: "https://eco-track-chi.vercel.app/"
     },
   ]
   return (
