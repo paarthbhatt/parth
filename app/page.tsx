@@ -823,37 +823,43 @@ function ProjectsSection() {
       title: "Delhi Smart City Dashboard",
       tag: "Sustainable Development",
       img: "/smart-city-dashboard.png",
-      description: "A real-time dashboard for Delhi's smart city initiative, visualizing urban data to improve city management and citizen engagement."
+      description: "A real-time dashboard for Delhi's smart city initiative, visualizing urban data to improve city management and citizen engagement.",
+      url: "https://delhi-smart-city.vercel.app/"
     },
     {
       title: "STEM Code Lab",
       tag: "Coding Simulations",
       img: "/threat-intel-parser.png",
-      description: "An interactive platform for students to learn coding through hands-on simulations and challenges."
+      description: "An interactive platform for students to learn coding through hands-on simulations and challenges.",
+      url: "https://stem-codelab.vercel.app/"
     },
     {
       title: "Eco Track",
       tag: "Environmental Monitoring",
       img: "/eco-track.png",
-      description: "A tool for tracking and analyzing environmental data to promote sustainability and eco-friendly practices."
+      description: "A tool for tracking and analyzing environmental data to promote sustainability and eco-friendly practices.",
+      url: "https://eco-track-chi.vercel.app/"
     },
     {
       title: "AI-Based Camera",
       tag: "AI in Surveillance",
       img: "/ai-camera.png",
-      description: "A smart surveillance system using AI to detect and alert on unusual activities in real-time."
+      description: "A smart surveillance system using AI to detect and alert on unusual activities in real-time.",
+      url: "https://circuitech-ai-based-camera.vercel.app/main.html"
     },
     {
       title: "Machine Learning Model and Interpretations of Netflix dataset",
       tag: "Visualizations and Statistical summaries",
       img: "/ml-netflix.png",
-      description: "Built and interpreted ML models on Netflix data, providing insights through visualizations and statistics."
+      description: "Built and interpreted ML models on Netflix data, providing insights through visualizations and statistics.",
+      url: "https://github.com/paarthbhatt/Netflix-data-files"
     },
     {
       title: "Netflix Clone",
       tag: "Web Development",
       img: "/netflix-clone.png",
-      description: "A full-stack clone of Netflix with authentication, streaming UI, and personalized recommendations."
+      description: "A full-stack clone of Netflix with authentication, streaming UI, and personalized recommendations.",
+      url: "https://netflix-clone-tau-black.vercel.app/"
     },
   ]
   return (
@@ -864,16 +870,24 @@ function ProjectsSection() {
       <TerminalStrip label="[PROJECTS]" meta="evidence • shipped" />
       <div className="container mx-auto max-w-7xl mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {items.map((p, i) => (
-          <article key={i} className="bg-white/85 dark:bg-gray-800/80 rounded-2xl p-4 shadow-xl holo card-3d">
-            <img src={p.img || "/placeholder.svg"} alt={p.title} className="w-full h-40 object-cover rounded-xl mb-3" />
-            <span className="inline-block px-2 py-1 text-xs font-mono bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 rounded">
-              {p.tag}
-            </span>
-            <h4 className="mt-2 text-lg font-bold text-gray-800 dark:text-white">{p.title}</h4>
-            <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-              {p.description}
-            </p>
-          </article>
+          <a
+            key={i}
+            href={p.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block bg-white/85 dark:bg-gray-800/80 rounded-2xl p-4 shadow-xl holo card-3d cursor-pointer hover:shadow-emerald-500/20 transition-all duration-300"
+          >
+            <article>
+              <img src={p.img || "/placeholder.svg"} alt={p.title} className="w-full h-40 object-cover rounded-xl mb-3" />
+              <span className="inline-block px-2 py-1 text-xs font-mono bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 rounded">
+                {p.tag}
+              </span>
+              <h4 className="mt-2 text-lg font-bold text-gray-800 dark:text-white">{p.title}</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                {p.description}
+              </p>
+            </article>
+          </a>
         ))}
       </div>
     </section>
