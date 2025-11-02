@@ -181,7 +181,7 @@ function TerminalStrip({
   )
 }
 
-// Enhanced Header Component
+// Hacker Header Component
 function Header({
   isContactOpen,
   setIsContactOpen,
@@ -190,30 +190,33 @@ function Header({
   return (
     <header
       className={[
-        "fixed top-0 left-0 right-0 z-40 rounded-b-2xl border-b border-emerald-500/25 bg-white/75 dark:bg-black/70 backdrop-blur-md shadow-[0_6px_30px_-10px_rgba(16,185,129,0.35)] transition-all duration-700",
+        "fixed top-0 left-0 right-0 z-40 border-b-2 border-emerald-500/30 bg-black/90 backdrop-blur-md shadow-[0_8px_32px_-8px_rgba(16,185,129,0.4)] transition-all duration-700 relative overflow-hidden",
         introDone ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4",
       ].join(" ")}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Scanlines */}
+      <div className="absolute inset-0 scanlines opacity-10 pointer-events-none"></div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-blue-400 shadow-[0_0_8px_#60a5fa]" />
-            <div className="ml-3 w-10 h-10 rounded-full bg-gradient-to-br from-emerald-600 to-cyan-600 text-white font-bold flex items-center justify-center shadow-lg">
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse" />
+            <span className="h-2.5 w-2.5 rounded-full bg-cyan-500 shadow-[0_0_8px_#06b6d4] animate-pulse" />
+            <span className="h-2.5 w-2.5 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6] animate-pulse" />
+            <div className="ml-3 w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 text-white font-bold flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.5)] border border-emerald-500">
               PB
             </div>
           </div>
 
           <div className="absolute left-1/2 -translate-x-1/2">
-            <h1 className="text-lg sm:text-xl font-bold font-mono text-gray-900 dark:text-white tracking-tight">
+            <h1 className="text-lg sm:text-xl font-bold font-mono text-emerald-400 tracking-tight">
               Parth Bhatt
             </h1>
           </div>
 
           <div className="w-[112px] sm:w-[128px]" aria-hidden="true" />
         </div>
-        <div className="h-0.5 w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 opacity-90 rounded-full" />
+        <div className="h-0.5 w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 opacity-70" />
       </div>
     </header>
   )
@@ -330,7 +333,7 @@ function HorizontalSlider({
   )
 }
 
-// Certifications Section
+// Certifications Section - Hacker Style
 function CertificationsSection() {
   const certifications = [
     {
@@ -339,8 +342,7 @@ function CertificationsSection() {
       date: "2025",
       icon: Shield,
       bgGradient: "from-blue-500 to-cyan-600",
-      description:
-        "Comprehensive cybersecurity training covering threat detection, incident response, and security analysis",
+      description: "Comprehensive cybersecurity training covering threat detection, incident response, and security analysis",
     },
     {
       title: "Foundation Level Threat Intelligence Analyst",
@@ -348,8 +350,7 @@ function CertificationsSection() {
       date: "2025",
       icon: Eye,
       bgGradient: "from-red-500 to-pink-600",
-      description:
-        "Specialized training in threat intelligence analysis, cyber threat hunting, and security intelligence",
+      description: "Specialized training in threat intelligence analysis, cyber threat hunting, and security intelligence",
     },
     {
       title: "GitHub Foundations",
@@ -357,8 +358,7 @@ function CertificationsSection() {
       date: "2025",
       icon: GitBranch,
       bgGradient: "from-green-500 to-emerald-600",
-      description:
-        "Mastery of version control, collaborative development workflows, and open-source contribution practices",
+      description: "Mastery of version control, collaborative development workflows, and open-source contribution practices",
     },
     {
       title: "Pre-Security Certificate",
@@ -366,70 +366,83 @@ function CertificationsSection() {
       date: "2025",
       icon: Shield,
       bgGradient: "from-yellow-500 to-orange-600",
-      description:
-        "Foundational cybersecurity knowledge covering network security, web application security, and digital forensics",
+      description: "Foundational cybersecurity knowledge covering network security, web application security, and digital forensics",
     },
   ]
 
   return (
     <section
       id="certifications"
-      className="relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-950 dark:to-gray-950"
+      className="relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950"
     >
-      <TerminalStrip label="[CERT.LOG] Certifications" meta="channel: training • integrity: high" />
-      <div className="pointer-events-none absolute inset-0">
-        <div className="subtle-grid" />
-        <div className="orb bg-emerald-400/20 w-28 sm:w-40 h-28 sm:h-40 top-6 left-8" />
-        <div className="orb bg-cyan-400/20 w-24 sm:w-36 h-24 sm:h-36 bottom-10 right-10" />
-        <div className="orb bg-blue-400/20 w-20 sm:w-28 h-20 sm:h-28 top-1/2 left-1/3" />
+      {/* Matrix background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.02)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
       </div>
 
-      <div className="container mx-auto max-w-7xl">
-        <div className="text-center mb-6 mt-6">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 font-mono text-emerald-600 dark:text-emerald-400">
-            Professional Certifications
-          </h2>
-          <div className="flex justify-center">
-            <p className="typing font-mono text-emerald-500/90 text-xs sm:text-sm space-y-1">
-              [LOAD] parsing credential store…
-            </p>
-          </div>
+      <TerminalStrip label="[CREDENTIALS.SCAN]" meta="verifying • certification_store" />
+      
+      <div className="container mx-auto max-w-7xl relative z-10">
+        <div className="text-center mb-4 sm:mb-6 mt-4 sm:mt-6 px-2">
+          <pre className="text-[8px] xs:text-[10px] sm:text-xs font-mono text-emerald-500 dark:text-emerald-400 whitespace-pre-wrap overflow-x-auto">
+            {`╔═══════════════════════════════╗
+║  CERT DB VERIFIED ✓      ║
+╚═══════════════════════════════╝`}
+          </pre>
         </div>
 
-        <div className="mt-4 sm:mt-6">
+        <div className="mt-6 sm:mt-8">
           <HorizontalSlider ariaLabel="Certifications slider">
             {certifications.map((cert, index) => (
               <div
                 key={index}
-                className="group relative snap-start min-w-[320px] sm:min-w-[420px] lg:min-w-[520px] max-w-[560px] bg-white/85 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 mr-3 shadow-xl hover:shadow-emerald-500/20 transform hover:-translate-y-3 transition-all duration-500 card-3d overflow-hidden holo"
+                className="group relative snap-start min-w-[280px] sm:min-w-[380px] lg:min-w-[450px] bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 mr-3 shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:border-emerald-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] transition-all duration-300 overflow-hidden"
               >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${cert.bgGradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
-                />
-                <div className="scanlines pointer-events-none" />
-                <div
-                  className={`relative w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br ${cert.bgGradient} rounded-2xl flex items-center justify-center mb-5 transform group-hover:scale-110 transition-all duration-500 shadow-lg`}
-                >
-                  <cert.icon className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
+                {/* Scanlines */}
+                <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
+                
+                {/* Badge */}
+                <div className="relative z-10 flex items-start gap-4">
+                  <div className={`w-16 h-16 bg-gradient-to-br ${cert.bgGradient} rounded-lg flex items-center justify-center border-2 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.3)] group-hover:scale-110 transition-transform`}>
+                    <cert.icon className="w-8 h-8 text-white" />
+                  </div>
+                  
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs font-mono bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded border border-emerald-500/30">
+                        [{cert.date}]
+                      </span>
+                      <span className="text-xs font-mono text-emerald-500/70">@ {cert.issuer}</span>
+                    </div>
+                    <h3 className="text-base font-bold font-mono text-emerald-400 mb-2 leading-tight">
+                      {cert.title}
+                    </h3>
+                    <p className="text-xs text-gray-400 font-mono leading-relaxed">
+                      {cert.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-2 leading-tight">
-                  {cert.title}
-                </h3>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-1">{cert.issuer}</p>
-                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-4">{cert.date}</p>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {cert.description}
-                </p>
+
+                {/* Verification stamp */}
+                <div className="absolute bottom-2 right-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                  <div className="text-xs font-mono text-emerald-500">✓ VERIFIED</div>
+                </div>
               </div>
             ))}
           </HorizontalSlider>
+        </div>
+
+        <div className="text-center mt-6 sm:mt-8 px-2">
+          <p className="text-xs font-mono text-emerald-500/50">
+            [*] Total certificates verified: {certifications.length} | Status: ✓ AUTHENTICATED
+          </p>
         </div>
       </div>
     </section>
   )
 }
 
-// Achievements Section
+// Achievements Section - Hacker Style
 function AchievementsSection() {
   const achievements = [
     {
@@ -439,8 +452,7 @@ function AchievementsSection() {
       date: "Feb 2025",
       icon: Award,
       bgGradient: "from-yellow-500 to-orange-600",
-      description:
-        "Recognized for exceptional mobile application development skills and innovative problem-solving approach in a competitive coding environment.",
+      description: "Recognized for exceptional mobile application development skills and innovative problem-solving approach in a competitive coding environment.",
     },
     {
       title: "1st Position – Design Dojo Event",
@@ -449,8 +461,7 @@ function AchievementsSection() {
       date: "2025",
       icon: Users,
       bgGradient: "from-green-500 to-emerald-600",
-      description:
-        "Demonstrated superior design thinking and creativity, leading to first place in a prestigious university-level design competition.",
+      description: "Demonstrated superior design thinking and creativity, leading to first place in a prestigious university-level design competition.",
     },
     {
       title: "Delhi Smart City Command Center",
@@ -459,64 +470,83 @@ function AchievementsSection() {
       date: "May 2025",
       icon: Building,
       bgGradient: "from-red-500 to-pink-600",
-      description:
-        "Developed a comprehensive smart city dashboard focused on Delhi, showcasing real-time and historical urban data to enhance city management and citizen engagement through interactive visualizations.",
+      description: "Developed a comprehensive smart city dashboard focused on Delhi, showcasing real-time and historical urban data to enhance city management and citizen engagement through interactive visualizations.",
     },
   ]
 
   return (
     <section
       id="achievements"
-      className="relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950"
+      className="relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950"
     >
-      <TerminalStrip label="[ACHV.LOG] Achievements" meta="scope: impact • signal: strong" />
-      <div className="pointer-events-none absolute inset-0">
-        <div className="subtle-grid" />
-        <div className="orb bg-pink-400/20 w-24 sm:w-36 h-24 sm:h-36 top-8 right-8" />
-        <div className="orb bg-cyan-400/20 w-20 sm:w-28 h-20 sm:h-28 bottom-10 left-12" />
-        <div className="orb bg-green-400/25 w-20 sm:w-36 h-20 sm:h-36 top-1/2 right-1/3" />
+      {/* Matrix background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.02)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
       </div>
 
-      <div className="container mx-auto max-w-7xl">
-        <div className="text-center mb-6 mt-6">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 font-mono text-cyan-600 dark:text-cyan-400">
-            Key Achievements
-          </h2>
-          <div className="flex justify-center">
-            <p className="typing font-mono text-emerald-500/90 text-xs sm:text-sm" style={{ animationDelay: "0.25s" }}>
-              [OK] signals verified • rendering cards…
-            </p>
-          </div>
+      <TerminalStrip label="[ACHIEVEMENT.DAT]" meta="unlocked • trophy_scan" />
+      
+      <div className="container mx-auto max-w-7xl relative z-10">
+        <div className="text-center mb-4 sm:mb-8 mt-4 sm:mt-6 px-2">
+          <pre className="text-[8px] xs:text-[10px] sm:text-xs font-mono text-emerald-500 dark:text-emerald-400 whitespace-pre-wrap overflow-x-auto">
+            {`╔═══════════════════════════════╗
+║  ACHIEVEMENTS UNLOCKED ✓  ║
+╚═══════════════════════════════╝`}
+          </pre>
         </div>
 
-        <div className="mt-4 sm:mt-6">
+        <div className="mt-6 sm:mt-8">
           <HorizontalSlider ariaLabel="Achievements slider">
             {achievements.map((achievement, index) => (
               <div
                 key={index}
-                className="group relative snap-start min-w-[340px] sm:min-w-[460px] lg:min-w-[560px] max-w-[600px] bg-white/85 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-7 sm:p-9 mr-3 shadow-xl hover:shadow-emerald-500/20 transform hover:-translate-y-3 transition-all duration-500 card-3d overflow-hidden holo"
+                className="group relative snap-start min-w-[300px] sm:min-w-[420px] lg:min-w-[550px] bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 mr-3 shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:border-emerald-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] transition-all duration-300 overflow-hidden"
               >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${achievement.bgGradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
-                />
-                <div className="scanlines pointer-events-none" />
-                <div
-                  className={`relative w-16 h-16 sm:w-18 sm:h-18 bg-gradient-to-br ${achievement.bgGradient} rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 transition-all duration-500 shadow-lg`}
-                >
-                  <achievement.icon className="w-8 h-8 sm:w-9 sm:h-9 text-white" />
+                {/* Scanlines */}
+                <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
+                
+                {/* Achievement display */}
+                <div className="relative z-10">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className={`w-16 h-16 bg-gradient-to-br ${achievement.bgGradient} rounded-lg flex items-center justify-center border-2 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.3)] group-hover:scale-110 transition-transform`}>
+                      <achievement.icon className="w-8 h-8 text-white" />
+                    </div>
+                    
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xs font-mono bg-cyan-500/20 text-cyan-400 px-2 py-1 rounded border border-cyan-500/30">
+                          [ACHIEVEMENT]
+                        </span>
+                        <span className="text-xs font-mono text-emerald-500/70">{achievement.date}</span>
+                      </div>
+                      <h3 className="text-lg font-bold font-mono text-emerald-400 mb-1">
+                        {achievement.title}
+                      </h3>
+                      <p className="text-xs font-mono text-cyan-400 mb-2">
+                        {achievement.subtitle}
+                      </p>
+                      <p className="text-xs text-emerald-500/70 font-mono">@ {achievement.issuer}</p>
+                    </div>
+                  </div>
+                  
+                  <p className="text-xs text-gray-400 font-mono leading-relaxed">
+                    {achievement.description}
+                  </p>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-2">
-                  {achievement.title}
-                </h3>
-                <p className="text-base sm:text-lg text-purple-600 dark:text-purple-400 font-semibold mb-2">
-                  {achievement.subtitle}
-                </p>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">{achievement.issuer}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{achievement.date}</p>
-                <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed">{achievement.description}</p>
+
+                {/* Trophy icon effect */}
+                <div className="absolute top-2 right-2 opacity-30 group-hover:opacity-100 transition-opacity">
+                  <div className="text-sm font-mono text-emerald-500 animate-pulse">🏆</div>
+                </div>
               </div>
             ))}
           </HorizontalSlider>
+        </div>
+
+        <div className="text-center mt-6 sm:mt-8 px-2">
+          <p className="text-xs font-mono text-emerald-500/50">
+            [*] Total achievements unlocked: {achievements.length} | Status: ✓ VERIFIED
+          </p>
         </div>
       </div>
     </section>
@@ -664,7 +694,7 @@ export default function App() {
         </div>
       )}
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-900 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-black to-slate-950 px-4 sm:px-6 lg:px-8">
         <Header isContactOpen={isContactOpen} setIsContactOpen={setIsContactOpen} introDone={!showIntro} />
         <main className="pt-20 space-y-12 md:space-y-14">
           <HeroSection isPitchOpen={isPitchOpen} setIsPitchOpen={setIsPitchOpen} setIsContactOpen={setIsContactOpen} />
@@ -685,60 +715,64 @@ export default function App() {
   )
 }
 
-// Neutral Portfolio Hero Section
+// Hacker Portfolio Hero Section
 function HeroSection({
   isPitchOpen,
   setIsPitchOpen,
   setIsContactOpen,
 }: { isPitchOpen: boolean; setIsPitchOpen: (open: boolean) => void; setIsContactOpen: (open: boolean) => void }) {
   return (
-    <section className="relative min-h-[92vh] md:min-h-[105vh] lg:min-h-[115vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-gray-950 dark:via-gray-900 dark:to-slate-900 px-4 sm:px-6 lg:px-8">
-      {/* Cyber background content */}
+    <section className="relative min-h-[92vh] md:min-h-[105vh] lg:min-h-[115vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-black to-slate-950 px-4 sm:px-6 lg:px-8">
+      {/* Matrix background */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* faint code snippets */}
-        <div className="absolute inset-0 opacity-10 dark:opacity-10">
-          <div className="absolute top-20 left-4 sm:left-10 text-sky-600 font-mono text-xs sm:text-sm animate-bounce">
-            {"<Portfolio />"}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        
+        {/* Hacker code snippets */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-20 left-4 sm:left-10 text-emerald-500 font-mono text-xs sm:text-sm animate-pulse">
+            {"const protect = () => encrypt()"}
           </div>
-          <div className="absolute top-40 right-4 sm:right-20 text-emerald-600 font-mono text-xs sm:text-sm animate-bounce delay-1000">
-            {"function defend() { return true }"}
+          <div className="absolute top-40 right-4 sm:right-20 text-cyan-500 font-mono text-xs sm:text-sm animate-pulse delay-1000">
+            {"# cyber-threat-intel"}
           </div>
-          <div className="absolute bottom-40 left-4 sm:left-20 text-cyan-600 font-mono text-xs sm:text-sm animate-bounce delay-2000">
-            {'const focus = ["Threat Intel","AppSec"]'}
+          <div className="absolute bottom-40 left-4 sm:left-20 text-blue-500 font-mono text-xs sm:text-sm animate-pulse delay-2000">
+            {'$ sudo analyze --network'}
           </div>
-          <div className="absolute bottom-20 right-4 sm:right-10 text-blue-600 font-mono text-xs sm:text-sm animate-bounce delay-3000">
-            {"// ship secure experiences"}
+          <div className="absolute bottom-20 right-4 sm:right-10 text-green-500 font-mono text-xs sm:text-sm animate-pulse delay-3000">
+            {"// zero_day_protection"}
           </div>
         </div>
-        {/* colorful soft orbs */}
-        <div className="absolute top-1/4 left-1/5 w-24 sm:w-40 h-24 sm:h-40 bg-sky-400/25 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute top-2/3 right-1/4 w-28 sm:w-48 h-28 sm:h-48 bg-emerald-400/25 rounded-full blur-2xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-1/3 left-1/3 w-20 sm:w-36 h-20 sm:h-36 bg-cyan-400/25 rounded-full blur-2xl animate-pulse delay-2000"></div>
-        <div className="absolute top-1/2 right-1/3 w-24 sm:w-44 h-24 sm:h-44 bg-pink-400/20 rounded-full blur-2xl animate-pulse delay-3000"></div>
-        {/* subtle grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.06)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        
+        {/* Glowing orbs */}
+        <div className="absolute top-1/4 left-1/5 w-32 sm:w-52 h-32 sm:h-52 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-2/3 right-1/4 w-36 sm:w-60 h-36 sm:h-60 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-1/3 left-1/3 w-28 sm:w-48 h-28 sm:h-48 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
 
       <div className="relative z-10 text-center max-w-6xl mx-auto">
-        <div className="mb-6 flex justify-center">
-          <img
-            src="/parth-bhatt-portrait.png"
-            alt="Parth Bhatt portrait"
-            className="w-28 h-28 sm:w-36 sm:h-36 rounded-full border border-emerald-400 shadow-[0_0_24px_rgba(16,185,129,0.35)]"
-          />
+        {/* Profile Avatar with glow */}
+        <div className="mb-8 flex justify-center">
+          <div className="relative group">
+            <div className="absolute -inset-2 bg-emerald-500 rounded-full blur-lg opacity-50 group-hover:opacity-75 transition-opacity animate-pulse"></div>
+            <img
+              src="/parth-bhatt-portrait.png"
+              alt="Parth Bhatt portrait"
+              className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-emerald-500 shadow-[0_0_40px_rgba(16,185,129,0.5)]"
+            />
+          </div>
         </div>
 
-        <h1 className="mb-2">
-          <NameDisplay />
+        <h1 className="mb-4">
+          <NameDisplay glitch={false} />
         </h1>
 
-        {/* Rotating line: role -> what I do -> quotes */}
-        <div className="mb-6">
+        {/* Rotating role titles */}
+        <div className="mb-8">
           <RotatingGlitchText
             items={[
               "Cyber Threat Intelligence Analyst",
               "Translating noise into signal • building secure tools",
-              "“Security is a process, not a product.” — Schneier",
+              "Security is a process, not a product. — Schneier",
               "The Best Offense is the Best Defense",
               "Google Developer Certified",
               "Curiosity-driven. Reliable. Security-first.",
@@ -746,30 +780,30 @@ function HeroSection({
           />
         </div>
 
-        <div className="space-y-2 mb-8">
+        {/* Status messages */}
+        <div className="space-y-2 mb-10">
           <Typewriter
-            text="[OPEN] handshake complete • secure session established"
+            text="[✓] handshake complete • secure session established"
             delay={200}
             speed={18}
-            className="font-mono text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm"
+            className="font-mono text-emerald-400 text-xs sm:text-sm"
           />
           <br />
           <Typewriter
-            text="[FACT] tech-savvy • driven • can think quick on their feet • adaptable"
+            text="[INFO] tech-savvy • driven • adaptive • security-focused"
             delay={700}
             speed={18}
-            className="font-mono text-cyan-600 dark:text-cyan-400 text-xs sm:text-sm"
+            className="font-mono text-cyan-400 text-xs sm:text-sm"
           />
         </div>
 
-        {/* ... existing chips if any ... */}
-
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="cyber-btn"
+            className="cyber-btn group"
             aria-label="Open Resume PDF"
           >
             <span className="cyber-btn__label">RESUME</span>
@@ -786,137 +820,321 @@ function HeroSection({
   )
 }
 
-// About Section
+// About Section - Hacker Style
 function AboutSection() {
   return (
-    <section id="about" className="relative py-12 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950 section-hover-tint">
-      <TerminalStrip label="[ABOUT]" meta="whoami • profile" />
-      <div className="container mx-auto max-w-5xl mt-6 grid md:grid-cols-3 gap-6">
-        <div className="md:col-span-1">
-          <img
-            src="/parth-bhatt-portrait.png"
-            alt="Parth Bhatt"
-            className="w-40 h-40 rounded-2xl border border-emerald-400/60 shadow-[0_0_24px_rgba(16,185,129,0.25)] mx-auto md:mx-0"
-          />
-        </div>
-        <div className="md:col-span-2">
-          <h3 className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400 mb-2">About</h3>
-          <p className="typing-wide font-mono text-emerald-500/90 text-xs sm:text-sm">
-            [INFO] concise summary incoming…
-          </p>
-          <p className="mt-4 text-gray-700 dark:text-gray-300 leading-relaxed">
-            I’m Parth Bhatt, a cybersecurity enthusiast and B.Tech student from New Delhi who loves solving digital puzzles and outsmarting threats. Ever since I got my first computer at age 7, I’ve been fascinated by how systems work—and how to secure them.
-          </p>
-          <p className="mt-4 text-gray-700 dark:text-gray-300 leading-relaxed">
-            From ethical hacking to defensive security, I thrive on challenges that blend logic, strategy, and creativity. My goal? To turn passion into impact by protecting digital spaces and building smarter, safer systems.
-          </p>
+    <section id="about" className="relative py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden">
+      {/* Matrix background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.02)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+      </div>
+
+      <TerminalStrip label="[SYSTEM_INFO.EXE]" meta="whoami • profile_scan" />
+      
+      <div className="container mx-auto max-w-5xl mt-4 sm:mt-8 relative z-10">
+        <div className="bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
+          {/* Scanlines */}
+          <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
+          
+          <div className="grid md:grid-cols-3 gap-4 sm:gap-6 relative z-10">
+            <div className="md:col-span-1 flex justify-center">
+              <img
+                src="/parth-bhatt-portrait.png"
+                alt="Parth Bhatt"
+                className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.4)]"
+              />
+            </div>
+            <div className="md:col-span-2 space-y-3 sm:space-y-4">
+              <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                <h3 className="text-xl sm:text-2xl font-bold font-mono text-emerald-400">$ ./whoami</h3>
+              </div>
+              
+              <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <span className="text-emerald-500 flex-shrink-0">[✦]</span>
+                  <p className="text-gray-300 leading-relaxed">
+                    I'm Parth Bhatt, a cybersecurity enthusiast and B.Tech student from New Delhi who loves solving digital puzzles and outsmarting threats. Ever since I got my first computer at age 7, I've been fascinated by how systems work—and how to secure them.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <span className="text-emerald-500 flex-shrink-0">[✦]</span>
+                  <p className="text-gray-300 leading-relaxed">
+                    From ethical hacking to defensive security, I thrive on challenges that blend logic, strategy, and creativity. My goal? To turn passion into impact by protecting digital spaces and building smarter, safer systems.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-emerald-500/30">
+                <p className="text-[10px] sm:text-xs font-mono text-emerald-500/70">
+                  <span className="animate-pulse">●</span> STATUS: [ACTIVE] | MODE: [SECURITY-FIRST] | LOCATION: [NEW_DELHI]
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-// Projects Section
+// Hacker-style ASCII Art Component
+function ASCIIArt({ text, delay = 0 }: { text: string; delay?: number }) {
+  const [displayedText, setDisplayedText] = useState("")
+  const [isComplete, setIsComplete] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      let currentIndex = 0
+      const interval = setInterval(() => {
+        if (currentIndex < text.length) {
+          // Replace \n with actual newlines for display
+          const currentText = text.slice(0, currentIndex + 1).replace(/\\n/g, '\n')
+          setDisplayedText(currentText)
+          currentIndex++
+        } else {
+          clearInterval(interval)
+          setIsComplete(true)
+        }
+      }, 8)
+      return () => clearInterval(interval)
+    }, delay)
+
+    return () => clearTimeout(timer)
+  }, [text, delay])
+
+  return (
+    <pre className="text-[10px] sm:text-xs font-mono text-emerald-500 dark:text-emerald-400 whitespace-pre animate-pulse">
+      {displayedText}
+    </pre>
+  )
+}
+
+// Projects Section - Hacker Style
 function ProjectsSection() {
-  const items = [
+  const [selectedCategory, setSelectedCategory] = useState<"security" | "web" | "other">("security")
+  const [isHacking, setIsHacking] = useState(false)
+
+  const securityProjects = [
     {
       title: "SecretVault",
       tag: "Security & Encryption",
       img: "/secure-app-prototype.png",
-      description: "Enterprise-grade API key management with AES encryption and zero-knowledge architecture for secure storage and access control.",
-      url: "https://github.com/paarthbhatt/SecretVault"
+      description: "Enterprise-grade API key management with AES encryption and zero-knowledge architecture.",
+      url: "https://github.com/paarthbhatt/SecretVault",
+      ascii: "╔════════════════╗\n║   SECRET VAULT  ║\n║  [ENCRYPTED]    ║\n║  AES-256-GCM    ║\n╚════════════════╝"
     },
     {
       title: "WHOIS Lookup Tool",
       tag: "Threat Intelligence",
       img: "/threat-intel-parser.png",
-      description: "Python CLI tool for bulk domain WHOIS lookups with parallel processing, rate-limiting, and CSV/JSON export for threat analysis.",
-      url: "https://github.com/paarthbhatt/Whois-Lookup-Terminal-Tool"
+      description: "Python CLI for bulk domain WHOIS lookups with parallel processing and rate-limiting.",
+      url: "https://github.com/paarthbhatt/Whois-Lookup-Terminal-Tool",
+      ascii: "╔════════════════╗\n║   WHOIS SCAN    ║\n║  [DOMAIN] <--   ║\n║  → [OWNER]      ║\n╚════════════════╝"
     },
     {
       title: "SurveillanceOps",
       tag: "Security Monitoring",
       img: "/ai-camera.png",
-      description: "Enterprise-grade surveillance platform with real-time object detection, encrypted data transmission, interactive maps, and comprehensive analytics.",
-      url: "https://surveillance-platform-updated.vercel.app/"
+      description: "Enterprise surveillance platform with real-time detection and encrypted analytics.",
+      url: "https://surveillance-platform-updated.vercel.app/",
+      ascii: "╔════════════════╗\n║  SURVEILLANCE   ║\n║  [MONITOR] ◉◉◉  ║\n║  AI-DETECT ✓    ║\n╚════════════════╝"
     },
+  ]
+
+  const webProjects = [
     {
-      title: "AI-Based Camera",
-      tag: "Security Surveillance",
-      img: "/ai-camera.png",
-      description: "A smart surveillance system using AI to detect and alert on unusual activities in real-time with threat detection capabilities.",
-      url: "https://circuitech-ai-based-camera.vercel.app/main.html"
+      title: "Delhi Smart City Dashboard",
+      tag: "Data Visualization",
+      img: "/smart-city-dashboard.png",
+      description: "Real-time dashboard for Delhi's smart city initiative with urban data visualization.",
+      url: "https://delhi-smart-city.vercel.app/",
+      ascii: "╔════════════════╗\n║  SMART CITY     ║\n║  [DASHBOARD]    ║\n║  RT-VISUALIZE ✓ ║\n╚════════════════╝"
     },
     {
       title: "STEM Code Lab",
-      tag: "Security Education",
+      tag: "Educational Platform",
       img: "/threat-intel-parser.png",
-      description: "An interactive platform for students to learn coding and security concepts through hands-on simulations and challenges.",
-      url: "https://stem-codelab.vercel.app/"
+      description: "Interactive platform for coding education through hands-on simulations.",
+      url: "https://stem-codelab.vercel.app/",
+      ascii: "╔════════════════╗\n║   CODE LAB      ║\n║  [LEARN] </>    ║\n║  SIMULATE ✓     ║\n╚════════════════╝"
     },
     {
-      title: "Delhi Smart City Dashboard",
-      tag: "Cybersecurity Infrastructure",
-      img: "/smart-city-dashboard.png",
-      description: "A real-time dashboard for Delhi's smart city initiative with secure data visualization and monitoring for critical infrastructure.",
-      url: "https://delhi-smart-city.vercel.app/"
-    },
-    {
-      title: "Machine Learning Model and Interpretations of Netflix dataset",
-      tag: "Data Analysis & Security",
-      img: "/ml-netflix.png",
-      description: "Built and interpreted ML models on Netflix data, providing insights through visualizations and statistical analysis for security research.",
-      url: "https://github.com/paarthbhatt/Netflix-data-files"
-    },
-    {
-      title: "Netflix Clone",
-      tag: "Secure Web Development",
-      img: "/netflix-clone.png",
-      description: "A full-stack clone of Netflix with authentication, streaming UI, and security-focused implementation of web applications.",
-      url: "https://netflix-clone-tau-black.vercel.app/"
+      title: "AI-Based Camera",
+      tag: "AI & Computer Vision",
+      img: "/ai-camera.png",
+      description: "Smart surveillance system using AI for real-time threat detection.",
+      url: "https://circuitech-ai-based-camera.vercel.app/main.html",
+      ascii: "╔════════════════╗\n║   AI CAMERA     ║\n║  [VISION] ▌◉   ║\n║  ML-DETECT ✓    ║\n╚════════════════╝"
     },
     {
       title: "Eco Track",
-      tag: "IoT Security",
+      tag: "Environmental Monitoring",
       img: "/eco-track.png",
-      description: "A tool for tracking and analyzing environmental data with secure IoT integration and data protection practices.",
-      url: "https://eco-track-chi.vercel.app/"
+      description: "Tool for tracking environmental data to promote sustainability practices.",
+      url: "https://eco-track-chi.vercel.app/",
+      ascii: "╔════════════════╗\n║   ECO TRACK     ║\n║  [MONITOR] 🌱   ║\n║  IoT-SENSOR ✓   ║\n╚════════════════╝"
     },
   ]
+
+  const otherProjects = [
+    {
+      title: "Netflix Clone",
+      tag: "Web App",
+      img: "/netflix-clone.png",
+      description: "Full-stack Netflix clone with authentication and streaming UI.",
+      url: "https://netflix-clone-tau-black.vercel.app/",
+      ascii: "╔════════════════╗\n║  NETFLIX CLONE  ║\n║  [STREAM] ▸▸▸   ║\n║  AUTH ✓         ║\n╚════════════════╝"
+    },
+    {
+      title: "Machine Learning Model and Interpretations of Netflix dataset",
+      tag: "Data Analysis",
+      img: "/ml-netflix.png",
+      description: "ML models on Netflix data with visualizations and statistical analysis.",
+      url: "https://github.com/paarthbhatt/Netflix-data-files",
+      ascii: "╔════════════════╗\n║   ML ANALYSIS   ║\n║  [DATA] ████    ║\n║  INSIGHT ✓      ║\n╚════════════════╝"
+    },
+  ]
+
+  const HackerProjectCard = ({ project, index }: { project: typeof securityProjects[0] & { ascii?: string }; index: number }) => {
+    const [isVisible, setIsVisible] = useState(false)
+
+    useEffect(() => {
+      const timer = setTimeout(() => setIsVisible(true), index * 150)
+      return () => clearTimeout(timer)
+    }, [index])
+
+    return (
+      <a
+        href={project.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`block relative bg-black border-2 border-emerald-500/30 rounded-lg p-3 sm:p-4 shadow-[0_0_20px_rgba(16,185,129,0.3)] cursor-pointer hover:border-emerald-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all duration-300 overflow-hidden group ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+      >
+        {/* Hacker scanlines effect */}
+        <div className="absolute inset-0 scanlines opacity-30 pointer-events-none"></div>
+        
+
+        {/* Content */}
+        <div className="relative z-10">
+          <div className="flex items-start justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <span className="inline-block w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></span>
+              <span className="text-xs font-mono text-emerald-500">[{project.tag}]</span>
+            </div>
+            <span className="text-xs font-mono text-emerald-500/50">#{String(index + 1).padStart(2, '0')}</span>
+          </div>
+          
+          <img 
+            src={project.img || "/placeholder.svg"} 
+            alt={project.title} 
+            className="w-full h-32 object-cover rounded border border-emerald-500/20 mb-3" 
+          />
+          
+          <h4 className="text-base font-bold font-mono text-emerald-400 mb-2 group-hover:text-emerald-300 transition-colors">
+            {project.title}
+          </h4>
+          
+          <p className="text-xs text-gray-400 font-mono leading-relaxed">
+            {project.description}
+          </p>
+
+          {/* Hacker button */}
+          <div className="mt-4 flex items-center gap-2 text-xs font-mono">
+            <span className="text-emerald-500 animate-pulse">&gt;</span>
+            <span className="text-gray-500">Access target</span>
+            <span className="text-emerald-500 group-hover:translate-x-1 transition-transform inline-block">→</span>
+          </div>
+        </div>
+
+        {/* Glitch effect overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+      </a>
+    )
+  }
+
   return (
     <section
       id="projects"
-      className="relative py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-950 dark:to-gray-950"
+      className="relative py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden"
     >
-      <TerminalStrip label="[PROJECTS]" meta="evidence • shipped" />
-      <div className="container mx-auto max-w-7xl mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map((p, i) => (
-          <a
-            key={i}
-            href={p.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block bg-white/85 dark:bg-gray-800/80 rounded-2xl p-4 shadow-xl holo card-3d cursor-pointer hover:shadow-emerald-500/20 transition-all duration-300"
-          >
-            <article>
-              <img src={p.img || "/placeholder.svg"} alt={p.title} className="w-full h-40 object-cover rounded-xl mb-3" />
-              <span className="inline-block px-2 py-1 text-xs font-mono bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 rounded">
-                {p.tag}
+      {/* Matrix-style background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/5 to-transparent"></div>
+      </div>
+
+      <TerminalStrip label="[PROJECTS.EXE]" meta="scanning • targets acquired" />
+      
+      <div className="container mx-auto max-w-7xl mt-6 space-y-8 relative z-10">
+        {/* Hacker ASCII Header */}
+        <div className="text-center mb-8">
+          <ASCIIArt
+            text="╔═══════════════════════════════════════════════════════════════╗\n║                                                                       ║\n║     ██████╗ ██████╗  ██████╗      ██╗███████╗ ██████╗████████╗     ║\n║     ██╔══██╗██╔══██╗██╔═══██╗     ██║██╔════╝██╔════╝╚══██╔══╝     ║\n║     ██████╔╝██████╔╝██║   ██║     ██║█████╗  ██║        ██║        ║\n║     ██╔═══╝ ██╔══██╗██║   ██║██   ██║██╔══╝  ██║        ██║        ║\n║     ██║     ██║  ██║╚██████╔╝╚█████╔╝███████╗╚██████╗   ██║        ║\n║     ╚═╝     ╚═╝  ╚═╝ ╚═════╝  ╚════╝ ╚══════╝ ╚═════╝   ╚═╝        ║\n║                                                                       ║\n╚═══════════════════════════════════════════════════════════════╝"
+            delay={500}
+          />
+        </div>
+
+        {/* Category Selector - Hacker Style */}
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
+          {[
+            { id: "security" as const, label: "SECURITY.EXE", count: securityProjects.length },
+            { id: "web" as const, label: "WEB_APP.BIN", count: webProjects.length },
+            { id: "other" as const, label: "OTHER.DATA", count: otherProjects.length },
+          ].map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => {
+                setIsHacking(true)
+                setTimeout(() => setIsHacking(false), 500)
+                setSelectedCategory(cat.id)
+              }}
+              className={`relative px-6 py-3 font-mono text-sm border-2 transition-all duration-300 ${
+                selectedCategory === cat.id
+                  ? "border-emerald-500 bg-emerald-500/10 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+                  : "border-emerald-500/30 bg-black/50 text-gray-400 hover:border-emerald-500/60 hover:text-emerald-500"
+              }`}
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                <span className="inline-block w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                {cat.label}
+                <span className="text-emerald-600">({cat.count})</span>
               </span>
-              <h4 className="mt-2 text-lg font-bold text-gray-800 dark:text-white">{p.title}</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                {p.description}
-              </p>
-            </article>
-          </a>
-        ))}
+              {selectedCategory === cat.id && (
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 animate-pulse"></div>
+              )}
+            </button>
+          ))}
+        </div>
+
+        {/* Projects Grid */}
+        <div className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 transition-all duration-500 ${isHacking ? "blur-sm" : ""}`}>
+          {selectedCategory === "security" &&
+            securityProjects.map((project, i) => (
+              <HackerProjectCard key={i} project={project} index={i} />
+            ))}
+          {selectedCategory === "web" &&
+            webProjects.map((project, i) => (
+              <HackerProjectCard key={i} project={project} index={i} />
+            ))}
+          {selectedCategory === "other" &&
+            otherProjects.map((project, i) => (
+              <HackerProjectCard key={i} project={project} index={i} />
+            ))}
+        </div>
+
+        {/* Hacker Footer Text */}
+        <div className="text-center mt-12">
+          <p className="text-xs font-mono text-emerald-500/50">
+            [*] Targets scanned: {securityProjects.length + webProjects.length + otherProjects.length} | Status: ✓ ONLINE
+          </p>
+        </div>
       </div>
     </section>
-    
   )
 }
 
-// Experience Section
+// Experience Section - Hacker Terminal Log Style
 function ExperienceSection() {
   const items = [
     {
@@ -924,140 +1142,265 @@ function ExperienceSection() {
       org: "Sinusoid",
       when: "August 2024",
       desc: "Helped in the creation phase of the website, helped in event competition, operations and technical support.",
+      status: "COMPLETED"
     },
     {
       role: "Tech Team Member",
       org: "TEDxNIITUniversity",
       when: "February 2025",
       desc: "Designed webpages all part of the website and helped in operations and technical support.",
+      status: "COMPLETED"
     },
-    
     {
       role: "Web Developer Internship",
       org: "LaunchED Global",
       when: "April 2025",
       desc: "Built a commercial dashboard for anime website.",
+      status: "COMPLETED"
     },
     {
       role: "Virtual Internship – Cybersecurity & AI",
       org: "NIIT Foundation",
       when: "July 2025",
       desc: "Completed 4-week virtual internship focused on Cybersecurity & Artificial Intelligence.",
+      status: "COMPLETED"
     },
   ]
-  return (
-    <section id="experience" className="relative py-12 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950">
-      <TerminalStrip label="[EXPERIENCE]" meta="practice • learning" />
-      <div className="container mx-auto max-w-5xl mt-6 space-y-6">
-        {items.map((e, i) => (
-          <div key={i} className="bg-white/85 dark:bg-gray-800/80 rounded-2xl p-5 shadow-lg holo">
-            <div className="flex flex-wrap items-center gap-2">
-              <h4 className="font-bold text-gray-800 dark:text-white">{e.role}</h4>
-              <span className="text-emerald-600 dark:text-emerald-300 font-mono">• {e.org}</span>
-              <span className="ml-auto text-xs font-mono text-gray-500 dark:text-gray-400">{e.when}</span>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">{e.desc}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}
 
-// Skills Section
-function SkillsSection() {
-  const skills = ["Threat Intel", "Cybersecurity", "Vulnerability Management", "Web Application Security", "Artificial Intelligence", "Github", 
-    "Cloud Security", "Incident Response", "Linux", "Python", "DSA", "Collaboration", "Networking", "Cloud Computing", "Project Management",
-  "OOPs", "AI tools & Frameworks", "Network Security", "Security Operations", "Cisco Packet Tracer", "Kali Linux", "OWASP"] 
   return (
-    <section
-      id="skills"
-      className="relative py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-950 dark:to-gray-950"
-    >
-      <TerminalStrip label="[SKILLS]" meta="toolbox • evolving" />
-      <div className="container mx-auto max-w-5xl mt-6">
-        <div className="flex flex-wrap gap-3">
-          {skills.map((s, i) => (
-            <span
-              key={i}
-              className="px-3 py-2 rounded-xl bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 font-mono text-sm holo"
-            >
-              {s}
-            </span>
-          ))}
+    <section id="experience" className="relative py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden">
+      {/* Matrix background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.02)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+      </div>
+
+      <TerminalStrip label="[HISTORY.LOG]" meta="experience • timeline_scan" />
+      
+      <div className="container mx-auto max-w-5xl mt-4 sm:mt-6 relative z-10">
+        <div className="bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
+          {/* Scanlines */}
+          <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
+          
+          <div className="relative z-10">
+            {/* Terminal Header */}
+            <div className="flex flex-wrap items-center gap-2 mb-4 sm:mb-6">
+              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+              <h3 className="text-base sm:text-xl font-bold font-mono text-emerald-400">$ cat experience.log</h3>
+            </div>
+
+            {/* Terminal Log Entries */}
+            <div className="space-y-3 sm:space-y-4 font-mono text-xs sm:text-sm">
+              {items.map((e, i) => (
+                <div
+                  key={i}
+                  className="bg-emerald-500/5 border-l-4 border-emerald-500/50 pl-3 sm:pl-4 py-3 sm:py-4 hover:bg-emerald-500/10 hover:border-emerald-500 transition-all group"
+                >
+                  {/* Terminal-style timestamp and status */}
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
+                    <span className="text-emerald-500 font-mono">[{String(i + 1).padStart(2, '0')}]</span>
+                    <span className="text-cyan-500 font-mono">{e.when}</span>
+                    <span className="text-emerald-400 font-mono">→</span>
+                    <span className="text-emerald-400 font-bold">{e.role}</span>
+                    <span className="text-emerald-500/70 font-mono">@ {e.org}</span>
+                  </div>
+                  
+                  {/* Description as log entry */}
+                  <div className="flex items-start gap-2">
+                    <span className="text-emerald-500 mt-1">└─</span>
+                    <p className="text-gray-300 leading-relaxed flex-1">{e.desc}</p>
+                  </div>
+                  
+                  {/* Status badge */}
+                  <div className="mt-2 flex items-center gap-2">
+                    <span className="inline-block w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                    <span className="text-xs font-mono text-emerald-400">{e.status}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Terminal Footer */}
+            <div className="mt-4 sm:mt-6 pt-4 border-t border-emerald-500/30">
+              <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-emerald-500/70">
+                <span>[*]</span>
+                <span>Total entries: {items.length}</span>
+                <span>|</span>
+                <span className="text-emerald-400">Status: ✓ ONLINE</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-// Contact Section
+// Skills Section - Hacker Style
+function SkillsSection() {
+  const skills = ["Threat Intel", "Cybersecurity", "Vulnerability Management", "Web Application Security", "Artificial Intelligence", "Github", 
+    "Cloud Security", "Incident Response", "Linux", "Python", "DSA", "Collaboration", "Networking", "Cloud Computing", "Project Management",
+  "OOPs", "AI tools & Frameworks", "Network Security", "Security Operations", "Cisco Packet Tracer", "Kali Linux", "OWASP"]
+
+  const [isScanning, setIsScanning] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsScanning(false), 2000)
+    return () => clearTimeout(timer)
+  }, [])
+  
+  return (
+    <section
+      id="skills"
+      className="relative py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden"
+    >
+      {/* Matrix background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.02)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+      </div>
+
+      <TerminalStrip label="[SKILLS.SCAN]" meta="scanning • capability_matrix" />
+      
+      <div className="container mx-auto max-w-5xl mt-4 sm:mt-6 relative z-10">
+        <div className="bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
+          {/* Scanlines */}
+          <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
+          
+          <div className="relative z-10">
+            {isScanning && (
+              <div className="text-center py-6 sm:py-8">
+                <p className="text-emerald-500 font-mono animate-pulse text-xs sm:text-sm">
+                  [*] Scanning capabilities...
+                </p>
+              </div>
+            )}
+            
+            {!isScanning && (
+              <>
+                <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                  <h3 className="text-base sm:text-xl font-bold font-mono text-emerald-400">$ ./skills --list-all</h3>
+                </div>
+                
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  {skills.map((s, i) => (
+                    <span
+                      key={i}
+                      className="inline-block px-2 sm:px-4 py-1.5 sm:py-2 rounded border border-emerald-500/40 bg-emerald-500/5 text-emerald-400 font-mono text-[10px] sm:text-xs hover:bg-emerald-500/10 hover:border-emerald-500 hover:shadow-[0_0_10px_rgba(16,185,129,0.3)] transition-all duration-300 relative group"
+                    >
+                      <span className="absolute -left-2 -top-2 w-1 h-1 bg-emerald-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                      {s}
+                      <span className="absolute -right-2 -bottom-2 w-1 h-1 bg-emerald-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-emerald-500/30 text-xs font-mono text-emerald-500/70">
+                  <p>[*] Total skill sets loaded: {skills.length} | Status: ✓ OPERATIONAL</p>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// Contact Section - Hacker Style
 function ContactSection() {
   return (
-    <section id="contact" className="relative py-12 md:py-14 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950">
-      <TerminalStrip label="[CONTACT]" meta="reach • collaborate" />
-      <div className="container mx-auto max-w-3xl mt-6">
-        <p className="typing font-mono text-emerald-500/90 text-xs sm:text-sm">[OPEN] contact channel ready…</p>
+    <section id="contact" className="relative py-12 md:py-14 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden">
+      {/* Matrix background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.02)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+      </div>
 
-        <div className="mt-4 rounded-2xl bg-white dark:bg-gray-900 border border-emerald-500/20 p-5 md:p-6">
-          <p className="text-sm text-gray-600 dark:text-gray-300">Availability</p>
-          <p className="text-base text-gray-800 dark:text-white leading-relaxed mt-1">
-            Open to internships & part-time remote roles (Cybersecurity, AI, Blockchain). I’m flexible for 
-            collaborations, part-time work, and knowledge-sharing initiatives.
-          </p>
-
-          <div className="mt-4">
-            <p className="text-sm text-gray-600 dark:text-gray-300">Location</p>
-            <p className="text-base font-semibold text-gray-800 dark:text-white">New Delhi, INDIA</p>
-          </div>
-
-          <div className="mt-4">
-            <p className="text-sm text-gray-600 dark:text-gray-300">Open To</p>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {[
-                "Ethical Hacking",
-                "Security Operations",
-                "AI in Cybersecurity",
-                "Blockchain / Web3 Integrations Security",
-                "Hackathons & CTF Collaborations",
-              ].map((chip) => (
-                <span
-                  key={chip}
-                  className="px-3 py-1 rounded-md border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 font-mono text-xs"
-                >
-                  {chip}
-                </span>
-              ))}
+      <TerminalStrip label="[CONTACT.PROTO]" meta="communication • handshake_init" />
+      
+      <div className="container mx-auto max-w-3xl mt-4 sm:mt-6 relative z-10">
+        <div className="bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
+          {/* Scanlines */}
+          <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
+          
+          <div className="relative z-10 space-y-4 sm:space-y-6">
+            {/* Header */}
+            <div className="flex items-center gap-2 mb-4 sm:mb-6">
+              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+              <h3 className="text-base sm:text-xl font-bold font-mono text-emerald-400">$ ./contact --init-session</h3>
             </div>
-          </div>
 
-          <div className="mt-4 grid sm:grid-cols-2 gap-4">
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">Email</p>
+            {/* Availability */}
+            <div className="border border-emerald-500/30 bg-emerald-500/5 rounded p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-emerald-500">[AVAILABLE]</span>
+              </div>
+              <p className="text-sm text-gray-300 font-mono leading-relaxed">
+                Open to internships & part-time remote roles (Cybersecurity, AI, Blockchain). I'm flexible for collaborations, part-time work, and knowledge-sharing initiatives.
+              </p>
+            </div>
+
+            {/* Location */}
+            <div className="border border-emerald-500/30 bg-emerald-500/5 rounded p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <MapPin className="w-4 h-4 text-emerald-500" />
+                <span className="text-emerald-500 font-mono">[LOCATION]</span>
+              </div>
+              <p className="text-sm font-mono text-emerald-400">New Delhi, INDIA</p>
+            </div>
+
+            {/* Interests */}
+            <div className="border border-emerald-500/30 bg-emerald-500/5 rounded p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-emerald-500">[INTERESTS]</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {["Ethical Hacking", "Security Operations", "AI in Cybersecurity", "Blockchain / Web3 Security", "Hackathons & CTF"].map((chip) => (
+                  <span key={chip} className="px-3 py-1 rounded border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-mono text-xs hover:bg-emerald-500/20 transition-colors">
+                    {chip}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Contact Info */}
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="border border-emerald-500/30 bg-emerald-500/5 rounded p-4 group hover:bg-emerald-500/10 transition-colors">
+                <div className="flex items-center gap-2 mb-2">
+                  <Mail className="w-4 h-4 text-emerald-500" />
+                  <span className="text-emerald-500 font-mono text-xs">[EMAIL]</span>
+                </div>
+                <a className="text-sm font-mono text-emerald-400 hover:text-emerald-300 block" href="mailto:paarthbhatt37@gmail.com">
+                  paarthbhatt37@gmail.com
+                </a>
+              </div>
+              <div className="border border-emerald-500/30 bg-emerald-500/5 rounded p-4 group hover:bg-emerald-500/10 transition-colors">
+                <div className="flex items-center gap-2 mb-2">
+                  <Phone className="w-4 h-4 text-emerald-500" />
+                  <span className="text-emerald-500 font-mono text-xs">[PHONE]</span>
+                </div>
+                <a className="text-sm font-mono text-emerald-400 hover:text-emerald-300 block" href="tel:+918920948990">
+                  +91 8920948990
+                </a>
+              </div>
+            </div>
+
+            {/* Resume Link */}
+            <div className="pt-4 border-t border-emerald-500/30">
               <a
-                className="text-base font-semibold text-gray-800 dark:text-white"
-                href="mailto:paarthbhatt37@gmail.com"
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-emerald-500/40 px-4 py-2 font-mono text-sm text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-500 transition-all group"
               >
-                paarthbhatt37@gmail.com
+                <span className="group-hover:translate-x-1 transition-transform inline-block">&gt;</span>
+                [DOWNLOAD] resume.pdf
               </a>
             </div>
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">Phone</p>
-              <a className="text-base font-semibold text-gray-800 dark:text-white" href="tel:+918920948990">
-                +91 8920948990
-              </a>
-            </div>
-          </div>
 
-          <div className="mt-5">
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-emerald-500/40 px-4 py-2 font-mono text-sm text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/10 transition-colors"
-            >
-              Resume
-            </a>
+            {/* Status */}
+            <div className="pt-4 border-t border-emerald-500/30 text-xs font-mono text-emerald-500/70">
+              <p>[*] Session ready | Handshake pending | Status: ✓ ONLINE</p>
+            </div>
           </div>
         </div>
       </div>
