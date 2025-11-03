@@ -26,7 +26,7 @@ function NameDisplay({ glitch = false, className = "" }: { glitch?: boolean; cla
       className={[
         "font-extrabold font-mono tracking-tight",
         // keep sizes consistent across loader and hero for a seamless transition
-        "text-5xl sm:text-7xl md:text-8xl",
+        "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl",
         "bg-clip-text text-transparent",
         glitch ? "glitch glitch-once" : "",
         className,
@@ -104,7 +104,7 @@ function PitchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         <div className="p-8">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 font-mono text-emerald-600 dark:text-emerald-400">
-              Why I’m a fit for Cybersecurity Roles
+              Why I'm a fit for Cybersecurity Roles
             </h3>
             <button
               onClick={onClose}
@@ -143,7 +143,7 @@ function PitchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 
             <div className="text-center pt-2">
               <p className="text-lg font-medium text-gray-800 dark:text-white">
-                I’m ready to contribute on day one—curious, reliable, and focused on secure outcomes.
+                I'm ready to contribute on day one—curious, reliable, and focused on secure outcomes.
               </p>
             </div>
           </div>
@@ -197,24 +197,24 @@ function Header({
       {/* Scanlines */}
       <div className="absolute inset-0 scanlines opacity-10 pointer-events-none"></div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse" />
-            <span className="h-2.5 w-2.5 rounded-full bg-cyan-500 shadow-[0_0_8px_#06b6d4] animate-pulse" />
-            <span className="h-2.5 w-2.5 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6] animate-pulse" />
-            <div className="ml-3 w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 text-white font-bold flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.5)] border border-emerald-500">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
+        <div className="flex h-14 sm:h-16 items-center justify-between">
+          <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
+            <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse" />
+            <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-cyan-500 shadow-[0_0_8px_#06b6d4] animate-pulse" />
+            <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6] animate-pulse" />
+            <div className="ml-1 sm:ml-2 md:ml-3 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 text-white text-xs sm:text-sm font-bold flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.5)] border border-emerald-500">
               PB
             </div>
           </div>
 
           <div className="absolute left-1/2 -translate-x-1/2">
-            <h1 className="text-lg sm:text-xl font-bold font-mono text-emerald-400 tracking-tight">
+            <h1 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold font-mono text-emerald-400 tracking-tight">
               Parth Bhatt
             </h1>
           </div>
 
-          <div className="w-[112px] sm:w-[128px]" aria-hidden="true" />
+          <div className="w-[80px] sm:w-[96px] md:w-[112px] lg:w-[128px]" aria-hidden="true" />
         </div>
         <div className="h-0.5 w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 opacity-70" />
       </div>
@@ -383,12 +383,16 @@ function CertificationsSection() {
       <TerminalStrip label="[CREDENTIALS.SCAN]" meta="verifying • certification_store" />
       
       <div className="container mx-auto max-w-7xl relative z-10">
-        <div className="text-center mb-4 sm:mb-6 mt-4 sm:mt-6 px-2">
-          <pre className="text-[8px] xs:text-[10px] sm:text-xs font-mono text-emerald-500 dark:text-emerald-400 whitespace-pre-wrap overflow-x-auto">
-            {`╔═══════════════════════════════╗
-║  CERT DB VERIFIED ✓      ║
-╚═══════════════════════════════╝`}
-          </pre>
+        <div className="text-center mb-6 sm:mb-8 mt-4 sm:mt-6 px-2">
+          <ASCIIArt
+            text={` ██████╗███████╗██████╗ ████████╗██╗███████╗██╗ ██████╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗███████╗
+██╔════╝██╔════╝██╔══██╗╚══██╔══╝██║██╔════╝██║██╔════╝██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║╚══███╔╝
+██║     █████╗  ██████╔╝   ██║   ██║█████╗  ██║██║     ███████║   ██║   ██║██║   ██║██╔██╗ ██║  ███╔╝
+██║     ██╔══╝  ██╔══██╗   ██║   ██║██╔══╝  ██║██║     ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║ ███╔╝  
+╚██████╗███████╗██║  ██║   ██║   ██║██║     ██║╚██████╗██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║███████╗
+ ╚═════╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚═╝     ╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝`}
+            delay={300}
+          />
         </div>
 
         <div className="mt-6 sm:mt-8">
@@ -405,7 +409,7 @@ function CertificationsSection() {
                 <div className="relative z-10 flex items-start gap-4">
                   <div className={`w-16 h-16 bg-gradient-to-br ${cert.bgGradient} rounded-lg flex items-center justify-center border-2 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.3)] group-hover:scale-110 transition-transform`}>
                     <cert.icon className="w-8 h-8 text-white" />
-                  </div>
+                </div>
                   
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
@@ -415,11 +419,11 @@ function CertificationsSection() {
                       <span className="text-xs font-mono text-emerald-500/70">@ {cert.issuer}</span>
                     </div>
                     <h3 className="text-base font-bold font-mono text-emerald-400 mb-2 leading-tight">
-                      {cert.title}
-                    </h3>
+                  {cert.title}
+                </h3>
                     <p className="text-xs text-gray-400 font-mono leading-relaxed">
-                      {cert.description}
-                    </p>
+                  {cert.description}
+                </p>
                   </div>
                 </div>
 
@@ -487,12 +491,16 @@ function AchievementsSection() {
       <TerminalStrip label="[ACHIEVEMENT.DAT]" meta="unlocked • trophy_scan" />
       
       <div className="container mx-auto max-w-7xl relative z-10">
-        <div className="text-center mb-4 sm:mb-8 mt-4 sm:mt-6 px-2">
-          <pre className="text-[8px] xs:text-[10px] sm:text-xs font-mono text-emerald-500 dark:text-emerald-400 whitespace-pre-wrap overflow-x-auto">
-            {`╔═══════════════════════════════╗
-║  ACHIEVEMENTS UNLOCKED ✓  ║
-╚═══════════════════════════════╝`}
-          </pre>
+        <div className="text-center mb-6 sm:mb-8 mt-4 sm:mt-6 px-2">
+          <ASCIIArt
+            text={` █████╗  ██████╗██╗  ██╗██╗███████╗██╗   ██╗███████╗███╗   ███╗███████╗███╗   ██╗████████╗███████╗
+██╔══██╗██╔════╝██║  ██║██║██╔════╝██║   ██║██╔════╝████╗ ████║██╔════╝████╗  ██║╚══██╔══╝╚══███╔╝
+███████║██║     ███████║██║█████╗  ██║   ██║█████╗  ██╔████╔██║█████╗  ██╔██╗ ██║   ██║     ███╔╝ 
+██╔══██║██║     ██╔══██║██║██╔══╝  ╚██╗ ██╔╝██╔══╝  ██║╚██╔╝██║██╔══╝  ██║╚██╗██║   ██║    ███╔╝  
+██║  ██║╚██████╗██║  ██║██║███████╗ ╚████╔╝ ███████╗██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   ███████╗
+╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝╚══════╝  ╚═══╝  ╚══════╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝`}
+            delay={300}
+          />
         </div>
 
         <div className="mt-6 sm:mt-8">
@@ -510,7 +518,7 @@ function AchievementsSection() {
                   <div className="flex items-start gap-4 mb-4">
                     <div className={`w-16 h-16 bg-gradient-to-br ${achievement.bgGradient} rounded-lg flex items-center justify-center border-2 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.3)] group-hover:scale-110 transition-transform`}>
                       <achievement.icon className="w-8 h-8 text-white" />
-                    </div>
+                </div>
                     
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
@@ -520,11 +528,11 @@ function AchievementsSection() {
                         <span className="text-xs font-mono text-emerald-500/70">{achievement.date}</span>
                       </div>
                       <h3 className="text-lg font-bold font-mono text-emerald-400 mb-1">
-                        {achievement.title}
-                      </h3>
+                  {achievement.title}
+                </h3>
                       <p className="text-xs font-mono text-cyan-400 mb-2">
-                        {achievement.subtitle}
-                      </p>
+                  {achievement.subtitle}
+                </p>
                       <p className="text-xs text-emerald-500/70 font-mono">@ {achievement.issuer}</p>
                     </div>
                   </div>
@@ -562,24 +570,24 @@ function Footer({ introDone }: { introDone: boolean }) {
         introDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3",
       ].join(" ")}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-        <div className="mb-3 flex items-center gap-2">
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-300" />
-          <span className="h-2.5 w-2.5 rounded-full bg-cyan-300" />
-          <span className="h-2.5 w-2.5 rounded-full bg-blue-300" />
-          <span className="ml-2 font-mono text-xs opacity-80">/dev/portfolio – link-layer</span>
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-5">
+        <div className="mb-2 sm:mb-3 flex flex-wrap items-center gap-1.5 sm:gap-2">
+          <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-emerald-300" />
+          <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-cyan-300" />
+          <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-blue-300" />
+          <span className="ml-1 sm:ml-2 font-mono text-[10px] sm:text-xs opacity-80">/dev/portfolio – link-layer</span>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-white/15 text-white font-bold flex items-center justify-center shadow-lg border border-white/20">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/15 text-white text-xs sm:text-sm font-bold flex items-center justify-center shadow-lg border border-white/20">
               PB
             </div>
-            <span className="text-lg font-semibold">Parth Bhatt</span>
+            <span className="text-base sm:text-lg font-semibold">Parth Bhatt</span>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="text-sm/none opacity-90 mr-1">Connect:</span>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="text-xs sm:text-sm opacity-90 mr-0.5 sm:mr-1">Connect:</span>
             <a
               href="mailto:paarthbhatt37@gmail.com"
               className="group p-2 bg-white/15 hover:bg-white/25 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
@@ -623,6 +631,174 @@ function Footer({ introDone }: { introDone: boolean }) {
   )
 }
 
+// Hacker Boot Sequence Component
+function HackerBootSequence({ introDissolve }: { introDissolve: boolean }) {
+  const [currentLine, setCurrentLine] = useState(0)
+  const [glitchActive, setGlitchActive] = useState(false)
+  const [codeFalls, setCodeFalls] = useState<Array<{ left: number; delay: number; duration: number; text: string }>>([])
+  const [showBanner, setShowBanner] = useState(true)
+
+  const bootSequence = [
+    { delay: 0, text: "[SYSTEM] Initializing secure terminal...", type: "info" },
+    { delay: 400, text: "[BIOS] Checking hardware integrity...", type: "info" },
+    { delay: 800, text: "[OK] Memory: 16GB OK | CPU: 8 cores OK | Disk: 1TB OK", type: "success" },
+    { delay: 1200, text: "[FS] Mounting filesystems...", type: "info" },
+    { delay: 1600, text: "[OK] /dev/sda1 mounted | /dev/sda2 mounted | /home mounted", type: "success" },
+    { delay: 2000, text: "[NET] Configuring network interfaces...", type: "info" },
+    { delay: 2400, text: "[OK] eth0: 192.168.1.100 | wlan0: 10.0.0.5 | VPN: ESTABLISHED", type: "success" },
+    { delay: 2800, text: "[SEC] Loading security protocols...", type: "info" },
+    { delay: 3200, text: "[OK] Firewall: ACTIVE | IDS: SCANNING | Encryption: AES-256", type: "success" },
+    { delay: 3600, text: "[AUTH] Verifying credentials...", type: "info" },
+    { delay: 4000, text: "[OK] User: parth_bhatt | Access: GRANTED | Permissions: ROOT", type: "success" },
+    { delay: 4400, text: "[LOAD] Loading profile modules...", type: "info" },
+    { delay: 4800, text: "[OK] Module: skills.sys | Module: certs.sys | Module: projects.sys", type: "success" },
+    { delay: 5200, text: "[SCAN] Scanning capabilities matrix...", type: "info" },
+    { delay: 5600, text: "[OK] Threat Intel: ONLINE | Cybersecurity: ONLINE | Web Sec: ONLINE", type: "success" },
+    { delay: 5800, text: "[VERIFY] Checking system integrity...", type: "info" },
+    { delay: 5900, text: "[OK] All systems operational | Status: SECURE | Ready for handshake", type: "success" },
+    { delay: 6000, text: "", type: "ascii" },
+  ]
+
+  useEffect(() => {
+    // Generate falling code particles
+    const falls = Array.from({ length: 20 }, () => ({
+      left: Math.random() * 100,
+      delay: Math.random() * 2,
+      duration: 3 + Math.random() * 2,
+      text: Math.random().toString(36).substring(2, 15),
+    }))
+    setCodeFalls(falls)
+
+    const glitchInterval = setInterval(() => {
+      setGlitchActive(true)
+      setTimeout(() => setGlitchActive(false), 100)
+    }, 2000)
+
+    return () => {
+      clearInterval(glitchInterval)
+    }
+  }, [])
+
+  useEffect(() => {
+    const timers: NodeJS.Timeout[] = []
+    bootSequence.forEach((item, index) => {
+      const timer = setTimeout(() => {
+        setCurrentLine(index)
+      }, item.delay)
+      timers.push(timer)
+    })
+    return () => timers.forEach(timer => clearTimeout(timer))
+  }, [])
+
+  return (
+    <div
+      className={`fixed inset-0 z-[60] bg-black flex items-center justify-center overflow-hidden ${introDissolve ? "dissolve-out" : ""}`}
+    >
+      {/* Matrix background effect */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:20px_20px] animate-pulse"></div>
+      </div>
+
+      {/* Falling code effect */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {codeFalls.map((fall, i) => (
+          <div
+            key={i}
+            className="absolute text-emerald-500/20 font-mono text-xs"
+            style={{
+              left: `${fall.left}%`,
+              animation: `fall ${fall.duration}s linear infinite`,
+              animationDelay: `${fall.delay}s`,
+            }}
+          >
+            {fall.text}
+          </div>
+        ))}
+      </div>
+
+      {/* Terminal Window */}
+      <div className="relative z-10 w-full max-w-[95%] sm:max-w-4xl mx-2 sm:mx-4 bg-black border-2 border-emerald-500/50 rounded-lg shadow-[0_0_50px_rgba(16,185,129,0.5)] overflow-hidden">
+        {/* Terminal Header */}
+        <div className="bg-emerald-500/10 border-b border-emerald-500/30 px-2 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1 sm:gap-2">
+          <div className="flex gap-1 sm:gap-1.5">
+            <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
+            <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500"></div>
+            <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
+          </div>
+          <span className="text-[10px] sm:text-xs font-mono text-emerald-400 ml-1 sm:ml-2 truncate">root@parth-bhatt:~</span>
+        </div>
+
+        {/* Terminal Content */}
+        <div className="p-3 sm:p-4 md:p-6 font-mono text-[10px] sm:text-xs md:text-sm overflow-y-auto overflow-x-auto max-h-[75vh] sm:max-h-[70vh]">
+          {/* ASCII Banner (shown first during loading) */}
+          {showBanner && (
+            <div className={`mb-2 sm:mb-4 text-center ${glitchActive ? "animate-pulse" : ""}`}>
+              <pre className="text-[6px] sm:text-[7px] md:text-[9px] lg:text-[11px] xl:text-[12px] text-emerald-500 dark:text-emerald-400 whitespace-pre overflow-x-auto">
+{`██████╗  █████╗ ██████╗ ████████╗██╗  ██╗    ██████╗ ██╗  ██╗ █████╗ ████████╗████████╗
+██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██║  ██║    ██╔══██╗██║  ██║██╔══██╗╚══██╔══╝╚══██╔══╝
+██████╔╝███████║██████╔╝   ██║   ███████║    ██████╔╝███████║███████║   ██║      ██║   
+██╔═══╝ ██╔══██║██╔══██╗   ██║   ██╔══██║    ██╔══██╗██╔══██║██╔══██║   ██║      ██║   
+██║     ██║  ██║██║  ██║   ██║   ██║  ██║    ██████╔╝██║  ██║██║  ██║   ██║      ██║   
+╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝      ╚═╝    `}
+              </pre>
+            </div>
+          )}
+
+          {/* Boot Sequence Lines */
+          }
+          <div className="space-y-0.5 sm:space-y-1">
+            {bootSequence.slice(0, currentLine + 1).map((item, index) => {
+              if (item.type === "ascii") return null
+              return (
+                <div
+                  key={index}
+                  className={`animate-fade-in break-words ${
+                    item.type === "success" ? "text-emerald-400" : "text-emerald-500"
+                  }`}
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <span className="text-cyan-500 text-[10px] sm:text-xs">root@parth-bhatt:~$</span>{" "}
+                  <span className={`text-[10px] sm:text-xs ${item.type === "success" ? "text-emerald-400" : "text-gray-400"}`}>
+                    {item.text}
+                  </span>
+                  {index === currentLine && <span className="animate-pulse text-emerald-500 inline-block ml-1">▊</span>}
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Final Status */}
+          {currentLine >= bootSequence.length - 1 && (
+            <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-emerald-500/30 animate-fade-in">
+              <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-3 sm:mb-4">
+                <span className="text-emerald-500 text-[10px] sm:text-xs">[*]</span>
+                <span className="text-emerald-400 font-bold text-[10px] sm:text-xs md:text-sm">System Status: OPERATIONAL</span>
+              </div>
+              <div className="space-y-1 sm:space-y-1.5 text-emerald-400/70 text-[10px] sm:text-xs">
+                <div className="flex items-start gap-1.5 sm:gap-2">
+                  <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-emerald-500 rounded-full animate-pulse mt-1 flex-shrink-0"></span>
+                  <span className="break-words">Portfolio modules loaded and verified</span>
+                </div>
+                <div className="flex items-start gap-1.5 sm:gap-2">
+                  <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-emerald-500 rounded-full animate-pulse mt-1 flex-shrink-0"></span>
+                  <span className="break-words">Secure connection established</span>
+                </div>
+                <div className="flex items-start gap-1.5 sm:gap-2">
+                  <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-emerald-500 rounded-full animate-pulse mt-1 flex-shrink-0"></span>
+                  <span className="break-words">Ready to display profile: <span className="text-cyan-400 font-bold">Parth Bhatt</span></span>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Scanlines overlay */}
+        <div className="absolute inset-0 scanlines opacity-10 pointer-events-none"></div>
+      </div>
+    </div>
+  )
+}
+
 // Main App Component
 export default function App() {
   const [isContactOpen, setIsContactOpen] = useState(false)
@@ -647,8 +823,8 @@ export default function App() {
     updateTheme()
     const interval = setInterval(updateTheme, 60000)
 
-    const dissolveTimeout = setTimeout(() => setIntroDissolve(true), 5200)
-    const introTimeout = setTimeout(() => setShowIntro(false), 6000)
+    const dissolveTimeout = setTimeout(() => setIntroDissolve(true), 6800)
+    const introTimeout = setTimeout(() => setShowIntro(false), 7200)
 
     return () => {
       clearInterval(interval)
@@ -660,38 +836,7 @@ export default function App() {
   return (
     <div className={`min-h-screen transition-colors duration-300 cursor-dollar ${isDark ? "dark" : ""}`}>
       {showIntro && (
-        <div
-          className={`fixed inset-0 z-[60] bg-black flex items-center justify-center overflow-hidden ${introDissolve ? "dissolve-out" : ""}`}
-        >
-          <div className="absolute inset-0 starfield"></div>
-          <div className="absolute inset-0 starfield-2"></div>
-          <div className="relative z-10 text-center animate-fade-in">
-            <h1 className="">
-              <NameDisplay glitch={false} />
-            </h1>
-            <div className="mt-4 text-emerald-300 font-mono text-xs sm:text-sm space-y-1">
-              <p className="typing">[BOOT] Initializing systems…</p>
-              <p className="typing" style={{ animationDelay: "0.6s" }}>
-                [OK] Loading profile: Parth Bhatt<span className="caret">|</span>
-              </p>
-              <p className="typing" style={{ animationDelay: "1.2s" }}>
-                [SCAN] skills: threat intel • appsec • hacking
-              </p>
-              <p className="typing typing-wide" style={{ animationDelay: "2.0s" }}>
-                [CERT] cisco • arcX • tryhackme • github foundations
-              </p>
-              <p className="typing typing-wide" style={{ animationDelay: "3.0s" }}>
-                [ACHV] codenest top 3 • design dojo winner • smart city viz
-              </p>
-              <p className="typing" style={{ animationDelay: "4.2s" }}>
-                [WIT] curiosity-driven • reliable • security‑first
-              </p>
-              <p className="typing" style={{ animationDelay: "5.0s" }}>
-                [READY] initiating secure portfolio launch…
-              </p>
-            </div>
-          </div>
-        </div>
+        <HackerBootSequence introDissolve={introDissolve} />
       )}
 
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-black to-slate-950 px-4 sm:px-6 lg:px-8">
@@ -722,7 +867,7 @@ function HeroSection({
   setIsContactOpen,
 }: { isPitchOpen: boolean; setIsPitchOpen: (open: boolean) => void; setIsContactOpen: (open: boolean) => void }) {
   return (
-    <section className="relative min-h-[92vh] md:min-h-[105vh] lg:min-h-[115vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-black to-slate-950 px-4 sm:px-6 lg:px-8">
+    <section className="relative min-h-[85vh] sm:min-h-[90vh] md:min-h-[92vh] lg:min-h-[105vh] xl:min-h-[115vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-black to-slate-950 px-3 sm:px-4 md:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
       {/* Matrix background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
@@ -749,25 +894,25 @@ function HeroSection({
         <div className="absolute bottom-1/3 left-1/3 w-28 sm:w-48 h-28 sm:h-48 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
 
-      <div className="relative z-10 text-center max-w-6xl mx-auto">
+      <div className="relative z-10 text-center max-w-6xl mx-auto w-full">
         {/* Profile Avatar with glow */}
-        <div className="mb-8 flex justify-center">
+        <div className="mb-6 sm:mb-7 md:mb-8 flex justify-center">
           <div className="relative group">
-            <div className="absolute -inset-2 bg-emerald-500 rounded-full blur-lg opacity-50 group-hover:opacity-75 transition-opacity animate-pulse"></div>
-            <img
-              src="/parth-bhatt-portrait.png"
-              alt="Parth Bhatt portrait"
-              className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-emerald-500 shadow-[0_0_40px_rgba(16,185,129,0.5)]"
-            />
+            <div className="absolute -inset-1 sm:-inset-1.5 md:-inset-2 bg-emerald-500 rounded-full blur-lg opacity-50 group-hover:opacity-75 transition-opacity animate-pulse"></div>
+          <img
+            src="/parth-bhatt-portrait.png"
+            alt="Parth Bhatt portrait"
+              className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full border-2 border-emerald-500 shadow-[0_0_40px_rgba(16,185,129,0.5)]"
+          />
           </div>
         </div>
 
-        <h1 className="mb-4">
+        <h1 className="mb-3 sm:mb-4 md:mb-5 lg:mb-6">
           <NameDisplay glitch={false} />
         </h1>
 
         {/* Rotating role titles */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-7 md:mb-8 lg:mb-10">
           <RotatingGlitchText
             items={[
               "Cyber Threat Intelligence Analyst",
@@ -781,24 +926,24 @@ function HeroSection({
         </div>
 
         {/* Status messages */}
-        <div className="space-y-2 mb-10">
+        <div className="space-y-1 sm:space-y-1.5 md:space-y-2 mb-6 sm:mb-7 md:mb-8 lg:mb-10 px-2">
           <Typewriter
             text="[✓] handshake complete • secure session established"
             delay={200}
             speed={18}
-            className="font-mono text-emerald-400 text-xs sm:text-sm"
+            className="font-mono text-emerald-400 text-[10px] sm:text-xs md:text-sm"
           />
           <br />
           <Typewriter
             text="[INFO] tech-savvy • driven • adaptive • security-focused"
             delay={700}
             speed={18}
-            className="font-mono text-cyan-400 text-xs sm:text-sm"
+            className="font-mono text-cyan-400 text-[10px] sm:text-xs md:text-sm"
           />
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-3.5 md:gap-4 justify-center items-center px-2">
           <a
             href="/resume.pdf"
             target="_blank"
@@ -838,12 +983,12 @@ function AboutSection() {
           
           <div className="grid md:grid-cols-3 gap-4 sm:gap-6 relative z-10">
             <div className="md:col-span-1 flex justify-center">
-              <img
-                src="/parth-bhatt-portrait.png"
-                alt="Parth Bhatt"
+          <img
+            src="/parth-bhatt-portrait.png"
+            alt="Parth Bhatt"
                 className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.4)]"
-              />
-            </div>
+          />
+        </div>
             <div className="md:col-span-2 space-y-3 sm:space-y-4">
               <div className="flex items-center gap-2 mb-3 sm:mb-4">
                 <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
@@ -860,8 +1005,8 @@ function AboutSection() {
                 <div className="flex items-start gap-2 sm:gap-3">
                   <span className="text-emerald-500 flex-shrink-0">[✦]</span>
                   <p className="text-gray-300 leading-relaxed">
-                    From ethical hacking to defensive security, I thrive on challenges that blend logic, strategy, and creativity. My goal? To turn passion into impact by protecting digital spaces and building smarter, safer systems.
-                  </p>
+            From ethical hacking to defensive security, I thrive on challenges that blend logic, strategy, and creativity. My goal? To turn passion into impact by protecting digital spaces and building smarter, safer systems.
+          </p>
                 </div>
               </div>
 
@@ -904,9 +1049,11 @@ function ASCIIArt({ text, delay = 0 }: { text: string; delay?: number }) {
   }, [text, delay])
 
   return (
-    <pre className="text-[10px] sm:text-xs font-mono text-emerald-500 dark:text-emerald-400 whitespace-pre animate-pulse">
-      {displayedText}
-    </pre>
+    <div className="w-full overflow-x-auto">
+      <pre className="inline-block max-w-full text-[6px] xs:text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] xl:text-[12px] font-mono text-emerald-500 dark:text-emerald-400 whitespace-pre animate-pulse">
+        {displayedText}
+      </pre>
+    </div>
   )
 }
 
@@ -1099,13 +1246,13 @@ function ProjectsSection() {
                 <span className="inline-block w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
                 {cat.label}
                 <span className="text-emerald-600">({cat.count})</span>
-              </span>
+            </span>
               {selectedCategory === cat.id && (
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 animate-pulse"></div>
               )}
             </button>
-          ))}
-        </div>
+        ))}
+      </div>
 
         {/* Projects Grid */}
         <div className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 transition-all duration-500 ${isHacking ? "blur-sm" : ""}`}>
@@ -1190,7 +1337,7 @@ function ExperienceSection() {
 
             {/* Terminal Log Entries */}
             <div className="space-y-3 sm:space-y-4 font-mono text-xs sm:text-sm">
-              {items.map((e, i) => (
+        {items.map((e, i) => (
                 <div
                   key={i}
                   className="bg-emerald-500/5 border-l-4 border-emerald-500/50 pl-3 sm:pl-4 py-3 sm:py-4 hover:bg-emerald-500/10 hover:border-emerald-500 transition-all group"
@@ -1202,7 +1349,7 @@ function ExperienceSection() {
                     <span className="text-emerald-400 font-mono">→</span>
                     <span className="text-emerald-400 font-bold">{e.role}</span>
                     <span className="text-emerald-500/70 font-mono">@ {e.org}</span>
-                  </div>
+            </div>
                   
                   {/* Description as log entry */}
                   <div className="flex items-start gap-2">
@@ -1215,8 +1362,8 @@ function ExperienceSection() {
                     <span className="inline-block w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
                     <span className="text-xs font-mono text-emerald-400">{e.status}</span>
                   </div>
-                </div>
-              ))}
+          </div>
+        ))}
             </div>
 
             {/* Terminal Footer */}
@@ -1239,7 +1386,7 @@ function ExperienceSection() {
 function SkillsSection() {
   const skills = ["Threat Intel", "Cybersecurity", "Vulnerability Management", "Web Application Security", "Artificial Intelligence", "Github", 
     "Cloud Security", "Incident Response", "Linux", "Python", "DSA", "Collaboration", "Networking", "Cloud Computing", "Project Management",
-  "OOPs", "AI tools & Frameworks", "Network Security", "Security Operations", "Cisco Packet Tracer", "Kali Linux", "OWASP"]
+  "OOPs", "AI tools & Frameworks", "Network Security", "Security Operations", "Cisco Packet Tracer", "Kali Linux", "OWASP"] 
 
   const [isScanning, setIsScanning] = useState(true)
 
@@ -1282,16 +1429,16 @@ function SkillsSection() {
                 </div>
                 
                 <div className="flex flex-wrap gap-2 sm:gap-3">
-                  {skills.map((s, i) => (
-                    <span
-                      key={i}
+          {skills.map((s, i) => (
+            <span
+              key={i}
                       className="inline-block px-2 sm:px-4 py-1.5 sm:py-2 rounded border border-emerald-500/40 bg-emerald-500/5 text-emerald-400 font-mono text-[10px] sm:text-xs hover:bg-emerald-500/10 hover:border-emerald-500 hover:shadow-[0_0_10px_rgba(16,185,129,0.3)] transition-all duration-300 relative group"
-                    >
+            >
                       <span className="absolute -left-2 -top-2 w-1 h-1 bg-emerald-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                      {s}
+              {s}
                       <span className="absolute -right-2 -bottom-2 w-1 h-1 bg-emerald-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                    </span>
-                  ))}
+            </span>
+          ))}
                 </div>
 
                 <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-emerald-500/30 text-xs font-mono text-emerald-500/70">
@@ -1346,7 +1493,7 @@ function ContactSection() {
                 <span className="text-emerald-500 font-mono">[LOCATION]</span>
               </div>
               <p className="text-sm font-mono text-emerald-400">New Delhi, INDIA</p>
-            </div>
+          </div>
 
             {/* Interests */}
             <div className="border border-emerald-500/30 bg-emerald-500/5 rounded p-4">
@@ -1356,11 +1503,11 @@ function ContactSection() {
               <div className="flex flex-wrap gap-2">
                 {["Ethical Hacking", "Security Operations", "AI in Cybersecurity", "Blockchain / Web3 Security", "Hackathons & CTF"].map((chip) => (
                   <span key={chip} className="px-3 py-1 rounded border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-mono text-xs hover:bg-emerald-500/20 transition-colors">
-                    {chip}
-                  </span>
-                ))}
-              </div>
+                  {chip}
+                </span>
+              ))}
             </div>
+          </div>
 
             {/* Contact Info */}
             <div className="grid sm:grid-cols-2 gap-4">
@@ -1370,26 +1517,26 @@ function ContactSection() {
                   <span className="text-emerald-500 font-mono text-xs">[EMAIL]</span>
                 </div>
                 <a className="text-sm font-mono text-emerald-400 hover:text-emerald-300 block" href="mailto:paarthbhatt37@gmail.com">
-                  paarthbhatt37@gmail.com
-                </a>
-              </div>
+                paarthbhatt37@gmail.com
+              </a>
+            </div>
               <div className="border border-emerald-500/30 bg-emerald-500/5 rounded p-4 group hover:bg-emerald-500/10 transition-colors">
                 <div className="flex items-center gap-2 mb-2">
                   <Phone className="w-4 h-4 text-emerald-500" />
                   <span className="text-emerald-500 font-mono text-xs">[PHONE]</span>
                 </div>
                 <a className="text-sm font-mono text-emerald-400 hover:text-emerald-300 block" href="tel:+918920948990">
-                  +91 8920948990
-                </a>
-              </div>
+                +91 8920948990
+              </a>
             </div>
+          </div>
 
             {/* Resume Link */}
             <div className="pt-4 border-t border-emerald-500/30">
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 border border-emerald-500/40 px-4 py-2 font-mono text-sm text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-500 transition-all group"
               >
                 <span className="group-hover:translate-x-1 transition-transform inline-block">&gt;</span>
