@@ -165,7 +165,7 @@ function TerminalStrip({
     <div className="relative z-10 mx-auto max-w-7xl">
       {/* was -mb-6 which caused overlap with the next heading */}
       <div className="mx-4 sm:mx-6 lg:mx-8 mb-2 sm:mb-3">
-        <div className="flex items-center justify-between rounded-t-xl border border-emerald-500/30 bg-emerald-500/10 dark:bg-emerald-500/10 px-3 sm:px-4 py-2 backdrop-blur">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 rounded-t-xl border border-emerald-500/30 bg-emerald-500/10 dark:bg-emerald-500/10 px-3 sm:px-4 py-2 backdrop-blur">
           <div className="flex items-center gap-2">
             <span className="inline-block h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span>
             <span className="inline-block h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span>
@@ -174,7 +174,9 @@ function TerminalStrip({
               {label}
             </span>
           </div>
-          <div className="font-mono text-[10px] sm:text-xs text-emerald-500/80 dark:text-emerald-300/80">{meta}</div>
+          <div className="font-mono text-[10px] sm:text-xs text-emerald-500/80 dark:text-emerald-300/80 sm:text-right">
+            {meta}
+          </div>
         </div>
       </div>
     </div>
@@ -757,7 +759,7 @@ function HackerBootSequence({ introDissolve }: { introDissolve: boolean }) {
           {/* ASCII Banner (shown first during loading) */}
           {showBanner && (
             <div className={`mb-2 sm:mb-4 text-center ${glitchActive ? "animate-pulse" : ""}`}>
-              <pre className="text-[6px] sm:text-[7px] md:text-[9px] lg:text-[11px] xl:text-[12px] text-emerald-500 dark:text-emerald-400 whitespace-pre overflow-x-auto">
+              <pre className="hidden sm:block text-[7px] md:text-[9px] lg:text-[11px] xl:text-[12px] text-emerald-500 dark:text-emerald-400 whitespace-pre overflow-x-auto">
 {`██████╗  █████╗ ██████╗ ████████╗██╗  ██╗    ██████╗ ██╗  ██╗ █████╗ ████████╗████████╗
 ██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██║  ██║    ██╔══██╗██║  ██║██╔══██╗╚══██╔══╝╚══██╔══╝
 ██████╔╝███████║██████╔╝   ██║   ███████║    ██████╔╝███████║███████║   ██║      ██║   
@@ -765,6 +767,9 @@ function HackerBootSequence({ introDissolve }: { introDissolve: boolean }) {
 ██║     ██║  ██║██║  ██║   ██║   ██║  ██║    ██████╔╝██║  ██║██║  ██║   ██║      ██║   
 ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝      ╚═╝    `}
               </pre>
+              <div className="block sm:hidden">
+                <p className="font-mono text-[11px] text-emerald-400">[boot] Parth Bhatt Portfolio</p>
+              </div>
             </div>
           )}
 
@@ -1073,10 +1078,18 @@ function ASCIIArt({ text, delay = 0 }: { text: string; delay?: number }) {
   }, [text, delay])
 
   return (
-    <div className="w-full overflow-x-auto">
-      <pre className="inline-block max-w-full text-[6px] xs:text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] xl:text-[12px] font-mono text-emerald-500 dark:text-emerald-400 whitespace-pre animate-pulse">
-        {displayedText}
-      </pre>
+    <div className="w-full">
+      {/* Full ASCII on >= sm; compact hint on mobile to avoid distortion */}
+      <div className="hidden sm:block overflow-x-auto">
+        <pre className="inline-block max-w-full text-[6px] xs:text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] xl:text-[12px] font-mono text-emerald-500 dark:text-emerald-400 whitespace-pre animate-pulse">
+          {displayedText}
+        </pre>
+      </div>
+      <div className="block sm:hidden">
+        <p className="font-mono text-[11px] text-emerald-400">
+          [ascii condensed] Best viewed on desktop/laptop
+        </p>
+      </div>
     </div>
   )
 }
