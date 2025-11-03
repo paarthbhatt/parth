@@ -642,25 +642,25 @@ function HackerBootSequence({ introDissolve }: { introDissolve: boolean }) {
   const [showDisclaimer, setShowDisclaimer] = useState(true)
 
   const bootSequence = [
-    { delay: 0, text: "[SYSTEM] Initializing secure terminal...", type: "info" },
-    { delay: 400, text: "[BIOS] Checking hardware integrity...", type: "info" },
-    { delay: 800, text: "[OK] Memory: 16GB OK | CPU: 8 cores OK | Disk: 1TB OK", type: "success" },
-    { delay: 1200, text: "[FS] Mounting filesystems...", type: "info" },
-    { delay: 1600, text: "[OK] /dev/sda1 mounted | /dev/sda2 mounted | /home mounted", type: "success" },
-    { delay: 2000, text: "[NET] Configuring network interfaces...", type: "info" },
-    { delay: 2400, text: "[OK] eth0: 192.168.1.100 | wlan0: 10.0.0.5 | VPN: ESTABLISHED", type: "success" },
-    { delay: 2800, text: "[SEC] Loading security protocols...", type: "info" },
-    { delay: 3200, text: "[OK] Firewall: ACTIVE | IDS: SCANNING | Encryption: AES-256", type: "success" },
-    { delay: 3600, text: "[AUTH] Verifying credentials...", type: "info" },
-    { delay: 4000, text: "[OK] User: parth_bhatt | Access: GRANTED | Permissions: ROOT", type: "success" },
-    { delay: 4400, text: "[LOAD] Loading profile modules...", type: "info" },
-    { delay: 4800, text: "[OK] Module: skills.sys | Module: certs.sys | Module: projects.sys", type: "success" },
-    { delay: 5200, text: "[SCAN] Scanning capabilities matrix...", type: "info" },
-    { delay: 5600, text: "[OK] Threat Intel: ONLINE | Cybersecurity: ONLINE | Web Sec: ONLINE", type: "success" },
-    { delay: 5800, text: "[VERIFY] Checking system integrity...", type: "info" },
-    { delay: 5900, text: "[OK] All systems operational | Status: SECURE | Ready for handshake", type: "success" },
-    { delay: 6000, text: "", type: "ascii" },
-  ]
+    { delay: 0, kind: "cmd", text: "echo 'initializing secure session'" },
+    { delay: 350, kind: "out", text: "initializing secure session... ✓" },
+    { delay: 700, kind: "cmd", text: "whoami" },
+    { delay: 1050, kind: "out", text: "parth_bhatt" },
+    { delay: 1400, kind: "cmd", text: "hostname" },
+    { delay: 1750, kind: "out", text: "parth-bhatt.dev" },
+    { delay: 2100, kind: "cmd", text: "uname -srv" },
+    { delay: 2450, kind: "out", text: "Linux 6.x #1337 SMP x86_64" },
+    { delay: 2800, kind: "cmd", text: "ip -4 addr | grep 'inet ' | head -1" },
+    { delay: 3150, kind: "out", text: "inet 10.0.0.5/24 brd 10.0.0.255 scope global" },
+    { delay: 3500, kind: "cmd", text: "ls modules" },
+    { delay: 3850, kind: "out", text: "skills.sys  certs.sys  projects.sys" },
+    { delay: 4200, kind: "cmd", text: "./scanner --capabilities --fast" },
+    { delay: 4550, kind: "out", text: "ThreatIntel ONLINE | Cybersecurity ONLINE | WebSec ONLINE" },
+    { delay: 4900, kind: "cmd", text: "gpg --list-keys parth@secure" },
+    { delay: 5250, kind: "out", text: "pub rsa4096/0xPB  created: 2025-01-01  trust: ultimate" },
+    { delay: 5600, kind: "cmd", text: "printf 'status: OPERATIONAL\\n'" },
+    { delay: 5950, kind: "out", text: "status: OPERATIONAL" },
+  ] as Array<{ delay: number; kind: "cmd" | "out"; text: string }>
 
   useEffect(() => {
     // Generate falling code particles
@@ -777,20 +777,22 @@ function HackerBootSequence({ introDissolve }: { introDissolve: boolean }) {
           }
           <div className="space-y-0.5 sm:space-y-1">
             {bootSequence.slice(0, currentLine + 1).map((item, index) => {
-              if (item.type === "ascii") return null
+              const isCmd = item.kind === "cmd"
               return (
                 <div
                   key={index}
-                  className={`animate-fade-in break-words ${
-                    item.type === "success" ? "text-emerald-400" : "text-emerald-500"
-                  }`}
-                  style={{ animationDelay: `${index * 50}ms` }}
+                  className={`animate-fade-in break-words ${isCmd ? "text-emerald-500" : "text-emerald-400/80"}`}
+                  style={{ animationDelay: `${index * 40}ms` }}
                 >
-                  <span className="text-cyan-500 text-[10px] sm:text-xs">root@parth-bhatt:~$</span>{" "}
-                  <span className={`text-[10px] sm:text-xs ${item.type === "success" ? "text-emerald-400" : "text-gray-400"}`}>
-                    {item.text}
-                  </span>
-                  {index === currentLine && <span className="animate-pulse text-emerald-500 inline-block ml-1">▊</span>}
+                  {isCmd ? (
+                    <>
+                      <span className="text-cyan-500 text-[10px] sm:text-xs">root@parth-bhatt:~$</span>{" "}
+                      <span className="text-[10px] sm:text-xs text-cyan-400">{item.text}</span>
+                      {index === currentLine && <span className="animate-pulse text-emerald-500 inline-block ml-1">▊</span>}
+                    </>
+                  ) : (
+                    <span className="pl-4 text-[10px] sm:text-xs text-emerald-400/80 block">{item.text}</span>
+                  )}
                 </div>
               )
             })}
