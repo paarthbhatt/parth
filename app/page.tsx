@@ -637,6 +637,7 @@ function HackerBootSequence({ introDissolve }: { introDissolve: boolean }) {
   const [glitchActive, setGlitchActive] = useState(false)
   const [codeFalls, setCodeFalls] = useState<Array<{ left: number; delay: number; duration: number; text: string }>>([])
   const [showBanner, setShowBanner] = useState(true)
+  const [showDisclaimer, setShowDisclaimer] = useState(true)
 
   const bootSequence = [
     { delay: 0, text: "[SYSTEM] Initializing secure terminal...", type: "info" },
@@ -727,6 +728,29 @@ function HackerBootSequence({ introDissolve }: { introDissolve: boolean }) {
           </div>
           <span className="text-[10px] sm:text-xs font-mono text-emerald-400 ml-1 sm:ml-2 truncate">root@parth-bhatt:~</span>
         </div>
+
+      {/* Desktop/Laptop best experience disclaimer */}
+      {showDisclaimer && (
+        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20">
+          <div className="group relative rounded-lg border-2 border-emerald-500/50 bg-black/85 px-3 py-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] backdrop-blur">
+            <div className="absolute -inset-0.5 rounded-lg bg-[conic-gradient(from_180deg_at_50%_50%,rgba(16,185,129,0.2),rgba(6,182,212,0.2),rgba(59,130,246,0.2),rgba(16,185,129,0.2))] blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="relative z-10 flex items-center gap-2">
+              <span className="text-[10px] sm:text-xs font-mono text-emerald-400">[NOTICE]</span>
+              <span className="text-[10px] sm:text-xs font-mono text-emerald-200 whitespace-nowrap">
+                Best experienced on <span className="text-cyan-400 font-semibold">desktop/laptop</span> 💻
+              </span>
+              <button
+                type="button"
+                aria-label="Dismiss notice"
+                className="ml-1 text-emerald-500/70 hover:text-emerald-300 text-[10px] sm:text-xs"
+                onClick={() => setShowDisclaimer(false)}
+              >
+                ×
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
         {/* Terminal Content */}
         <div className="p-3 sm:p-4 md:p-6 font-mono text-[10px] sm:text-xs md:text-sm overflow-y-auto overflow-x-auto max-h-[75vh] sm:max-h-[70vh]">
