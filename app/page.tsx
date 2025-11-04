@@ -821,6 +821,25 @@ function HackerBootSequence({ introDissolve, onProceed, onCancel }: { introDisso
                   <span className="animate-pulse text-emerald-500 inline-block ml-1">▊</span>
                 </div>
                 <div className="text-emerald-500/70">press Y or Enter to continue, N to close</div>
+                {/* Mobile-friendly controls */}
+                <div className="mt-2 flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={onProceed}
+                    className="px-3 py-1 rounded border border-emerald-500/60 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 transition-colors"
+                    aria-label="Yes, open portfolio"
+                  >
+                    Y / ENTER
+                  </button>
+                  <button
+                    type="button"
+                    onClick={onCancel}
+                    className="px-3 py-1 rounded border border-emerald-500/40 bg-transparent text-emerald-400 hover:bg-emerald-500/10 transition-colors"
+                    aria-label="No, close tab"
+                  >
+                    N
+                  </button>
+                </div>
               </div>
             </div>
           )}
