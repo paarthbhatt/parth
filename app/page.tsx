@@ -634,32 +634,25 @@ function Footer({ introDone }: { introDone: boolean }) {
 }
 
 // Hacker Boot Sequence Component
-function HackerBootSequence({ introDissolve }: { introDissolve: boolean }) {
+function HackerBootSequence({ introDissolve, onProceed, onCancel }: { introDissolve: boolean; onProceed: () => void; onCancel: () => void }) {
   const [currentLine, setCurrentLine] = useState(0)
   const [glitchActive, setGlitchActive] = useState(false)
   const [codeFalls, setCodeFalls] = useState<Array<{ left: number; delay: number; duration: number; text: string }>>([])
   const [showBanner, setShowBanner] = useState(true)
   const [showDisclaimer, setShowDisclaimer] = useState(true)
+  const [awaitingInput, setAwaitingInput] = useState(false)
 
   const bootSequence = [
-    { delay: 0, kind: "cmd", text: "echo 'initializing secure session'" },
-    { delay: 350, kind: "out", text: "initializing secure session... ✓" },
-    { delay: 700, kind: "cmd", text: "whoami" },
-    { delay: 1050, kind: "out", text: "parth_bhatt" },
-    { delay: 1400, kind: "cmd", text: "hostname" },
-    { delay: 1750, kind: "out", text: "parth-bhatt.dev" },
-    { delay: 2100, kind: "cmd", text: "uname -srv" },
-    { delay: 2450, kind: "out", text: "Linux 6.x #1337 SMP x86_64" },
-    { delay: 2800, kind: "cmd", text: "ip -4 addr | grep 'inet ' | head -1" },
-    { delay: 3150, kind: "out", text: "inet 10.0.0.5/24 brd 10.0.0.255 scope global" },
-    { delay: 3500, kind: "cmd", text: "ls modules" },
-    { delay: 3850, kind: "out", text: "skills.sys  certs.sys  projects.sys" },
-    { delay: 4200, kind: "cmd", text: "./scanner --capabilities --fast" },
-    { delay: 4550, kind: "out", text: "ThreatIntel ONLINE | Cybersecurity ONLINE | WebSec ONLINE" },
-    { delay: 4900, kind: "cmd", text: "gpg --list-keys parth@secure" },
-    { delay: 5250, kind: "out", text: "pub rsa4096/0xPB  created: 2025-01-01  trust: ultimate" },
-    { delay: 5600, kind: "cmd", text: "printf 'status: OPERATIONAL\\n'" },
-    { delay: 5950, kind: "out", text: "status: OPERATIONAL" },
+    { delay: 0, kind: "cmd", text: "whoami" },
+    { delay: 300, kind: "out", text: "parth_bhatt" },
+    { delay: 600, kind: "cmd", text: "hostname" },
+    { delay: 900, kind: "out", text: "parth-bhatt.dev" },
+    { delay: 1200, kind: "cmd", text: "uname -srv" },
+    { delay: 1500, kind: "out", text: "Linux 6.x #1337 SMP x86_64" },
+    { delay: 1800, kind: "cmd", text: "ls modules" },
+    { delay: 2100, kind: "out", text: "skills.sys  certs.sys  projects.sys" },
+    { delay: 2400, kind: "cmd", text: "./scanner --capabilities --fast" },
+    { delay: 2700, kind: "out", text: "capabilities: ThreatIntel ✓  Cybersecurity ✓  WebSec ✓" },
   ] as Array<{ delay: number; kind: "cmd" | "out"; text: string }>
 
   useEffect(() => {
@@ -690,8 +683,27 @@ function HackerBootSequence({ introDissolve }: { introDissolve: boolean }) {
       }, item.delay)
       timers.push(timer)
     })
+    // after last item rendered, enable y/n prompt
+    const lastDelay = bootSequence[bootSequence.length - 1]?.delay ?? 0
+    const afterId = setTimeout(() => setAwaitingInput(true), lastDelay + 150)
+    timers.push(afterId)
     return () => timers.forEach(timer => clearTimeout(timer))
   }, [])
+
+  // Capture keyboard for (y/n) once ready
+  useEffect(() => {
+    if (!awaitingInput) return
+    const handler = (e: KeyboardEvent) => {
+      const key = e.key.toLowerCase()
+      if (key === 'y' || key === 'enter') {
+        onProceed()
+      } else if (key === 'n') {
+        onCancel()
+      }
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [awaitingInput, onProceed, onCancel])
 
   return (
     <div
@@ -798,26 +810,17 @@ function HackerBootSequence({ introDissolve }: { introDissolve: boolean }) {
             })}
           </div>
 
-          {/* Final Status */}
-          {currentLine >= bootSequence.length - 1 && (
+          {/* Final prompt */}
+          {awaitingInput && (
             <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-emerald-500/30 animate-fade-in">
-              <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-3 sm:mb-4">
-                <span className="text-emerald-500 text-[10px] sm:text-xs">[*]</span>
-                <span className="text-emerald-400 font-bold text-[10px] sm:text-xs md:text-sm">System Status: OPERATIONAL</span>
-              </div>
-              <div className="space-y-1 sm:space-y-1.5 text-emerald-400/70 text-[10px] sm:text-xs">
-                <div className="flex items-start gap-1.5 sm:gap-2">
-                  <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-emerald-500 rounded-full animate-pulse mt-1 flex-shrink-0"></span>
-                  <span className="break-words">Portfolio modules loaded and verified</span>
+              <div className="space-y-1 sm:space-y-1.5 text-[10px] sm:text-xs">
+                <div className="text-emerald-400/80">status: OPERATIONAL</div>
+                <div>
+                  <span className="text-cyan-500">root@parth-bhatt:~$</span>{' '}
+                  <span className="text-cyan-400">open portfolio? (y/n)</span>
+                  <span className="animate-pulse text-emerald-500 inline-block ml-1">▊</span>
                 </div>
-                <div className="flex items-start gap-1.5 sm:gap-2">
-                  <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-emerald-500 rounded-full animate-pulse mt-1 flex-shrink-0"></span>
-                  <span className="break-words">Secure connection established</span>
-                </div>
-                <div className="flex items-start gap-1.5 sm:gap-2">
-                  <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-emerald-500 rounded-full animate-pulse mt-1 flex-shrink-0"></span>
-                  <span className="break-words">Ready to display profile: <span className="text-cyan-400 font-bold">Parth Bhatt</span></span>
-                </div>
+                <div className="text-emerald-500/70">press Y or Enter to continue, N to close</div>
               </div>
             </div>
           )}
@@ -853,21 +856,37 @@ export default function App() {
     }
     updateTheme()
     const interval = setInterval(updateTheme, 60000)
-
-    const dissolveTimeout = setTimeout(() => setIntroDissolve(true), 6800)
-    const introTimeout = setTimeout(() => setShowIntro(false), 7200)
-
     return () => {
       clearInterval(interval)
-      clearTimeout(dissolveTimeout)
-      clearTimeout(introTimeout)
     }
   }, [])
 
   return (
     <div className={`min-h-screen transition-colors duration-300 cursor-dollar ${isDark ? "dark" : ""}`}>
       {showIntro && (
-        <HackerBootSequence introDissolve={introDissolve} />
+        <HackerBootSequence
+          introDissolve={introDissolve}
+          onProceed={() => {
+            setIntroDissolve(true)
+            setTimeout(() => setShowIntro(false), 400)
+          }}
+          onCancel={() => {
+            // attempt to close the tab; fallback to about:blank
+            try {
+              window.close()
+              // some browsers block window.close(); fallback
+              setTimeout(() => {
+                try {
+                  // @ts-ignore
+                  window.open('', '_self')?.close()
+                } catch {}
+                window.location.href = 'about:blank'
+              }, 150)
+            } catch {
+              window.location.href = 'about:blank'
+            }
+          }}
+        />
       )}
 
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-black to-slate-950 px-4 sm:px-6 lg:px-8">
