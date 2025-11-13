@@ -1,59 +1,190 @@
-# Parth Bhatt's Portfolio Website
+```markdown
+# Parth Bhatt — Portfolio Website
 
-This repository contains the source code for my personal portfolio website, [parthbhatt.me](https://parthbhatt.me).
+Welcome to the source code for my personal portfolio website: https://parthbhatt.me
 
-This portfolio is a single-page application built with Next.js and Tailwind CSS, designed to showcase my skills, projects, and experience in the field of cybersecurity and software development.
+This repository contains a fast, accessible, and responsive single-page portfolio built with Next.js and TypeScript. It is designed to highlight projects, experience, skills, certifications, and ways to get in touch.
 
-## ✨ Features
+---
 
-*   **Single-Page Layout:** A modern, single-page design for a seamless user experience.
-*   **Responsive Design:** Fully responsive and optimized for both desktop and mobile devices.
-*   **Interactive UI:** Engaging user interface with animations, modals, and a terminal-style theme.
-*   **Dynamic Content:** Key information is dynamically rendered using React components.
-*   **Sections:**
-    *   **About:** A brief introduction about me.
-    *   **Projects:** A showcase of my most significant projects with descriptions.
-    *   **Experience:** A timeline of my work experience and internships.
-    *   **Skills:** A list of my technical and soft skills.
-    *   **Certifications:** My professional certifications.
-    *   **Achievements:** Awards and recognitions.
-    *   **Contact:** A section with my contact details and social media links.
+Table of Contents
+- [About](#about)
+- [Live Demo](#live-demo)
+- [Key Features](#key-features)
+- [Tech Stack](#tech-stack)
+- [Project Structure (Overview)](#project-structure-overview)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Install](#install)
+  - [Development](#development)
+  - [Build & Production](#build--production)
+- [Available Scripts](#available-scripts)
+- [Deployment](#deployment)
+- [Design & Accessibility](#design--accessibility)
+- [Contributing & Feedback](#contributing--feedback)
+- [Troubleshooting & Tips](#troubleshooting--tips)
+- [Acknowledgements](#acknowledgements)
+- [License & Contact](#license--contact)
 
-## 🚀 Tech Stack
+---
 
-*   **Framework:** [Next.js](https://nextjs.org/) - A React framework for building fast and scalable web applications. Used for its features like Server-Side Rendering (SSR) and Static Site Generation (SSG), which are great for performance and SEO.
-*   **Language:** [TypeScript](https://www.typescriptlang.org/) - A typed superset of JavaScript that compiles to plain JavaScript. It helps in catching errors early and improving code quality.
-*   **Styling:** [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework that allows for rapid UI development by composing utility classes.
-*   **UI Components:** [Radix UI](https://www.radix-ui.com/) - A collection of accessible and unstyled UI components that provide a solid foundation for building a custom design system.
-*   **Icons:** [Lucide React](https://lucide.dev/guide/packages/lucide-react) - A beautiful and consistent icon set.
-*   **Package Manager:** [pnpm](https://pnpm.io/) - A fast and disk-space-efficient package manager.
-*   **Deployment:** [Vercel](https://vercel.com/) - A platform for deploying modern web applications, with first-class support for Next.js.
+## About
 
-## 🛠️ Getting Started
+This portfolio is a single-page application built to present my background and work clearly and professionally. It focuses on:
 
-First, install the dependencies using `pnpm`:
+- Clean, minimal UI with a terminal-inspired theme and subtle animations.
+- Mobile-first responsive design.
+- Accessibility and SEO best practices.
+- Easily updatable content via React/Next.js components.
+
+The site is intended for potential employers, collaborators, and anyone interested in my work in cybersecurity and software development.
+
+## Live Demo
+
+Visit the live site: https://parthbhatt.me
+
+## Key Features
+
+- Single-page layout with smooth scrolling navigation.
+- Fully responsive and optimized for mobile and desktop.
+- Interactive UI components and subtle animations.
+- Dynamic content rendered via React components (Next.js).
+- Sections for About, Projects, Experience, Skills, Certifications, Achievements, and Contact.
+- Accessible components (keyboard navigation, semantic HTML).
+- Optimized for fast builds and deployment (Vercel-ready).
+
+## Tech Stack
+
+- Framework: Next.js
+- Language: TypeScript
+- Styling: Tailwind CSS
+- UI primitives: Radix UI (for accessible unstyled components)
+- Icons: Lucide React
+- Package manager: pnpm
+- Deployment: Vercel (recommended)
+
+## Project Structure (Overview)
+
+A typical layout for this repository:
+
+- public/           — Static assets (images, favicons, etc.)
+- src/
+  - app/            — Next.js app routes and pages (if using app directory)
+  - pages/          — Next.js pages (if using pages directory)
+  - components/     — Reusable React components
+  - styles/         — Global styles / Tailwind config
+  - utils/          — Utility functions and helpers
+- package.json
+- tsconfig.json
+- tailwind.config.js
+- next.config.js
+
+Note: The exact structure may vary—check the repository root for the current layout.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (>= 16 recommended)
+- pnpm (preferred as package manager) — install via npm: `npm i -g pnpm`
+
+### Install
+
+Clone the repository and install dependencies:
 
 ```bash
+git clone https://github.com/paarthbhatt/parth.git
+cd parth
 pnpm install
 ```
 
-Then, run the development server:
+### Development
+
+Start the development server (hot-reloads on change):
 
 ```bash
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-## 📜 Available Scripts
+### Build & Production
 
-In the project directory, you can run:
+Build the static/production assets:
 
-*   `pnpm dev`: Runs the app in development mode.
-*   `pnpm build`: Builds the app for production.
-*   `pnpm start`: Starts the production server.
-*   `pnpm lint`: Runs the linter.
+```bash
+pnpm build
+```
 
-## 🤝 Contributing
+Start the production server (if running locally):
 
-This is a personal portfolio, but I'm open to suggestions and feedback. If you have any ideas for improvement, feel free to open an issue.
+```bash
+pnpm start
+```
+
+## Available Scripts
+
+- `pnpm dev` — Run the app in development mode.
+- `pnpm build` — Produce an optimized production build.
+- `pnpm start` — Start the production server (after build).
+- `pnpm lint` — Run the linter (if configured).
+- `pnpm format` — Format code with Prettier (if configured).
+
+(Exact script names may vary — see package.json for the authoritative list.)
+
+## Deployment
+
+This site is ready for deployment to Vercel (recommended for Next.js apps):
+
+1. Push to a GitHub repository.
+2. Import the repository into Vercel.
+3. Set any environment variables required by the app (if any).
+4. Configure build command: `pnpm build` and output directory as default for Next.js.
+
+Other platforms that support Node/Next.js can be used similarly.
+
+## Design & Accessibility
+
+- Built with accessibility in mind: semantic HTML, focus states, and keyboard navigation.
+- Responsive across device sizes using Tailwind CSS utilities.
+- Performance optimizations (image optimization, code-splitting) via Next.js features.
+- SEO-friendly metadata and structured content.
+
+## Contributing & Feedback
+
+This is primarily my personal portfolio, but I welcome suggestions and improvements:
+
+- Ideas, typos, or small improvements: please open an issue.
+- Code contributions: open a pull request with a clear description of changes.
+- For larger changes, open an issue first to discuss the approach.
+
+When contributing, please follow the repository's code style and linting rules (if present).
+
+## Troubleshooting & Tips
+
+- If you have issues starting the project:
+  - Ensure Node.js and pnpm versions meet the prerequisites.
+  - Delete node_modules and lockfile then run `pnpm install` again.
+- Linting or formatting errors: run the configured lint/format commands or check CI logs for guidance.
+- If environment-specific behavior is needed, check for `.env.example` or docs in the repo.
+
+## Acknowledgements
+
+Thanks to the open-source projects and libraries used to build this site:
+- Next.js
+- Tailwind CSS
+- Radix UI
+- Lucide Icons
+- pnpm
+
+## License & Contact
+
+- Author: Parth Bhatt
+- Website: https://parthbhatt.me
+- GitHub: https://github.com/paarthbhatt/parth
+
+If you want to reach out, you can open an issue here on GitHub or contact me through the links on my site.
+
+---
+Last updated: 2025-11-13
+```
