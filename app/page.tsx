@@ -370,6 +370,38 @@ function CertificationsSection() {
       bgGradient: "from-yellow-500 to-orange-600",
       description: "Foundational cybersecurity knowledge covering network security, web application security, and digital forensics",
     },
+    {
+      title: "Cybersecurity 101 Certificate",
+      issuer: "TryHackMe",
+      date: "2025",
+      icon: Shield,
+      bgGradient: "from-yellow-500 to-orange-600",
+      description: "Fundamental concepts of cybersecurity including network security, web application security, and cryptography",
+    },
+    {
+      title: "ICS Cybersecurity Risks, Vulnerabiltities and Threats (3 certs)",
+      issuer: "CISA",
+      date: "2025",
+      icon: Building,
+      bgGradient: "from-blue-600 to-indigo-600",
+      description: "Specialized training on Industrial Control Systems (ICS) security, focusing on risks, vulnerabilities, and threat mitigation",
+    },
+    {
+      title: "Introduction to Cybersecurity",
+      issuer: "Cisco",
+      date: "2025",
+      icon: Shield,
+      bgGradient: "from-blue-500 to-cyan-600",
+      description: "Foundational understanding of cybersecurity principles, protecting personal online life, and insights into security challenges",
+    },
+    {
+      title: "XSS Defense Bootcamp",
+      issuer: "DevTown",
+      date: "2025",
+      icon: Shield,
+      bgGradient: "from-purple-500 to-pink-600",
+      description: "Deep dive into Cross-Site Scripting (XSS) attacks and defense mechanisms, focusing on secure coding practices",
+    },
   ]
 
   return (
