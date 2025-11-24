@@ -198,7 +198,7 @@ function Header({
     >
       {/* Scanlines */}
       <div className="absolute inset-0 scanlines opacity-10 pointer-events-none"></div>
-      
+
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
         <div className="flex h-14 sm:h-16 items-center justify-between">
           <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
@@ -415,7 +415,7 @@ function CertificationsSection() {
       </div>
 
       <TerminalStrip label="[CREDENTIALS.SCAN]" meta="verifying • certification_store" />
-      
+
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="text-center mb-6 sm:mb-8 mt-4 sm:mt-6 px-2">
           <ASCIIArt
@@ -438,13 +438,13 @@ function CertificationsSection() {
               >
                 {/* Scanlines */}
                 <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
-                
+
                 {/* Badge */}
                 <div className="relative z-10 flex items-start gap-4">
                   <div className={`w-16 h-16 bg-gradient-to-br ${cert.bgGradient} rounded-lg flex items-center justify-center border-2 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.3)] group-hover:scale-110 transition-transform`}>
                     <cert.icon className="w-8 h-8 text-white" />
-                </div>
-                  
+                  </div>
+
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-xs font-mono bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded border border-emerald-500/30">
@@ -453,11 +453,11 @@ function CertificationsSection() {
                       <span className="text-xs font-mono text-emerald-500/70">@ {cert.issuer}</span>
                     </div>
                     <h3 className="text-base font-bold font-mono text-emerald-400 mb-2 leading-tight">
-                  {cert.title}
-                </h3>
+                      {cert.title}
+                    </h3>
                     <p className="text-xs text-gray-400 font-mono leading-relaxed">
-                  {cert.description}
-                </p>
+                      {cert.description}
+                    </p>
                   </div>
                 </div>
 
@@ -510,6 +510,15 @@ function AchievementsSection() {
       bgGradient: "from-red-500 to-pink-600",
       description: "Developed a comprehensive smart city dashboard focused on Delhi, showcasing real-time and historical urban data to enhance city management and citizen engagement through interactive visualizations.",
     },
+    {
+      title: "Hackorate Hackathon ",
+      subtitle: "Vibe-Coding Excellence",
+      issuer: "Sinusoid v9 - NIIT University",
+      date: "2025",
+      icon: Award,
+      bgGradient: "from-purple-500 to-violet-600",
+      description: "Achieved a top-tier ranking in this unique 'vibe-coding' competition. Recognized for maintaining exceptional development flow and code quality while delivering a creative solution under pressure.",
+    },
   ]
 
   return (
@@ -523,7 +532,7 @@ function AchievementsSection() {
       </div>
 
       <TerminalStrip label="[ACHIEVEMENT.DAT]" meta="unlocked • trophy_scan" />
-      
+
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="text-center mb-6 sm:mb-8 mt-4 sm:mt-6 px-2">
           <ASCIIArt
@@ -546,14 +555,14 @@ function AchievementsSection() {
               >
                 {/* Scanlines */}
                 <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
-                
+
                 {/* Achievement display */}
                 <div className="relative z-10">
                   <div className="flex items-start gap-4 mb-4">
                     <div className={`w-16 h-16 bg-gradient-to-br ${achievement.bgGradient} rounded-lg flex items-center justify-center border-2 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.3)] group-hover:scale-110 transition-transform`}>
                       <achievement.icon className="w-8 h-8 text-white" />
-                </div>
-                    
+                    </div>
+
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-xs font-mono bg-cyan-500/20 text-cyan-400 px-2 py-1 rounded border border-cyan-500/30">
@@ -562,15 +571,15 @@ function AchievementsSection() {
                         <span className="text-xs font-mono text-emerald-500/70">{achievement.date}</span>
                       </div>
                       <h3 className="text-lg font-bold font-mono text-emerald-400 mb-1">
-                  {achievement.title}
-                </h3>
+                        {achievement.title}
+                      </h3>
                       <p className="text-xs font-mono text-cyan-400 mb-2">
-                  {achievement.subtitle}
-                </p>
+                        {achievement.subtitle}
+                      </p>
                       <p className="text-xs text-emerald-500/70 font-mono">@ {achievement.issuer}</p>
                     </div>
                   </div>
-                  
+
                   <p className="text-xs text-gray-400 font-mono leading-relaxed">
                     {achievement.description}
                   </p>
@@ -775,28 +784,28 @@ function HackerBootSequence({ introDissolve, onProceed, onCancel }: { introDisso
           <span className="text-[10px] sm:text-xs font-mono text-emerald-400 ml-1 sm:ml-2 truncate">root@parth-bhatt:~</span>
         </div>
 
-      {/* Desktop/Laptop best experience disclaimer */}
-      {showDisclaimer && (
-        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20">
-          <div className="group relative rounded-lg border-2 border-emerald-500/50 bg-black/85 px-3 py-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] backdrop-blur">
-            <div className="absolute -inset-0.5 rounded-lg bg-[conic-gradient(from_180deg_at_50%_50%,rgba(16,185,129,0.2),rgba(6,182,212,0.2),rgba(59,130,246,0.2),rgba(16,185,129,0.2))] blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div className="relative z-10 flex items-center gap-2">
-              <span className="text-[10px] sm:text-xs font-mono text-emerald-400">[NOTICE]</span>
-              <span className="text-[10px] sm:text-xs font-mono text-emerald-200 whitespace-nowrap">
-                Best experienced on <span className="text-cyan-400 font-semibold">desktop/laptop</span> 💻
-              </span>
-              <button
-                type="button"
-                aria-label="Dismiss notice"
-                className="ml-1 text-emerald-500/70 hover:text-emerald-300 text-[10px] sm:text-xs"
-                onClick={() => setShowDisclaimer(false)}
-              >
-                ×
-              </button>
+        {/* Desktop/Laptop best experience disclaimer */}
+        {showDisclaimer && (
+          <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20">
+            <div className="group relative rounded-lg border-2 border-emerald-500/50 bg-black/85 px-3 py-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] backdrop-blur">
+              <div className="absolute -inset-0.5 rounded-lg bg-[conic-gradient(from_180deg_at_50%_50%,rgba(16,185,129,0.2),rgba(6,182,212,0.2),rgba(59,130,246,0.2),rgba(16,185,129,0.2))] blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="relative z-10 flex items-center gap-2">
+                <span className="text-[10px] sm:text-xs font-mono text-emerald-400">[NOTICE]</span>
+                <span className="text-[10px] sm:text-xs font-mono text-emerald-200 whitespace-nowrap">
+                  Best experienced on <span className="text-cyan-400 font-semibold">desktop/laptop</span> 💻
+                </span>
+                <button
+                  type="button"
+                  aria-label="Dismiss notice"
+                  className="ml-1 text-emerald-500/70 hover:text-emerald-300 text-[10px] sm:text-xs"
+                  onClick={() => setShowDisclaimer(false)}
+                >
+                  ×
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
         {/* Terminal Content */}
         <div className="p-3 sm:p-4 md:p-6 font-mono text-[10px] sm:text-xs md:text-sm overflow-y-auto overflow-x-auto max-h-[75vh] sm:max-h-[70vh]">
@@ -804,7 +813,7 @@ function HackerBootSequence({ introDissolve, onProceed, onCancel }: { introDisso
           {showBanner && (
             <div className={`mb-2 sm:mb-4 text-center ${glitchActive ? "animate-pulse" : ""}`}>
               <pre className="hidden sm:block text-[7px] md:text-[9px] lg:text-[11px] xl:text-[12px] text-emerald-500 dark:text-emerald-400 whitespace-pre overflow-x-auto">
-{`██████╗  █████╗ ██████╗ ████████╗██╗  ██╗    ██████╗ ██╗  ██╗ █████╗ ████████╗████████╗
+                {`██████╗  █████╗ ██████╗ ████████╗██╗  ██╗    ██████╗ ██╗  ██╗ █████╗ ████████╗████████╗
 ██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██║  ██║    ██╔══██╗██║  ██║██╔══██╗╚══██╔══╝╚══██╔══╝
 ██████╔╝███████║██████╔╝   ██║   ███████║    ██████╔╝███████║███████║   ██║      ██║   
 ██╔═══╝ ██╔══██║██╔══██╗   ██║   ██╔══██║    ██╔══██╗██╔══██║██╔══██║   ██║      ██║   
@@ -930,7 +939,7 @@ export default function App() {
                 try {
                   // @ts-ignore
                   window.open('', '_self')?.close()
-                } catch {}
+                } catch { }
                 window.location.href = 'about:blank'
               }, 150)
             } catch {
@@ -972,7 +981,7 @@ function HeroSection({
       {/* Matrix background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-        
+
         {/* Hacker code snippets */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-20 left-4 sm:left-10 text-emerald-500 font-mono text-xs sm:text-sm animate-pulse">
@@ -988,7 +997,7 @@ function HeroSection({
             {"// zero_day_protection"}
           </div>
         </div>
-        
+
         {/* Glowing orbs */}
         <div className="absolute top-1/4 left-1/5 w-32 sm:w-52 h-32 sm:h-52 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-2/3 right-1/4 w-36 sm:w-60 h-36 sm:h-60 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -1000,11 +1009,11 @@ function HeroSection({
         <div className="mb-6 sm:mb-7 md:mb-8 flex justify-center">
           <div className="relative group">
             <div className="absolute -inset-1 sm:-inset-1.5 md:-inset-2 bg-emerald-500 rounded-full blur-lg opacity-50 group-hover:opacity-75 transition-opacity animate-pulse"></div>
-          <img
-            src="/parth-bhatt-portrait.png"
-            alt="Parth Bhatt portrait"
+            <img
+              src="/parth-bhatt-portrait.png"
+              alt="Parth Bhatt portrait"
               className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full border-2 border-emerald-500 shadow-[0_0_40px_rgba(16,185,129,0.5)]"
-          />
+            />
           </div>
         </div>
 
@@ -1076,26 +1085,26 @@ function AboutSection() {
       </div>
 
       <TerminalStrip label="[SYSTEM_INFO.EXE]" meta="whoami • profile_scan" />
-      
+
       <div className="container mx-auto max-w-5xl mt-4 sm:mt-8 relative z-10">
         <div className="bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
           {/* Scanlines */}
           <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
-          
+
           <div className="grid md:grid-cols-3 gap-4 sm:gap-6 relative z-10">
             <div className="md:col-span-1 flex justify-center">
-          <img
-            src="/parth-bhatt-portrait.png"
-            alt="Parth Bhatt"
+              <img
+                src="/parth-bhatt-portrait.png"
+                alt="Parth Bhatt"
                 className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.4)]"
-          />
-        </div>
+              />
+            </div>
             <div className="md:col-span-2 space-y-3 sm:space-y-4">
               <div className="flex items-center gap-2 mb-3 sm:mb-4">
                 <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
                 <h3 className="text-xl sm:text-2xl font-bold font-mono text-emerald-400">$ ./whoami</h3>
               </div>
-              
+
               <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
                 <div className="flex items-start gap-2 sm:gap-3">
                   <span className="text-emerald-500 flex-shrink-0">[✦]</span>
@@ -1106,8 +1115,8 @@ function AboutSection() {
                 <div className="flex items-start gap-2 sm:gap-3">
                   <span className="text-emerald-500 flex-shrink-0">[✦]</span>
                   <p className="text-gray-300 leading-relaxed">
-            From ethical hacking to defensive security, I thrive on challenges that blend logic, strategy, and creativity. My goal? To turn passion into impact by protecting digital spaces and building smarter, safer systems.
-          </p>
+                    From ethical hacking to defensive security, I thrive on challenges that blend logic, strategy, and creativity. My goal? To turn passion into impact by protecting digital spaces and building smarter, safer systems.
+                  </p>
                 </div>
               </div>
 
@@ -1269,7 +1278,7 @@ function ProjectsSection() {
       >
         {/* Hacker scanlines effect */}
         <div className="absolute inset-0 scanlines opacity-30 pointer-events-none"></div>
-        
+
 
         {/* Content */}
         <div className="relative z-10">
@@ -1280,17 +1289,17 @@ function ProjectsSection() {
             </div>
             <span className="text-xs font-mono text-emerald-500/50">#{String(index + 1).padStart(2, '0')}</span>
           </div>
-          
-          <img 
-            src={project.img || "/placeholder.svg"} 
-            alt={project.title} 
-            className="w-full h-32 object-cover rounded border border-emerald-500/20 mb-3" 
+
+          <img
+            src={project.img || "/placeholder.svg"}
+            alt={project.title}
+            className="w-full h-32 object-cover rounded border border-emerald-500/20 mb-3"
           />
-          
+
           <h4 className="text-base font-bold font-mono text-emerald-400 mb-2 group-hover:text-emerald-300 transition-colors">
             {project.title}
           </h4>
-          
+
           <p className="text-xs text-gray-400 font-mono leading-relaxed">
             {project.description}
           </p>
@@ -1321,7 +1330,7 @@ function ProjectsSection() {
       </div>
 
       <TerminalStrip label="[PROJECTS.EXE]" meta="scanning • targets acquired" />
-      
+
       <div className="container mx-auto max-w-7xl mt-6 space-y-8 relative z-10">
         {/* Hacker ASCII Header */}
         <div className="text-center mb-8">
@@ -1345,23 +1354,22 @@ function ProjectsSection() {
                 setTimeout(() => setIsHacking(false), 500)
                 setSelectedCategory(cat.id)
               }}
-              className={`relative px-6 py-3 font-mono text-sm border-2 transition-all duration-300 ${
-                selectedCategory === cat.id
-                  ? "border-emerald-500 bg-emerald-500/10 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.5)]"
-                  : "border-emerald-500/30 bg-black/50 text-gray-400 hover:border-emerald-500/60 hover:text-emerald-500"
-              }`}
+              className={`relative px-6 py-3 font-mono text-sm border-2 transition-all duration-300 ${selectedCategory === cat.id
+                ? "border-emerald-500 bg-emerald-500/10 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+                : "border-emerald-500/30 bg-black/50 text-gray-400 hover:border-emerald-500/60 hover:text-emerald-500"
+                }`}
             >
               <span className="relative z-10 flex items-center gap-2">
                 <span className="inline-block w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
                 {cat.label}
                 <span className="text-emerald-600">({cat.count})</span>
-            </span>
+              </span>
               {selectedCategory === cat.id && (
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 animate-pulse"></div>
               )}
             </button>
-        ))}
-      </div>
+          ))}
+        </div>
 
         {/* Projects Grid */}
         <div className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 transition-all duration-500 ${isHacking ? "blur-sm" : ""}`}>
@@ -1431,12 +1439,12 @@ function ExperienceSection() {
       </div>
 
       <TerminalStrip label="[HISTORY.LOG]" meta="experience • timeline_scan" />
-      
+
       <div className="container mx-auto max-w-5xl mt-4 sm:mt-6 relative z-10">
         <div className="bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
           {/* Scanlines */}
           <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
-          
+
           <div className="relative z-10">
             {/* Terminal Header */}
             <div className="flex flex-wrap items-center gap-2 mb-4 sm:mb-6">
@@ -1446,7 +1454,7 @@ function ExperienceSection() {
 
             {/* Terminal Log Entries */}
             <div className="space-y-3 sm:space-y-4 font-mono text-xs sm:text-sm">
-        {items.map((e, i) => (
+              {items.map((e, i) => (
                 <div
                   key={i}
                   className="bg-emerald-500/5 border-l-4 border-emerald-500/50 pl-3 sm:pl-4 py-3 sm:py-4 hover:bg-emerald-500/10 hover:border-emerald-500 transition-all group"
@@ -1458,21 +1466,21 @@ function ExperienceSection() {
                     <span className="text-emerald-400 font-mono">→</span>
                     <span className="text-emerald-400 font-bold">{e.role}</span>
                     <span className="text-emerald-500/70 font-mono">@ {e.org}</span>
-            </div>
-                  
+                  </div>
+
                   {/* Description as log entry */}
                   <div className="flex items-start gap-2">
                     <span className="text-emerald-500 mt-1">└─</span>
                     <p className="text-gray-300 leading-relaxed flex-1">{e.desc}</p>
                   </div>
-                  
+
                   {/* Status badge */}
                   <div className="mt-2 flex items-center gap-2">
                     <span className="inline-block w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
                     <span className="text-xs font-mono text-emerald-400">{e.status}</span>
                   </div>
-          </div>
-        ))}
+                </div>
+              ))}
             </div>
 
             {/* Terminal Footer */}
@@ -1493,9 +1501,9 @@ function ExperienceSection() {
 
 // Skills Section - Hacker Style
 function SkillsSection() {
-  const skills = ["Threat Intel", "Cybersecurity", "Vulnerability Management", "Web Application Security", "Artificial Intelligence", "Github", 
+  const skills = ["Threat Intel", "Cybersecurity", "Vulnerability Management", "Web Application Security", "Artificial Intelligence", "Github",
     "Cloud Security", "Incident Response", "Linux", "Python", "DSA", "Collaboration", "Networking", "Cloud Computing", "Project Management",
-  "OOPs", "AI tools & Frameworks", "Network Security", "Security Operations", "Cisco Packet Tracer", "Kali Linux", "OWASP"] 
+    "OOPs", "AI tools & Frameworks", "Network Security", "Security Operations", "Cisco Packet Tracer", "Kali Linux", "OWASP"]
 
   const [isScanning, setIsScanning] = useState(true)
 
@@ -1503,7 +1511,7 @@ function SkillsSection() {
     const timer = setTimeout(() => setIsScanning(false), 2000)
     return () => clearTimeout(timer)
   }, [])
-  
+
   return (
     <section
       id="skills"
@@ -1515,12 +1523,12 @@ function SkillsSection() {
       </div>
 
       <TerminalStrip label="[SKILLS.SCAN]" meta="scanning • capability_matrix" />
-      
+
       <div className="container mx-auto max-w-5xl mt-4 sm:mt-6 relative z-10">
         <div className="bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
           {/* Scanlines */}
           <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
-          
+
           <div className="relative z-10">
             {isScanning && (
               <div className="text-center py-6 sm:py-8">
@@ -1529,25 +1537,25 @@ function SkillsSection() {
                 </p>
               </div>
             )}
-            
+
             {!isScanning && (
               <>
                 <div className="flex items-center gap-2 mb-3 sm:mb-4">
                   <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
                   <h3 className="text-base sm:text-xl font-bold font-mono text-emerald-400">$ ./skills --list-all</h3>
                 </div>
-                
+
                 <div className="flex flex-wrap gap-2 sm:gap-3">
-          {skills.map((s, i) => (
-            <span
-              key={i}
+                  {skills.map((s, i) => (
+                    <span
+                      key={i}
                       className="inline-block px-2 sm:px-4 py-1.5 sm:py-2 rounded border border-emerald-500/40 bg-emerald-500/5 text-emerald-400 font-mono text-[10px] sm:text-xs hover:bg-emerald-500/10 hover:border-emerald-500 hover:shadow-[0_0_10px_rgba(16,185,129,0.3)] transition-all duration-300 relative group"
-            >
+                    >
                       <span className="absolute -left-2 -top-2 w-1 h-1 bg-emerald-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-              {s}
+                      {s}
                       <span className="absolute -right-2 -bottom-2 w-1 h-1 bg-emerald-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-            </span>
-          ))}
+                    </span>
+                  ))}
                 </div>
 
                 <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-emerald-500/30 text-xs font-mono text-emerald-500/70">
@@ -1572,12 +1580,12 @@ function ContactSection() {
       </div>
 
       <TerminalStrip label="[CONTACT.PROTO]" meta="communication • handshake_init" />
-      
+
       <div className="container mx-auto max-w-3xl mt-4 sm:mt-6 relative z-10">
         <div className="bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
           {/* Scanlines */}
           <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
-          
+
           <div className="relative z-10 space-y-4 sm:space-y-6">
             {/* Header */}
             <div className="flex items-center gap-2 mb-4 sm:mb-6">
@@ -1602,7 +1610,7 @@ function ContactSection() {
                 <span className="text-emerald-500 font-mono">[LOCATION]</span>
               </div>
               <p className="text-sm font-mono text-emerald-400">New Delhi, INDIA</p>
-          </div>
+            </div>
 
             {/* Interests */}
             <div className="border border-emerald-500/30 bg-emerald-500/5 rounded p-4">
@@ -1612,11 +1620,11 @@ function ContactSection() {
               <div className="flex flex-wrap gap-2">
                 {["Ethical Hacking", "Security Operations", "AI in Cybersecurity", "Blockchain / Web3 Security", "Hackathons & CTF"].map((chip) => (
                   <span key={chip} className="px-3 py-1 rounded border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-mono text-xs hover:bg-emerald-500/20 transition-colors">
-                  {chip}
-                </span>
-              ))}
+                    {chip}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
 
             {/* Contact Info */}
             <div className="grid sm:grid-cols-2 gap-4">
@@ -1626,26 +1634,26 @@ function ContactSection() {
                   <span className="text-emerald-500 font-mono text-xs">[EMAIL]</span>
                 </div>
                 <a className="text-sm font-mono text-emerald-400 hover:text-emerald-300 block" href="mailto:paarthbhatt37@gmail.com">
-                paarthbhatt37@gmail.com
-              </a>
-            </div>
+                  paarthbhatt37@gmail.com
+                </a>
+              </div>
               <div className="border border-emerald-500/30 bg-emerald-500/5 rounded p-4 group hover:bg-emerald-500/10 transition-colors">
                 <div className="flex items-center gap-2 mb-2">
                   <Phone className="w-4 h-4 text-emerald-500" />
                   <span className="text-emerald-500 font-mono text-xs">[PHONE]</span>
                 </div>
                 <a className="text-sm font-mono text-emerald-400 hover:text-emerald-300 block" href="tel:+918920948990">
-                +91 8920948990
-              </a>
+                  +91 8920948990
+                </a>
+              </div>
             </div>
-          </div>
 
             {/* Resume Link */}
             <div className="pt-4 border-t border-emerald-500/30">
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 border border-emerald-500/40 px-4 py-2 font-mono text-sm text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-500 transition-all group"
               >
                 <span className="group-hover:translate-x-1 transition-transform inline-block">&gt;</span>
