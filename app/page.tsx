@@ -339,6 +339,14 @@ function HorizontalSlider({
 function CertificationsSection() {
   const certifications = [
     {
+      title: "Advent of Cyber 2025",
+      issuer: "TryHackMe",
+      date: "2025",
+      icon: Shield,
+      bgGradient: "from-blue-600 to-indigo-600",
+      description: "Completed 24 cyber security challenges, demonstrating consistency, tenacity & continuous learning in security fundamentals.",
+    },
+    {
       title: "Junior Cybersecurity Analyst Career Path",
       issuer: "Cisco",
       date: "2025",
