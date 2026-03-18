@@ -5,9 +5,8 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Parth Bhatt - Portfolio',
-  description: 'Created with <3',
-  generator: 'v0.app',
+  title: 'Parth Bhatt | Cybersecurity Portfolio',
+  description: 'Portfolio of Parth Bhatt – Cybersecurity enthusiast, Threat Intelligence Analyst, and B.Tech student from New Delhi. Showcasing projects, certifications, and experience in cybersecurity, web security, and AI.',
 }
 
 export default function RootLayout({
