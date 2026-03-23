@@ -712,4 +712,126 @@ html {
 }
 
 /* Optional subtle bracket edges (disabled for simplicity)
+   could be added via clip-path if you want sharper "tool" edges */
+
+/* =====================================================
+   SCROLL PROGRESS BAR
+   ===================================================== */
+.scroll-progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 9999;
+  background: rgba(16, 185, 129, 0.08);
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #22d3ee, #3b82f6);
+  box-shadow:
+    0 0 6px rgba(16, 185, 129, 0.8),
+    0 0 16px rgba(34, 211, 238, 0.6),
+    0 0 28px rgba(59, 130, 246, 0.4);
+  transition: width 0.1s linear;
+  border-radius: 0 2px 2px 0;
+  will-change: width;
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-progress-bar::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  animation: progress-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes progress-shimmer {
+  0%   { transform: translateX(-40px); opacity: 0; }
+  40%  { opacity: 1; }
+  100% { transform: translateX(0px); opacity: 0; }
+}
+
+.scroll-progress-badge {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 9998;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* =====================================================
+   SCROLL REVEAL ANIMATIONS
+   ===================================================== */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-reveal.scroll-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal.delay-1 { transition-delay: 0.08s; }
+.scroll-reveal.delay-2 { transition-delay: 0.16s; }
+.scroll-reveal.delay-3 { transition-delay: 0.24s; }
+.scroll-reveal.delay-4 { transition-delay: 0.32s; }
+
+.scroll-reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.scroll-reveal-left.scroll-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.scroll-reveal-right.scroll-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  .scroll-reveal-left,
+  .scroll-reveal-right {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* Optional subtle bracket edges (disabled for simplicity)
    could be added via clip-path if you want sharper “tool” edges */

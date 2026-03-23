@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { TerminalStrip } from "./TerminalStrip"
 import { skillsData } from "../lib/data"
+import { useScrollReveal } from "../hooks/useScrollReveal"
 
 export function SkillsSection() {
   const [isScanning, setIsScanning] = useState(true)
@@ -12,8 +13,11 @@ export function SkillsSection() {
     return () => clearTimeout(timer)
   }, [])
 
+  const ref = useScrollReveal<HTMLElement>()
+
   return (
     <section
+      ref={ref}
       id="skills"
       className="relative py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden"
     >
@@ -24,7 +28,7 @@ export function SkillsSection() {
       <TerminalStrip label="[SKILLS.SCAN]" meta="scanning • capability_matrix" />
 
       <div className="container mx-auto max-w-5xl mt-4 sm:mt-6 relative z-10">
-        <div className="bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
+        <div className="scroll-reveal bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
           <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
 
           <div className="relative z-10">
