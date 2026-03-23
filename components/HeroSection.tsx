@@ -81,7 +81,7 @@ export function HeroSection({
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-3.5 md:gap-4 justify-center items-center px-2">
           <a
-            href="/resume.pdf"
+            href="/Resume_PARTH.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="cyber-btn group"
