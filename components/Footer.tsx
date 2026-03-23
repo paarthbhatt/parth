@@ -9,7 +9,7 @@ export function Footer({ introDone }: { introDone: boolean }) {
       ].join(" ")}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-5">
-        <div className="mb-2 sm:mb-3 flex flex-wrap items-center gap-1.5 sm:gap-2">
+        <div className="scroll-reveal mb-2 sm:mb-3 flex flex-wrap items-center gap-1.5 sm:gap-2">
           <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-emerald-300" />
           <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-cyan-300" />
           <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-blue-300" />

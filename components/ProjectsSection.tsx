@@ -4,10 +4,12 @@ import { useState, useEffect } from "react"
 import { TerminalStrip } from "./TerminalStrip"
 import { ASCIIArt } from "./ASCIIArt"
 import { securityProjectsData, webProjectsData, otherProjectsData } from "../lib/data"
+import { useScrollReveal } from "../hooks/useScrollReveal"
 
 export function ProjectsSection() {
   const [selectedCategory, setSelectedCategory] = useState<"security" | "web" | "other">("security")
   const [isHacking, setIsHacking] = useState(false)
+  const ref = useScrollReveal<HTMLElement>()
 
   const HackerProjectCard = ({ project, index }: { project: any; index: number }) => {
     const [isVisible, setIsVisible] = useState(false)
@@ -63,6 +65,7 @@ export function ProjectsSection() {
 
   return (
     <section
+      ref={ref}
       id="projects"
       className="relative py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden"
     >
@@ -81,7 +84,7 @@ export function ProjectsSection() {
           />
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
+        <div className="scroll-reveal flex flex-wrap justify-center gap-4 mb-8">
           {[
             { id: "security" as const, label: "SECURITY.EXE", count: securityProjectsData.length },
             { id: "web" as const, label: "WEB_APP.BIN", count: webProjectsData.length },
@@ -111,7 +114,7 @@ export function ProjectsSection() {
           ))}
         </div>
 
-        <div className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 transition-all duration-500 ${isHacking ? "blur-sm" : ""}`}>
+        <div className={`scroll-reveal delay-2 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 transition-all duration-500 ${isHacking ? "blur-sm" : ""}`}>
           {selectedCategory === "security" &&
             securityProjectsData.map((project, i) => (
               <HackerProjectCard key={i} project={project} index={i} />

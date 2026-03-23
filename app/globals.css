@@ -778,48 +778,48 @@ html {
 }
 
 /* =====================================================
-   SCROLL REVEAL ANIMATIONS
+   SCROLL REVEAL ANIMATIONS (parallax-style)
    ===================================================== */
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(32px);
+  transform: translateY(48px) scale(0.98);
   transition:
-    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal.scroll-revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .scroll-reveal.delay-1 { transition-delay: 0.08s; }
-.scroll-reveal.delay-2 { transition-delay: 0.16s; }
-.scroll-reveal.delay-3 { transition-delay: 0.24s; }
-.scroll-reveal.delay-4 { transition-delay: 0.32s; }
+.scroll-reveal.delay-2 { transition-delay: 0.18s; }
+.scroll-reveal.delay-3 { transition-delay: 0.28s; }
+.scroll-reveal.delay-4 { transition-delay: 0.38s; }
 
 .scroll-reveal-left {
   opacity: 0;
-  transform: translateX(-32px);
+  transform: translateX(-48px) scale(0.98);
   transition:
-    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .scroll-reveal-left.scroll-revealed {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) scale(1);
 }
 
 .scroll-reveal-right {
   opacity: 0;
-  transform: translateX(32px);
+  transform: translateX(48px) scale(0.98);
   transition:
-    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .scroll-reveal-right.scroll-revealed {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) scale(1);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,9 +1,11 @@
 import { Mail, Phone, MapPin } from "lucide-react"
 import { TerminalStrip } from "./TerminalStrip"
+import { useScrollReveal } from "../hooks/useScrollReveal"
 
 export function ContactSection() {
+  const ref = useScrollReveal<HTMLElement>()
   return (
-    <section id="contact" className="relative py-12 md:py-14 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden">
+    <section ref={ref} id="contact" className="relative py-12 md:py-14 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.02)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
       </div>
@@ -11,7 +13,7 @@ export function ContactSection() {
       <TerminalStrip label="[CONTACT.PROTO]" meta="communication • handshake_init" />
 
       <div className="container mx-auto max-w-3xl mt-4 sm:mt-6 relative z-10">
-        <div className="bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
+        <div className="scroll-reveal bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
           <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
 
           <div className="relative z-10 space-y-4 sm:space-y-6">

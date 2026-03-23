@@ -1,9 +1,11 @@
 import { TerminalStrip } from "./TerminalStrip"
 import { experienceData } from "../lib/data"
+import { useScrollReveal } from "../hooks/useScrollReveal"
 
 export function ExperienceSection() {
+  const ref = useScrollReveal<HTMLElement>()
   return (
-    <section id="experience" className="relative py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden">
+    <section ref={ref} id="experience" className="relative py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.02)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
       </div>
@@ -11,7 +13,7 @@ export function ExperienceSection() {
       <TerminalStrip label="[HISTORY.LOG]" meta="experience • timeline_scan" />
 
       <div className="container mx-auto max-w-5xl mt-4 sm:mt-6 relative z-10">
-        <div className="bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
+        <div className="scroll-reveal bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden">
           <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
 
           <div className="relative z-10">
@@ -24,7 +26,7 @@ export function ExperienceSection() {
               {experienceData.map((e, i) => (
                 <div
                   key={i}
-                  className="bg-emerald-500/5 border-l-4 border-emerald-500/50 pl-3 sm:pl-4 py-3 sm:py-4 hover:bg-emerald-500/10 hover:border-emerald-500 transition-all group"
+                  className={`scroll-reveal delay-${Math.min(i + 1, 4)} bg-emerald-500/5 border-l-4 border-emerald-500/50 pl-3 sm:pl-4 py-3 sm:py-4 hover:bg-emerald-500/10 hover:border-emerald-500 transition-all group`}
                 >
                   <div className="flex flex-wrap items-center gap-2 mb-2">
                     <span className="text-emerald-500 font-mono">[{String(i + 1).padStart(2, '0')}]</span>

@@ -2,10 +2,13 @@ import { TerminalStrip } from "./TerminalStrip"
 import { ASCIIArt } from "./ASCIIArt"
 import { HorizontalSlider } from "./HorizontalSlider"
 import { certificationsData } from "../lib/data"
+import { useScrollReveal } from "../hooks/useScrollReveal"
 
 export function CertificationsSection() {
+  const ref = useScrollReveal<HTMLElement>()
   return (
     <section
+      ref={ref}
       id="certifications"
       className="relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950"
     >
@@ -16,7 +19,7 @@ export function CertificationsSection() {
       <TerminalStrip label="[CREDENTIALS.SCAN]" meta="verifying • certification_store" />
 
       <div className="container mx-auto max-w-7xl relative z-10">
-        <div className="text-center mb-6 sm:mb-8 mt-4 sm:mt-6 px-2">
+        <div className="scroll-reveal text-center mb-6 sm:mb-8 mt-4 sm:mt-6 px-2">
           <ASCIIArt
             text={` ██████╗███████╗██████╗ ████████╗██╗███████╗██╗ ██████╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗███████╗
 ██╔════╝██╔════╝██╔══██╗╚══██╔══╝██║██╔════╝██║██╔════╝██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║╚══███╔╝
