@@ -4,52 +4,46 @@ export function PitchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto animate-pitch-modal-in">
-        <div className="p-8">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 font-mono text-emerald-600 dark:text-emerald-400">
-              Why I'm a fit for Cybersecurity Roles
-            </h3>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md">
+      <div className="relative bg-black border-2 border-emerald-500/30 rounded-lg shadow-[0_0_40px_rgba(16,185,129,0.2)] max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto animate-pitch-modal-in group">
+        <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
+        
+        <div className="p-6 sm:p-8 relative z-10">
+          <div className="flex justify-between items-start mb-6 border-b border-emerald-500/30 pb-4">
+            <div className="flex flex-col">
+              <span className="text-emerald-500/70 font-mono text-xs mb-1">[ACCESS_GRANTED: ROOT]</span>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold font-mono text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]">
+                &gt; WHY_IM_A_FIT<span className="animate-pulse">_</span>
+              </h3>
+            </div>
             <button
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+              className="text-emerald-500/70 hover:text-emerald-300 transition-colors p-2 bg-emerald-500/10 hover:bg-emerald-500/20 rounded border border-emerald-500/20"
+              aria-label="Close"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
-          <div className="space-y-6 text-gray-700 dark:text-gray-300">
-            <div className="bg-gradient-to-r from-emerald-50 to-cyan-50 dark:from-emerald-900/20 dark:to-cyan-900/20 p-6 rounded-2xl">
-              <h4 className="text-xl font-semibold text-emerald-700 dark:text-emerald-300 mb-3">
-                Validated Foundations
-              </h4>
-              <p className="leading-relaxed">
-                Junior Cybersecurity Analyst (Cisco), Threat Intelligence (arcX), Pre‑Security (TryHackMe), and GitHub
-                Foundations—giving me a strong base in SOC workflows, TI methodologies, and secure SDLC practices.
+          <div className="space-y-4">
+            <div className="border border-emerald-500/30 bg-emerald-500/5 p-6 sm:p-8 relative group hover:bg-emerald-500/10 transition-colors">
+              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-emerald-500"></div>
+              <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-emerald-500"></div>
+              <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-emerald-500"></div>
+              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-emerald-500"></div>
+              
+              <div className="flex items-center gap-2 mb-4">
+                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                <span className="text-sm font-mono text-emerald-500">[LOG_ENTRY.INITIATED]</span>
+              </div>
+              
+              <p className="leading-relaxed sm:text-lg font-mono text-emerald-300">
+                In a landscape of rapidly evolving AI risks, I bring a lethal combination of offensive security auditing and proactive infrastructure engineering. I specialize in developing resilient agentic workflows—implementing custom Write-Ahead Logging (WAL) and memory-compaction protocols for long-context stability. My philosophy is rooted in Sovereignty: building systems that are unignorable, unexploitable, and self-improving. I don't just prompt; I architect the backbone of the next generation of autonomous intelligence.
               </p>
             </div>
-
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-2xl">
-              <h4 className="text-xl font-semibold text-blue-700 dark:text-blue-300 mb-3">Analyst Mindset</h4>
-              <p className="leading-relaxed">
-                Comfortable with log triage, IOC enrichment, and writing concise incident notes. I approach problems
-                like an analyst: hypotheses, evidence, and iterative refinement.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-r from-slate-50 to-zinc-50 dark:from-slate-900/20 dark:to-zinc-900/20 p-6 rounded-2xl">
-              <h4 className="text-xl font-semibold text-slate-700 dark:text-slate-200 mb-3">Impactful Projects</h4>
-              <p className="leading-relaxed">
-                Built a Smart City data dashboard for Delhi with real‑time visualization—evidence of reliability, data
-                hygiene, and shipping user‑centric tools with security in mind.
-              </p>
-            </div>
-
-            <div className="text-center pt-2">
-              <p className="text-lg font-medium text-gray-800 dark:text-white">
-                I'm ready to contribute on day one—curious, reliable, and focused on secure outcomes.
-              </p>
+            
+            <div className="pt-2 text-xs font-mono text-emerald-500/50 flex justify-end">
+              <span>[EOF]</span>
             </div>
           </div>
         </div>
