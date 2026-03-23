@@ -63,6 +63,29 @@ export function AchievementsSection() {
                   <p className="text-xs text-gray-400 font-mono leading-relaxed">
                     {achievement.description}
                   </p>
+
+                  {"links" in achievement && achievement.links && (
+                    <div className="mt-4 flex flex-wrap gap-2 pt-3 border-t border-emerald-500/20">
+                      {"hackathon" in achievement.links && achievement.links.hackathon && (
+                        <a href={achievement.links.hackathon} target="_blank" rel="noopener noreferrer"
+                          className="text-[10px] font-mono px-2 py-1 border border-cyan-500/40 text-cyan-400 hover:bg-cyan-500/10 transition-colors">
+                          [HACKATHON]
+                        </a>
+                      )}
+                      {"github" in achievement.links && achievement.links.github && (
+                        <a href={achievement.links.github} target="_blank" rel="noopener noreferrer"
+                          className="text-[10px] font-mono px-2 py-1 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+                          [SOURCE]
+                        </a>
+                      )}
+                      {"live" in achievement.links && achievement.links.live && (
+                        <a href={achievement.links.live} target="_blank" rel="noopener noreferrer"
+                          className="text-[10px] font-mono px-2 py-1 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+                          [LIVE_DEMO]
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 <div className="absolute top-2 right-2 opacity-30 group-hover:opacity-100 transition-opacity">

@@ -25,7 +25,7 @@ export function ContactSection() {
                 <span className="text-emerald-500">[AVAILABLE]</span>
               </div>
               <p className="text-sm text-gray-300 font-mono leading-relaxed">
-                Open to internships & part-time remote roles (Cybersecurity, AI, Blockchain). I'm flexible for collaborations, part-time work, and knowledge-sharing initiatives.
+                Open to internships &amp; part-time remote roles (Cybersecurity, AI). I'm flexible for collaborations, part-time work, and knowledge-sharing initiatives.
               </p>
             </div>
 
@@ -42,7 +42,7 @@ export function ContactSection() {
                 <span className="text-emerald-500">[INTERESTS]</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {["Ethical Hacking", "Security Operations", "AI in Cybersecurity", "Blockchain / Web3 Security", "Hackathons & CTF"].map((chip) => (
+                {["Ethical Hacking", "Security Operations", "AI in Cybersecurity", "Hackathons & CTF"].map((chip) => (
                   <span key={chip} className="px-3 py-1 rounded border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-mono text-xs hover:bg-emerald-500/20 transition-colors">
                     {chip}
                   </span>
@@ -73,13 +73,13 @@ export function ContactSection() {
 
             <div className="pt-4 border-t border-emerald-500/30">
               <a
-                href="/resume.pdf"
+                href="/Resume_PARTH.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 border border-emerald-500/40 px-4 py-2 font-mono text-sm text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-500 transition-all group"
               >
                 <span className="group-hover:translate-x-1 transition-transform inline-block">&gt;</span>
-                [DOWNLOAD] resume.pdf
+                [DOWNLOAD] Resume_PARTH.pdf
               </a>
             </div>
 
