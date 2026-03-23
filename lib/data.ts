@@ -84,6 +84,20 @@ export const certificationsData = [
 
 export const achievementsData = [
   {
+    title: "🥈 2nd Place – GDG Cloud New Delhi HackFest 2.0",
+    subtitle: "$850 Prize | Powered by Turgon AI",
+    issuer: "GDG Cloud New Delhi",
+    date: "2025",
+    icon: Award,
+    bgGradient: "from-slate-500 to-blue-600",
+    description: "Secured 2nd place and $850 prize at HackFest 2.0 (GDG Cloud New Delhi), powered by Turgon AI. Built a live AI-powered project deployed on Vercel, showcasing rapid engineering under competition pressure.",
+    links: {
+      hackathon: "https://www.commudle.com/communities/gdgcloudnd/hackathons/hackfest-2-0",
+      github: "https://github.com/paarthbhatt/Hackfest_Hackathon_Project",
+      live: "https://hackfest-hackathon-project.vercel.app/",
+    },
+  },
+  {
     title: "Winner – MCA Eagles' CodeNest 2025",
     subtitle: "Top 3 in App Category",
     issuer: "Devpost",
@@ -91,6 +105,11 @@ export const achievementsData = [
     icon: Award,
     bgGradient: "from-yellow-500 to-orange-600",
     description: "Recognized for exceptional mobile application development skills and innovative problem-solving approach in a competitive coding environment.",
+    links: {
+      hackathon: "https://devpost.com/software/ecotrack-i98tyk",
+      github: "https://github.com/paarthbhatt/EcoTrack",
+      live: "https://eco-track-chi.vercel.app/",
+    },
   },
   {
     title: "1st Position – Design Dojo Event",
@@ -100,15 +119,6 @@ export const achievementsData = [
     icon: Users,
     bgGradient: "from-green-500 to-emerald-600",
     description: "Demonstrated superior design thinking and creativity, leading to first place in a prestigious university-level design competition.",
-  },
-  {
-    title: "Delhi Smart City Command Center",
-    subtitle: "Smart City Dashboard Development",
-    issuer: "Smart City Hackathon",
-    date: "May 2025",
-    icon: Building,
-    bgGradient: "from-red-500 to-pink-600",
-    description: "Developed a comprehensive smart city dashboard focused on Delhi, showcasing real-time and historical urban data to enhance city management and citizen engagement through interactive visualizations.",
   },
   {
     title: "Hackorate Hackathon ",
@@ -122,6 +132,27 @@ export const achievementsData = [
 ]
 
 export const securityProjectsData = [
+  {
+    title: "Entropy Firewall",
+    tag: "AI Security & Firewall",
+    img: "/entropy-firewall.png",
+    description: "Advanced LLM firewall solution offering proactive defense for autonomous agents and large language models.",
+    url: "https://github.com/paarthbhatt/entropy-firewall",
+  },
+  {
+    title: "Robin Security Agent",
+    tag: "Autonomous AI Agent",
+    img: "/robin-security.png",
+    description: "Autonomous AI security agent designed for proactive vulnerability assessment and threat mitigation.",
+    url: "https://github.com/paarthbhatt/robin-security-agent",
+  },
+  {
+    title: "Batcomputer",
+    tag: "Security Command Center",
+    img: "/batcomputer.png",
+    description: "Centralized security command center and dashboard for analyzing and responding to threat telemetry.",
+    url: "https://github.com/paarthbhatt/Batcomputer",
+  },
   {
     title: "SecretVault",
     tag: "Security & Encryption",
@@ -146,6 +177,13 @@ export const securityProjectsData = [
 ]
 
 export const webProjectsData = [
+  {
+    title: "Entropy Website",
+    tag: "Web App",
+    img: "/entropy-website.png",
+    description: "Official landing page and website for the Entropy Enterprise LLM firewall ecosystem.",
+    url: "https://github.com/paarthbhatt/entropy-website",
+  },
   {
     title: "Delhi Smart City Dashboard",
     tag: "Data Visualization",
@@ -177,6 +215,13 @@ export const webProjectsData = [
 ]
 
 export const otherProjectsData = [
+  {
+    title: "Star Trek Project",
+    tag: "Creative / Interactive",
+    img: "/star-trek.png",
+    description: "An engaging Star Trek themed project exploring imaginative concepts and interactive web elements.",
+    url: "https://github.com/paarthbhatt/Star-Trek",
+  },
   {
     title: "Netflix Clone",
     tag: "Web App",
