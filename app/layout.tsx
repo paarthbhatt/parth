@@ -3,6 +3,7 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { Analytics } from '@vercel/analytics/next'
 import { ScrollProgress } from '@/components/ScrollProgress'
+import { CursorGlow } from '@/components/CursorGlow'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default function RootLayout({
       </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
         <ScrollProgress />
+        <CursorGlow />
         {children}
         <Analytics />
       </body>

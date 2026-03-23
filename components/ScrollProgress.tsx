@@ -28,7 +28,9 @@ export function ScrollProgress() {
           aria-valuenow={Math.round(progress)}
           aria-valuemin={0}
           aria-valuemax={100}
-        />
+        >
+          {progress > 2 && <div className="scroll-progress-comet" aria-hidden="true" />}
+        </div>
       </div>
 
       {/* Floating percentage badge */}
