@@ -114,19 +114,21 @@ export function ProjectsSection() {
           ))}
         </div>
 
-        <div className={`scroll-reveal delay-2 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 transition-all duration-500 ${isHacking ? "blur-sm" : ""}`}>
-          {selectedCategory === "security" &&
-            securityProjectsData.map((project, i) => (
-              <HackerProjectCard key={i} project={project} index={i} />
-            ))}
-          {selectedCategory === "web" &&
-            webProjectsData.map((project, i) => (
-              <HackerProjectCard key={i} project={project} index={i} />
-            ))}
-          {selectedCategory === "other" &&
-            otherProjectsData.map((project, i) => (
-              <HackerProjectCard key={i} project={project} index={i} />
-            ))}
+        <div className="scroll-reveal delay-2">
+          <div className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 transition-all duration-500 ${isHacking ? "blur-sm" : ""}`}>
+            {selectedCategory === "security" &&
+              securityProjectsData.map((project, i) => (
+                <HackerProjectCard key={`security-${i}`} project={project} index={i} />
+              ))}
+            {selectedCategory === "web" &&
+              webProjectsData.map((project, i) => (
+                <HackerProjectCard key={`web-${i}`} project={project} index={i} />
+              ))}
+            {selectedCategory === "other" &&
+              otherProjectsData.map((project, i) => (
+                <HackerProjectCard key={`other-${i}`} project={project} index={i} />
+              ))}
+          </div>
         </div>
 
         <div className="text-center mt-12">
