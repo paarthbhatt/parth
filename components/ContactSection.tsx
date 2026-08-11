@@ -1,5 +1,6 @@
 import { Mail, Phone, MapPin } from "lucide-react"
 import { TerminalStrip } from "./TerminalStrip"
+import { ctfProfiles } from "../lib/data"
 import { useScrollReveal } from "../hooks/useScrollReveal"
 
 export function ContactSection() {
@@ -49,6 +50,41 @@ export function ContactSection() {
                     {chip}
                   </span>
                 ))}
+              </div>
+            </div>
+
+            <div className="border border-emerald-500/30 bg-emerald-500/5 rounded p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-emerald-500">[CTF_PROFILES]</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href={ctfProfiles.tryhackme}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-mono text-xs hover:bg-emerald-500/20 hover:border-emerald-500 transition-all group inline-flex items-center gap-1.5"
+                >
+                  <span className="group-hover:translate-x-0.5 transition-transform">&gt;</span>
+                  TryHackMe
+                </a>
+                <a
+                  href={ctfProfiles.medium}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded border border-cyan-500/40 bg-cyan-500/10 text-cyan-400 font-mono text-xs hover:bg-cyan-500/20 hover:border-cyan-500 transition-all group inline-flex items-center gap-1.5"
+                >
+                  <span className="group-hover:translate-x-0.5 transition-transform">&gt;</span>
+                  Medium Blog
+                </a>
+                <a
+                  href={ctfProfiles.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-mono text-xs hover:bg-emerald-500/20 hover:border-emerald-500 transition-all group inline-flex items-center gap-1.5"
+                >
+                  <span className="group-hover:translate-x-0.5 transition-transform">&gt;</span>
+                  GitHub
+                </a>
               </div>
             </div>
 

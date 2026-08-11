@@ -7,6 +7,7 @@ import { HackerBootSequence } from "@/components/HackerBootSequence"
 import { HeroSection } from "@/components/HeroSection"
 import { AboutSection } from "@/components/AboutSection"
 import { ProjectsSection } from "@/components/ProjectsSection"
+import { WriteupsSection } from "@/components/WriteupsSection"
 import { ExperienceSection } from "@/components/ExperienceSection"
 import { SkillsSection } from "@/components/SkillsSection"
 import { CertificationsSection } from "@/components/CertificationsSection"
@@ -78,6 +79,7 @@ export default function App() {
           />
           <AboutSection />
           <ProjectsSection />
+          <WriteupsSection />
           <ExperienceSection />
           <SkillsSection />
           <CertificationsSection />
