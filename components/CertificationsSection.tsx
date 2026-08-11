@@ -1,7 +1,7 @@
 import { TerminalStrip } from "./TerminalStrip"
 import { ASCIIArt } from "./ASCIIArt"
 import { HorizontalSlider } from "./HorizontalSlider"
-import { certificationsData } from "../lib/data"
+import { certificationsHighlight, certificationsOther } from "../lib/data"
 import { useScrollReveal } from "../hooks/useScrollReveal"
 
 export function CertificationsSection() {
@@ -31,9 +31,10 @@ export function CertificationsSection() {
           />
         </div>
 
+        {/* ── Highlight tier: full slider cards ── */}
         <div className="mt-6 sm:mt-8">
           <HorizontalSlider ariaLabel="Certifications slider">
-            {certificationsData.map((cert, index) => (
+            {certificationsHighlight.map((cert, index) => (
               <div
                 key={index}
                 className="group relative snap-start min-w-[280px] sm:min-w-[380px] lg:min-w-[450px] bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 mr-3 shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:border-emerald-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] transition-all duration-300 overflow-hidden"
@@ -69,9 +70,31 @@ export function CertificationsSection() {
           </HorizontalSlider>
         </div>
 
+        {/* ── Other tier: compact badge row ── */}
+        {certificationsOther.length > 0 && (
+          <div className="scroll-reveal delay-2 mt-6 sm:mt-8 bg-black border border-emerald-500/20 rounded-lg p-4 sm:p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-1.5 h-1.5 bg-emerald-500/70 rounded-full"></span>
+              <span className="text-xs font-mono text-emerald-500/70">[OTHER_CREDENTIALS]</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {certificationsOther.map((cert, i) => (
+                <span
+                  key={i}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-emerald-500/25 bg-emerald-500/5 text-emerald-400/80 font-mono text-[10px] sm:text-xs hover:bg-emerald-500/10 hover:border-emerald-500/40 transition-all"
+                >
+                  <span className="text-emerald-500/50">✓</span>
+                  {cert.title}
+                  <span className="text-emerald-500/40">({cert.issuer})</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="text-center mt-6 sm:mt-8 px-2">
           <p className="text-xs font-mono text-emerald-500/50">
-            [*] Total certificates verified: {certificationsData.length} | Status: ✓ AUTHENTICATED
+            [*] Total certificates verified: {certificationsHighlight.length + certificationsOther.length} | Status: ✓ AUTHENTICATED
           </p>
         </div>
       </div>
