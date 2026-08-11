@@ -33,7 +33,7 @@ export function AboutSection() {
                 <div className="flex items-start gap-2 sm:gap-3">
                   <span className="text-emerald-500 flex-shrink-0">[✦]</span>
                   <p className="text-gray-300 leading-relaxed">
-                    I build self-defending software pipelines and automated security agents. Currently interning at <span className="text-cyan-400 font-semibold">DRDO (SAG)</span>, I specialize in identifying execution flaws in AI/LLM integrations and building low-latency defensive tooling. <span className="text-emerald-400">4× hackathon winner</span>. <span className="text-emerald-400">Top 1% on TryHackMe</span>.
+                    I build self-defending software pipelines and automated security agents. Currently interning at <span className="text-cyan-400 font-semibold">DRDO (SAG)</span>, I specialize in identifying execution flaws in AI/LLM integrations and building low-latency defensive tooling. <span className="text-emerald-400">4× hackathon winner</span>. <span className="text-emerald-400">Top 6% on TryHackMe</span>.
                   </p>
                 </div>
                 <div className="flex items-start gap-2 sm:gap-3">

@@ -67,7 +67,7 @@ export function HeroSection({
               "Building self-defending pipelines at DRDO (SAG)",
               "I don't just find vulnerabilities — I architect the defenses.",
               "Entropy Firewall • Robin Agent • SecretVault",
-              "Top 1% TryHackMe • 4× Hackathon Winner",
+              "Top 6% TryHackMe • 4× Hackathon Winner",
               "DRDO SAG Intern • Cisco Certified • arcX Analyst",
             ]}
           />

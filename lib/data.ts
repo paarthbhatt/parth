@@ -246,9 +246,9 @@ export const experienceData = [
   },
   {
     role: "Cybersecurity & AI Intern",
-    org: "Cisco Networking Academy",
+    org: "Cisco Networking Academy × NIIT Foundation",
     when: "Jul 2025 – Aug 2025",
-    desc: "Completed focused internship on cybersecurity & AI — covering threat detection pipelines, network defense, and AI-driven security analysis.",
+    desc: "Completed focused virtual internship on cybersecurity & AI in collaboration with Cisco Networking Academy x NIIT Foundation — covering threat detection pipelines, network defense, and AI-driven security analysis.",
     status: "COMPLETED"
   },
   {

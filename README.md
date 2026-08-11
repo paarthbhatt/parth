@@ -1,6 +1,6 @@
 # 🛡️ Parth Bhatt — Portfolio & Security Workspace
 
-> **Security Architect & AI Safety Engineer** | **Cyber Security Intern @ DRDO (SAG)** | **4× Hackathon Winner** | **Top 1% TryHackMe**
+> **Security Architect & AI Safety Engineer** | **Cyber Security Intern @ DRDO (SAG)** | **4× Hackathon Winner** | **Top 6% TryHackMe**
 
 Live Portfolio: [https://parthbhatt.me](https://parthbhatt.me)
 
