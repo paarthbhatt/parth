@@ -3,19 +3,17 @@
 import { useState, useEffect } from "react"
 import { TerminalStrip } from "./TerminalStrip"
 import { ASCIIArt } from "./ASCIIArt"
-import { securityProjectsData, webProjectsData, otherProjectsData } from "../lib/data"
+import { securityProjectsData, collapsedProjectsData } from "../lib/data"
 import { useScrollReveal } from "../hooks/useScrollReveal"
 
 export function ProjectsSection() {
-  const [selectedCategory, setSelectedCategory] = useState<"security" | "web" | "other">("security")
-  const [isHacking, setIsHacking] = useState(false)
   const ref = useScrollReveal<HTMLElement>()
 
   const HackerProjectCard = ({ project, index }: { project: any; index: number }) => {
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
-      const timer = setTimeout(() => setIsVisible(true), index * 150)
+      const timer = setTimeout(() => setIsVisible(true), index * 100)
       return () => clearTimeout(timer)
     }, [index])
 
@@ -40,7 +38,7 @@ export function ProjectsSection() {
           <img
             src={project.img || "/placeholder.svg"}
             alt={project.title}
-            className="w-full h-32 object-cover rounded border border-emerald-500/20 mb-3"
+            className="w-full h-36 object-cover rounded border border-emerald-500/20 mb-3 group-hover:border-emerald-500/50 transition-colors"
           />
 
           <h4 className="text-base font-bold font-mono text-emerald-400 mb-2 group-hover:text-emerald-300 transition-colors">
@@ -51,9 +49,11 @@ export function ProjectsSection() {
             {project.description}
           </p>
 
-          <div className="mt-4 flex items-center gap-2 text-xs font-mono">
-            <span className="text-emerald-500 animate-pulse">&gt;</span>
-            <span className="text-gray-500">Access target</span>
+          <div className="mt-4 flex items-center justify-between text-xs font-mono">
+            <div className="flex items-center gap-2">
+              <span className="text-emerald-500 animate-pulse">&gt;</span>
+              <span className="text-gray-400 group-hover:text-emerald-300 transition-colors">Launch Target</span>
+            </div>
             <span className="text-emerald-500 group-hover:translate-x-1 transition-transform inline-block">→</span>
           </div>
         </div>
@@ -74,7 +74,7 @@ export function ProjectsSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/5 to-transparent"></div>
       </div>
 
-      <TerminalStrip label="[PROJECTS.EXE]" meta="scanning • targets acquired" />
+      <TerminalStrip label="[PROJECTS.EXE]" meta="scanning • security & AI architecture targets" />
 
       <div className="container mx-auto max-w-7xl mt-6 space-y-8 relative z-10">
         <div className="text-center mb-8">
@@ -84,56 +84,60 @@ export function ProjectsSection() {
           />
         </div>
 
-        <div className="scroll-reveal flex flex-wrap justify-center gap-4 mb-8">
-          {[
-            { id: "security" as const, label: "SECURITY.EXE", count: securityProjectsData.length },
-            { id: "web" as const, label: "WEB_APP.BIN", count: webProjectsData.length },
-            { id: "other" as const, label: "OTHER.DATA", count: otherProjectsData.length },
-          ].map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => {
-                setIsHacking(true)
-                setTimeout(() => setIsHacking(false), 500)
-                setSelectedCategory(cat.id)
-              }}
-              className={`relative px-6 py-3 font-mono text-sm border-2 transition-all duration-300 ${selectedCategory === cat.id
-                ? "border-emerald-500 bg-emerald-500/10 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.5)]"
-                : "border-emerald-500/30 bg-black/50 text-gray-400 hover:border-emerald-500/60 hover:text-emerald-500"
-                }`}
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                <span className="inline-block w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                {cat.label}
-                <span className="text-emerald-600">({cat.count})</span>
-              </span>
-              {selectedCategory === cat.id && (
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 animate-pulse"></div>
-              )}
-            </button>
-          ))}
+        {/* Header Label */}
+        <div className="scroll-reveal flex items-center justify-between mb-4 border-b border-emerald-500/20 pb-3">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+            <h3 className="text-base sm:text-lg font-mono text-emerald-400 font-bold">$ ./projects --featured-security</h3>
+          </div>
+          <span className="text-xs font-mono text-emerald-500/70">[{securityProjectsData.length} ACTIVE TARGETS]</span>
         </div>
 
-        <div className="scroll-reveal delay-2">
-          <div className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 transition-all duration-500 ${isHacking ? "blur-sm" : ""}`}>
-            {selectedCategory === "security" &&
-              securityProjectsData.map((project, i) => (
-                <HackerProjectCard key={`security-${i}`} project={project} index={i} />
-              ))}
-            {selectedCategory === "web" &&
-              webProjectsData.map((project, i) => (
-                <HackerProjectCard key={`web-${i}`} project={project} index={i} />
-              ))}
-            {selectedCategory === "other" &&
-              otherProjectsData.map((project, i) => (
-                <HackerProjectCard key={`other-${i}`} project={project} index={i} />
-              ))}
+        {/* Featured Security & AI Agent Grid */}
+        <div className="scroll-reveal delay-1">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {securityProjectsData.map((project, i) => (
+              <HackerProjectCard key={`security-${i}`} project={project} index={i} />
+            ))}
           </div>
         </div>
 
-        <div className="text-center mt-12">
+        {/* Collapsed Secondary / Web & Research Projects */}
+        <div className="scroll-reveal delay-2 mt-8 sm:mt-12 bg-black border border-emerald-500/20 rounded-lg p-4 sm:p-6 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+          <div className="flex items-center justify-between mb-4 border-b border-emerald-500/20 pb-2">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-emerald-500/70 rounded-full"></span>
+              <h4 className="text-xs sm:text-sm font-mono text-emerald-400 font-semibold">[SECONDARY_REPOS_AND_OTHER_BUILDS]</h4>
+            </div>
+            <span className="text-[10px] sm:text-xs font-mono text-emerald-500/50">hyperlinks active</span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
+            {collapsedProjectsData.map((project, i) => (
+              <a
+                key={i}
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col p-2.5 rounded border border-emerald-500/25 bg-emerald-500/5 hover:bg-emerald-500/10 hover:border-emerald-500/50 transition-all duration-200"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-[10px] font-mono text-emerald-500/70 group-hover:text-emerald-400 transition-colors">
+                    [{project.tag}]
+                  </span>
+                  <span className="text-emerald-500/50 group-hover:translate-x-0.5 transition-transform text-xs">↗</span>
+                </div>
+                <span className="font-mono text-xs text-emerald-300 group-hover:text-white font-medium truncate">
+                  {project.title}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="text-center mt-8">
           <p className="text-xs font-mono text-emerald-500/50">
-            [*] Targets scanned: {securityProjectsData.length + webProjectsData.length + otherProjectsData.length} | Status: ✓ ONLINE
+            [*] Total targets tracked: {securityProjectsData.length + collapsedProjectsData.length} | Status: ✓ ONLINE
           </p>
         </div>
       </div>
