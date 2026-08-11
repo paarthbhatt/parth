@@ -1,284 +1,160 @@
-<a id="top"></a>
-<a href="#table-of-contents" aria-label="Skip to table of contents">Skip to table of contents</a>
+# 🛡️ Parth Bhatt — Portfolio & Security Workspace
 
-# Parth Bhatt — Portfolio Website
+> **Security Architect & AI Safety Engineer** | **Cyber Security Intern @ DRDO (SAG)** | **4× Hackathon Winner** | **Top 1% TryHackMe**
 
-Welcome — this repository contains the source code for my personal portfolio website: https://parthbhatt.me
-
-This README includes a working Table of Contents (clickable links jump to the relevant sections). Each section also includes a "Back to Table of Contents" link to return to the navigation, improving accessibility and keyboard navigation.
+Live Portfolio: [https://parthbhatt.me](https://parthbhatt.me)
 
 ---
 
-<a id="table-of-contents"></a>
-## Table of Contents
-- [About](#about)
-- [Live Demo](#live-demo)
-- [Key Features](#key-features)
-- [Tech Stack & Languages](#tech-stack--languages)
-- [Project Structure (Overview)](#project-structure-overview)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Install](#install)
-  - [Development](#development)
-  - [Build & Production](#build--production)
-- [Available Scripts](#available-scripts)
-- [Deployment (Vercel)](#deployment-vercel)
-- [Design, Accessibility & Performance](#design-accessibility--performance)
-- [Contributing](#contributing)
-- [Troubleshooting & Tips](#troubleshooting--tips)
-- [Acknowledgements & Resources](#acknowledgements--resources)
-- [License & Contact](#license--contact)
+## 📌 Overview
+
+This repository contains the source code for my cybersecurity and security engineering portfolio, built using **Next.js 15 (App Router)**, **React 18**, **TypeScript**, and **Tailwind CSS v4**.
+
+Designed with a high-fidelity **"Hacker Terminal"** aesthetic — featuring interactive terminal boot sequences, Matrix code rain, CRT scanline overlays, responsive visual telemetry, and custom cursor spotlight effects — this platform highlights my work in:
+
+- **AI Safety & Agentic Security Frameworks** (Entropy Firewall, Atreides, Agentyc)
+- **Autonomous Security Agents & Vulnerability Scanners** (Robin Security Agent, Guardiant)
+- **Threat Intelligence Telemetry & CLI Tools** (Batcomputer, WHOIS Lookup CLI)
+- **Application Security & Web Penetration Testing** (DRDO SAG Internship, SecretVault)
 
 ---
 
-<a id="about"></a>
-## About
+## ⚡ Tech Stack
 
-This is a single-page portfolio built with Next.js and TypeScript. It is designed to highlight projects, experience, skills, certifications, and contact information in an accessible, responsive, and fast-loading format. The UI follows a terminal-inspired theme with subtle animations and focus on clarity.
-
-Purpose:
-- Serve as an online resume and project showcase.
-- Demonstrate best practices in frontend development (TypeScript, accessibility, responsive design).
-- Provide an easy-to-maintain codebase for iterative improvements.
-
-[Back to Table of Contents](#table-of-contents)
-
----
-
-<a id="live-demo"></a>
-## Live Demo
-
-Visit the live site: https://parthbhatt.me
-
-[Back to Table of Contents](#table-of-contents)
+| Domain | Technologies |
+|---|---|
+| **Framework** | Next.js 15 (App Router) |
+| **Language** | TypeScript (Strict Mode) |
+| **UI & Styling** | Tailwind CSS v4 + 1,000-line Custom Animation System |
+| **Icons & Design** | Lucide React, Geist Sans, Geist Mono |
+| **State & Hooks** | React 18 (`useScrollReveal`, `useIsMobile`) |
+| **Security Headers** | CSP, HSTS, X-Frame-Options, X-Content-Type-Options |
+| **Deployment** | Vercel (Production CI/CD) |
 
 ---
 
-<a id="key-features"></a>
-## Key Features
+## 🚀 Featured Security Engineering Projects
 
-- Single-page layout with smooth in-page navigation and keyboard-friendly focus order.
-- Fully responsive (mobile-first) design.
-- Interactive UI elements and small animations for engagement.
-- Content rendered dynamically using React components (Next.js).
-- Dedicated sections: About, Projects, Experience, Skills, Certifications, Achievements, Contact.
-- Accessibility-first components (semantic HTML, ARIA where necessary, visible focus states).
-- Optimized for fast builds and deploys (Vercel-ready).
+### 🛡️ AI & Agentic Security
+- **[Entropy Firewall](https://github.com/paarthbhatt/entropy-firewall)** — Proactive LLM firewall defending autonomous AI agents against prompt injection and execution exploits.
+- **[Robin Security Agent](https://github.com/paarthbhatt/robin-security-agent)** — Autonomous AI security agent designed for automated vulnerability assessment and mitigation.
+- **[Atreides Framework](https://atreides-web-liard.vercel.app/)** ([Source](https://github.com/paarthbhatt/Atreides)) — High-performance AI agent execution architecture with memory compaction & threat containment.
+- **[Guardiant Security](https://guardiant-website.vercel.app/)** ([Source](https://github.com/paarthbhatt/Guardiant)) — Enterprise AppSec platform for continuous vulnerability scanning and incident response.
+- **[Agentyc](https://github.com/paarthbhatt/Agentyc)** — Security-first automation framework for agent workflow orchestration.
 
-[Back to Table of Contents](#table-of-contents)
-
----
-
-<a id="tech-stack--languages"></a>
-## Tech Stack & Languages
-
-Primary technologies used:
-- Next.js (React framework)
-- TypeScript
-- Tailwind CSS
-- Radix UI (for accessible primitives)
-- Lucide React (icons)
-- pnpm (package manager)
-- Vercel (deployment)
-
-Language composition of the repo:
-- TypeScript: 92%
-- CSS: 7.9%
-- JavaScript: 0.1%
-
-[Back to Table of Contents](#table-of-contents)
+### 🛰️ Threat Intelligence & Defense
+- **[Batcomputer](https://github.com/paarthbhatt/Batcomputer)** — Centralized security command center dashboard for threat telemetry analysis.
+- **[SecretVault](https://github.com/paarthbhatt/SecretVault)** — Zero-knowledge key management platform powered by AES encryption.
+- **[WHOIS Lookup CLI](https://github.com/paarthbhatt/Whois-Lookup-Terminal-Tool)** — Parallelized Python CLI for bulk domain WHOIS lookups and threat intel parsing.
+- **[SurveillanceOps](https://surveillance-platform-updated.vercel.app/)** — Real-time surveillance platform with encrypted detection analytics.
 
 ---
 
-<a id="project-structure-overview"></a>
-## Project Structure (Overview)
+## ✍️ Write-ups & Technical Research
 
-A concise, common layout for this repo (adjust to actual folders as necessary):
-
-- public/           — Static assets (images, favicons)
-- src/
-  - app/            — Next.js App Router routes (or pages/ if using Pages Router)
-  - components/     — Reusable UI components
-  - styles/         — Tailwind and global styles
-  - data/           — Project/experience/certification content objects
-  - utils/          — Utility functions and helpers
-- package.json
-- tsconfig.json
-- tailwind.config.js
-- next.config.js
-- README.md
-
-Check the repository root to confirm the exact structure used.
-
-[Back to Table of Contents](#table-of-contents)
+- 📝 **[John the Ripper: The Basics](https://medium.com/@paarthbhatt37/tryhackme-john-the-ripper-the-basics-cyber-security-101-thm-1be625362fa3)** (*Medium*) — In-depth breakdown of NTLM/Shadow hash cracking, SSH private key breaking, and custom cracking rules.
+- 🎮 **["The Game" CTF Walkthrough](https://x.com/thatsparthbhatt/status/1929926261595316517)** (*X / Twitter*) — Reverse engineering a Godot Engine Tetris game to extract hidden flags via binary modding.
 
 ---
 
-<a id="getting-started"></a>
-## Getting Started
+## 📁 Repository Structure
 
-<a id="prerequisites"></a>
+```
+parth/
+├── app/
+│   ├── globals.css          # Master stylesheet (animations, CRT overlays, scanlines)
+│   ├── layout.tsx           # Root layout (Fonts, ScrollProgress, CursorGlow, Metadata)
+│   └── page.tsx             # Main page controller (state, dark mode, intro sequence)
+│
+├── components/
+│   ├── HackerBootSequence   # Terminal boot intro with ASCII banner & Matrix rain
+│   ├── HeroSection          # Hero viewport with avatar, gradient name, rotating text
+│   ├── AboutSection         # DRDO SAG profile & security-architect identity
+│   ├── ProjectsSection      # Featured security grid & collapsed secondary repos
+│   ├── WriteupsSection      # Technical write-ups & CTF analysis showcase
+│   ├── ExperienceSection    # Timeline log of DRDO SAG, Cisco, & tech roles
+│   ├── CertificationsSection# 2-Tier certification layout (Highlight vs Badges)
+│   ├── AchievementsSection  # Hackathon trophies (GDG Cloud 2nd Place, CodeNest)
+│   ├── ContactSection       # Contact interface + CTF profile badges
+│   ├── TerminalStrip        # Section header chrome with animated scan sweep
+│   ├── ScrollProgress       # Floating progress bar with comet tip
+│   └── CursorGlow           # Cursor-following radial spotlight overlay
+│
+├── hooks/
+│   └── useScrollReveal.ts   # IntersectionObserver driver for smooth reveal effects
+│
+├── lib/
+│   ├── data.ts              # Centralized single source of truth for portfolio data
+│   └── utils.ts             # Tailwind class merge helper (`cn`)
+│
+├── public/                  # Project preview screenshots & static assets
+├── next.config.mjs          # Hardened Next.js security headers & config
+├── package.json             # Dependencies & scripts
+└── tsconfig.json            # TypeScript configuration
+```
+
+---
+
+## 🛠️ Getting Started
+
 ### Prerequisites
 
-- Node.js (LTS recommended, v16+)
-- pnpm (preferred package manager). Install with:
+- Node.js (v18.x or later)
+- npm (Package Manager)
+
+### Installation & Development
 
 ```bash
-npm install -g pnpm
-```
-
-<a id="install"></a>
-### Install
-
-Clone and install dependencies:
-
-```bash
+# Clone the repository
 git clone https://github.com/paarthbhatt/parth.git
 cd parth
-pnpm install
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
 ```
 
-<a id="development"></a>
-### Development
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Run the development server (hot reload):
+### Production Build
 
 ```bash
-pnpm dev
+# Generate optimized production build
+npm run build
+
+# Start production server
+npm run start
 ```
 
-Open http://localhost:3000 to view the site locally.
+---
 
-<a id="build--production"></a>
-### Build & Production
+## 🔒 Security Headers & Hardening
 
-Create an optimized production build:
+Configured directly in `next.config.mjs`:
 
-```bash
-pnpm build
+```javascript
+headers: [
+  { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
+  { key: 'X-XSS-Protection', value: '1; mode=block' },
+  { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'origin-when-cross-origin' },
+  { key: 'Content-Security-Policy', value: "..." }
+]
 ```
 
-Run the production server locally (after build):
+---
 
-```bash
-pnpm start
-```
+## 🌐 Connect & Profiles
 
-[Back to Table of Contents](#table-of-contents)
+- **TryHackMe**: [tryhackme.com/p/paarthbhatt37](https://tryhackme.com/p/paarthbhatt37)
+- **Medium Blog**: [medium.com/@paarthbhatt37](https://medium.com/@paarthbhatt37)
+- **LinkedIn**: [linkedin.com/in/parth-bhatt-07bb36310](https://www.linkedin.com/in/parth-bhatt-07bb36310/)
+- **Twitter / X**: [@thatsparthbhatt](https://x.com/thatsparthbhatt)
+- **Email**: [paarthbhatt37@gmail.com](mailto:paarthbhatt37@gmail.com)
 
 ---
 
-<a id="available-scripts"></a>
-## Available Scripts
-
-Common scripts found in package.json (see package.json for the definitive list):
-
-- pnpm dev — Run in development mode
-- pnpm build — Build for production
-- pnpm start — Start production server
-- pnpm lint — Run linters
-- pnpm format — Format code (if configured)
-
-[Back to Table of Contents](#table-of-contents)
-
----
-
-<a id="deployment-vercel"></a>
-## Deployment (Vercel)
-
-Recommended: Deploy to Vercel (first-class Next.js support).
-
-Quick steps:
-1. Push the repository to GitHub.
-2. Log in to Vercel and import the GitHub repository.
-3. Set build command to: `pnpm build`
-4. Set any environment variables if needed (none required for a static portfolio in most cases).
-5. Deploy — Vercel will handle automatic builds and previews on pull requests.
-
-Alternative hosts: Netlify, GitHub Pages (static export), or any Node host supporting Next.js.
-
-[Back to Table of Contents](#table-of-contents)
-
----
-
-<a id="design-accessibility--performance"></a>
-## Design, Accessibility & Performance
-
-Accessibility:
-- Semantic HTML and landmarks are used.
-- Keyboard navigation and visible focus indicators are included.
-- Radix UI primitives provide accessible behaviors for interactive components.
-
-Performance:
-- Next.js automatic code-splitting and image optimization help reduce load times.
-- Tailwind CSS enables small CSS bundles by using utility classes.
-- Use Lighthouse to audit performance, accessibility, and best practices.
-
-SEO:
-- Per-page metadata and structured content help search engines index the site.
-- Social sharing metadata (Open Graph/Twitter cards) improves link previews.
-
-[Back to Table of Contents](#table-of-contents)
-
----
-
-<a id="contributing"></a>
-## Contributing
-
-This is primarily a personal portfolio repository, but contributions and suggestions are welcome.
-
-How to contribute:
-- Issues: Open an issue for bugs, typos, or suggestions.
-- Pull Requests: Fork the repo, create a feature branch, and open a PR with a clear description of changes.
-- Large changes: Open an issue first to discuss the approach.
-
-When contributing, please:
-- Follow TypeScript/React best practices used in the repo.
-- Keep components accessible and responsive.
-- Run linters/formatters before opening a PR.
-
-[Back to Table of Contents](#table-of-contents)
-
----
-
-<a id="troubleshooting--tips"></a>
-## Troubleshooting & Tips
-
-- If pnpm install fails: remove node_modules and pnpm-lock.yaml and try again.
-- If the dev server doesn't start: verify Node version and check for stray environment variables.
-- Linting/formatting: run pnpm lint or pnpm format (if configured).
-- If images or assets don't show: confirm the files exist under public/ and that import paths are correct.
-
-[Back to Table of Contents](#table-of-contents)
-
----
-
-<a id="acknowledgements--resources"></a>
-## Acknowledgements & Resources
-
-Thanks to the open-source projects that power this site:
-- Next.js
-- Tailwind CSS
-- Radix UI
-- Lucide Icons
-- pnpm
-
-Helpful resources:
-- Next.js docs — https://nextjs.org/docs
-- Tailwind CSS — https://tailwindcss.com/docs
-- Radix UI — https://www.radix-ui.com/
-
-[Back to Table of Contents](#table-of-contents)
-
----
-
-<a id="license--contact"></a>
-## License & Contact
-
-Author: Parth Bhatt  
-Website: https://parthbhatt.me  
-GitHub repo: https://github.com/paarthbhatt/parth
-
-If you have questions or suggestions, open an issue or reach out via the contact links on the site.
-
-[Back to Table of Contents](#table-of-contents)
+© 2026 Parth Bhatt. All rights reserved.
