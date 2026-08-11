@@ -7,8 +7,8 @@ import { CursorGlow } from '@/components/CursorGlow'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Parth Bhatt | Cybersecurity Portfolio',
-  description: 'Portfolio of Parth Bhatt – Cybersecurity enthusiast, Threat Intelligence Analyst, and B.Tech student from New Delhi. Showcasing projects, certifications, and experience in cybersecurity, web security, and AI.',
+  title: 'Parth Bhatt | Security Architect & AI Safety Engineer',
+  description: 'Portfolio of Parth Bhatt – Security Architect, AI Safety Engineer, and DRDO (SAG) Intern. Building self-defending software pipelines, LLM firewalls, and autonomous security agents. B.Tech student from New Delhi.',
 }
 
 export default function RootLayout({

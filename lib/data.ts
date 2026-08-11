@@ -7,14 +7,27 @@ import {
   Users
 } from "lucide-react"
 
-export const certificationsData = [
+/* ───────────────────────────────────────────────
+   CERTIFICATIONS — split into highlight + other
+   ─────────────────────────────────────────────── */
+
+/** Top-tier certifications shown as full slider cards */
+export const certificationsHighlight = [
   {
-    title: "Advent of Cyber 2025",
-    issuer: "TryHackMe",
+    title: "Foundation Level Threat Intelligence Analyst",
+    issuer: "arcX",
     date: "2025",
-    icon: Shield,
+    icon: Eye,
+    bgGradient: "from-red-500 to-pink-600",
+    description: "Specialized training in threat intelligence analysis, cyber threat hunting, and security intelligence frameworks.",
+  },
+  {
+    title: "ICS Cybersecurity Risks, Vulnerabilities and Threats (3 certs)",
+    issuer: "CISA",
+    date: "2025",
+    icon: Building,
     bgGradient: "from-blue-600 to-indigo-600",
-    description: "Completed 24 cyber security challenges, demonstrating consistency, tenacity & continuous learning in security fundamentals.",
+    description: "Specialized training on Industrial Control Systems (ICS) security, focusing on risks, vulnerabilities, and threat mitigation strategies.",
   },
   {
     title: "Junior Cybersecurity Analyst Career Path",
@@ -22,65 +35,30 @@ export const certificationsData = [
     date: "2025",
     icon: Shield,
     bgGradient: "from-blue-500 to-cyan-600",
-    description: "Comprehensive cybersecurity training covering threat detection, incident response, and security analysis",
+    description: "Comprehensive cybersecurity training covering threat detection, incident response, and security analysis methodologies.",
   },
   {
-    title: "Foundation Level Threat Intelligence Analyst",
-    issuer: "arcX",
-    date: "2025",
-    icon: Eye,
-    bgGradient: "from-red-500 to-pink-600",
-    description: "Specialized training in threat intelligence analysis, cyber threat hunting, and security intelligence",
-  },
-  {
-    title: "GitHub Foundations",
-    issuer: "GitHub",
-    date: "2025",
-    icon: GitBranch,
-    bgGradient: "from-green-500 to-emerald-600",
-    description: "Mastery of version control, collaborative development workflows, and open-source contribution practices",
-  },
-  {
-    title: "Pre-Security Certificate",
+    title: "Advent of Cyber 2025",
     issuer: "TryHackMe",
     date: "2025",
     icon: Shield,
-    bgGradient: "from-yellow-500 to-orange-600",
-    description: "Foundational cybersecurity knowledge covering network security, web application security, and digital forensics",
-  },
-  {
-    title: "Cybersecurity 101 Certificate",
-    issuer: "TryHackMe",
-    date: "2025",
-    icon: Shield,
-    bgGradient: "from-yellow-500 to-orange-600",
-    description: "Fundamental concepts of cybersecurity including network security, web application security, and cryptography",
-  },
-  {
-    title: "ICS Cybersecurity Risks, Vulnerabiltities and Threats (3 certs)",
-    issuer: "CISA",
-    date: "2025",
-    icon: Building,
     bgGradient: "from-blue-600 to-indigo-600",
-    description: "Specialized training on Industrial Control Systems (ICS) security, focusing on risks, vulnerabilities, and threat mitigation",
-  },
-  {
-    title: "Introduction to Cybersecurity",
-    issuer: "Cisco",
-    date: "2025",
-    icon: Shield,
-    bgGradient: "from-blue-500 to-cyan-600",
-    description: "Foundational understanding of cybersecurity principles, protecting personal online life, and insights into security challenges",
-  },
-  {
-    title: "XSS Defense Bootcamp",
-    issuer: "DevTown",
-    date: "2025",
-    icon: Shield,
-    bgGradient: "from-purple-500 to-pink-600",
-    description: "Deep dive into Cross-Site Scripting (XSS) attacks and defense mechanisms, focusing on secure coding practices",
+    description: "Completed 24 cyber security challenges demonstrating consistency, tenacity & continuous learning across offensive and defensive domains.",
   },
 ]
+
+/** Other certifications shown as compact badges */
+export const certificationsOther = [
+  { title: "GitHub Foundations", issuer: "GitHub" },
+  { title: "Cybersecurity 101", issuer: "TryHackMe" },
+  { title: "Pre-Security Certificate", issuer: "TryHackMe" },
+  { title: "Introduction to Cybersecurity", issuer: "Cisco" },
+  { title: "XSS Defense Bootcamp", issuer: "DevTown" },
+]
+
+/* ───────────────────────────────────────────────
+   ACHIEVEMENTS
+   ─────────────────────────────────────────────── */
 
 export const achievementsData = [
   {
@@ -131,6 +109,10 @@ export const achievementsData = [
   },
 ]
 
+/* ───────────────────────────────────────────────
+   PROJECTS — Security & AI Security Focus
+   ─────────────────────────────────────────────── */
+
 export const securityProjectsData = [
   {
     title: "Entropy Firewall",
@@ -138,6 +120,7 @@ export const securityProjectsData = [
     img: "/entropy-firewall.png",
     description: "Advanced LLM firewall solution offering proactive defense for autonomous agents and large language models.",
     url: "https://github.com/paarthbhatt/entropy-firewall",
+    sourceUrl: "https://github.com/paarthbhatt/entropy-firewall",
   },
   {
     title: "Robin Security Agent",
@@ -145,6 +128,31 @@ export const securityProjectsData = [
     img: "/robin-security.png",
     description: "Autonomous AI security agent designed for proactive vulnerability assessment and threat mitigation.",
     url: "https://github.com/paarthbhatt/robin-security-agent",
+    sourceUrl: "https://github.com/paarthbhatt/robin-security-agent",
+  },
+  {
+    title: "Atreides Framework",
+    tag: "AI Agent Architecture",
+    img: "/atreides-preview.png",
+    description: "Autonomous agent execution framework featuring long-context memory compaction and threat-resilient workflow isolation.",
+    url: "https://atreides-web-liard.vercel.app/",
+    sourceUrl: "https://github.com/paarthbhatt/Atreides",
+  },
+  {
+    title: "Guardiant Security",
+    tag: "AppSec & Active Shield",
+    img: "/guardiant-preview.png",
+    description: "Enterprise vulnerability monitoring & threat intelligence platform for active application defense.",
+    url: "https://guardiant-website.vercel.app/",
+    sourceUrl: "https://github.com/paarthbhatt/Guardiant",
+  },
+  {
+    title: "Agentyc Framework",
+    tag: "AI Security & Agent Ops",
+    img: "/agentyc-preview.png",
+    description: "Security-first agentic automation framework designed for agent workflow orchestration and threat containment.",
+    url: "https://github.com/paarthbhatt/Agentyc",
+    sourceUrl: "https://github.com/paarthbhatt/Agentyc",
   },
   {
     title: "Batcomputer",
@@ -152,6 +160,7 @@ export const securityProjectsData = [
     img: "/batcomputer.png",
     description: "Centralized security command center and dashboard for analyzing and responding to threat telemetry.",
     url: "https://github.com/paarthbhatt/Batcomputer",
+    sourceUrl: "https://github.com/paarthbhatt/Batcomputer",
   },
   {
     title: "SecretVault",
@@ -159,6 +168,7 @@ export const securityProjectsData = [
     img: "/secure-app-prototype.png",
     description: "Enterprise-grade API key management with AES encryption and zero-knowledge architecture.",
     url: "https://github.com/paarthbhatt/SecretVault",
+    sourceUrl: "https://github.com/paarthbhatt/SecretVault",
   },
   {
     title: "WHOIS Lookup Tool",
@@ -166,6 +176,7 @@ export const securityProjectsData = [
     img: "/threat-intel-parser.png",
     description: "Python CLI for bulk domain WHOIS lookups with parallel processing and rate-limiting.",
     url: "https://github.com/paarthbhatt/Whois-Lookup-Terminal-Tool",
+    sourceUrl: "https://github.com/paarthbhatt/Whois-Lookup-Terminal-Tool",
   },
   {
     title: "SurveillanceOps",
@@ -173,106 +184,136 @@ export const securityProjectsData = [
     img: "/ai-camera.png",
     description: "Enterprise surveillance platform with real-time detection and encrypted analytics.",
     url: "https://surveillance-platform-updated.vercel.app/",
+    sourceUrl: "https://surveillance-platform-updated.vercel.app/",
   },
 ]
 
-export const webProjectsData = [
+/** Secondary / collapsed web and research projects shown as compact hyperlinked badges */
+export const collapsedProjectsData = [
+  {
+    title: "Netflix Clone (DRDO Edition)",
+    tag: "Full-Stack Web App",
+    url: "https://netflix-drdo.vercel.app/",
+  },
   {
     title: "Entropy Website",
-    tag: "Web App",
-    img: "/entropy-website.png",
-    description: "Official landing page and website for the Entropy Enterprise LLM firewall ecosystem.",
+    tag: "Web Ecosystem",
     url: "https://github.com/paarthbhatt/entropy-website",
   },
   {
     title: "Delhi Smart City Dashboard",
     tag: "Data Visualization",
-    img: "/smart-city-dashboard.png",
-    description: "Real-time dashboard for Delhi's smart city initiative with urban data visualization.",
     url: "https://delhi-smart-city.vercel.app/",
   },
   {
     title: "STEM Code Lab",
     tag: "Educational Platform",
-    img: "/threat-intel-parser.png",
-    description: "Interactive platform for coding education through hands-on simulations.",
     url: "https://stem-codelab.vercel.app/",
   },
   {
     title: "AI-Based Camera",
-    tag: "AI & Computer Vision",
-    img: "/ai-camera.png",
-    description: "Smart surveillance system using AI for real-time threat detection.",
+    tag: "Computer Vision",
     url: "https://circuitech-ai-based-camera.vercel.app/main.html",
   },
   {
     title: "Eco Track",
-    tag: "Environmental Monitoring",
-    img: "/eco-track.png",
-    description: "Tool for tracking environmental data to promote sustainability practices.",
+    tag: "Environmental Tracker",
     url: "https://eco-track-chi.vercel.app/",
+  },
+  {
+    title: "Netflix ML Dataset Analysis",
+    tag: "Data Science / ML",
+    url: "https://github.com/paarthbhatt/Netflix-data-files",
+  },
+  {
+    title: "Star Trek Project",
+    tag: "Interactive Web",
+    url: "https://github.com/paarthbhatt/Star-Trek",
   },
 ]
 
-export const otherProjectsData = [
-  {
-    title: "Star Trek Project",
-    tag: "Creative / Interactive",
-    img: "/star-trek.png",
-    description: "An engaging Star Trek themed project exploring imaginative concepts and interactive web elements.",
-    url: "https://github.com/paarthbhatt/Star-Trek",
-  },
-  {
-    title: "Netflix Clone",
-    tag: "Web App",
-    img: "/netflix-clone.png",
-    description: "Full-stack Netflix clone with authentication and streaming UI.",
-    url: "https://netflix-clone-tau-black.vercel.app/",
-  },
-  {
-    title: "Machine Learning Model and Interpretations of Netflix dataset",
-    tag: "Data Analysis",
-    img: "/ml-netflix.png",
-    description: "ML models on Netflix data with visualizations and statistical analysis.",
-    url: "https://github.com/paarthbhatt/Netflix-data-files",
-  },
-]
+/* ───────────────────────────────────────────────
+   EXPERIENCE — updated from LinkedIn (security-first order)
+   ─────────────────────────────────────────────── */
 
 export const experienceData = [
   {
-    role: "Tech Team Member",
-    org: "Sinusoid",
-    when: "August 2024",
-    desc: "Helped in the creation phase of the website, helped in event competition, operations and technical support.",
+    role: "Cyber Security Intern",
+    org: "DRDO — Ministry of Defence, Govt. of India",
+    when: "Jun 2026 – Present",
+    desc: "Conducted whitebox and blackbox web application penetration testing for SAG division; identified vulnerabilities and executed successful PoC exploits.",
+    status: "ACTIVE"
+  },
+  {
+    role: "Cybersecurity & AI Intern",
+    org: "Cisco Networking Academy",
+    when: "Jul 2025 – Aug 2025",
+    desc: "Completed focused internship on cybersecurity & AI — covering threat detection pipelines, network defense, and AI-driven security analysis.",
     status: "COMPLETED"
   },
   {
-    role: "Tech Team Member",
-    org: "TEDxNIITUniversity",
-    when: "February 2025",
-    desc: "Designed webpages all part of the website and helped in operations and technical support.",
-    status: "COMPLETED"
-  },
-  {
-    role: "Web Developer Internship",
+    role: "Web Developer Intern",
     org: "LaunchED Global",
-    when: "April 2025",
-    desc: "Built a commercial dashboard for anime website.",
+    when: "Feb 2025 – Apr 2025",
+    desc: "Built production dashboards with React.js; applied secure coding practices across the development lifecycle.",
     status: "COMPLETED"
   },
   {
-    role: "Virtual Internship – Cybersecurity & AI",
-    org: "NIIT Foundation",
-    when: "July 2025",
-    desc: "Completed 4-week virtual internship focused on Cybersecurity & Artificial Intelligence.",
+    role: "TEDx Technical Team Member",
+    org: "TEDxNIITUniversity",
+    when: "Aug 2024 – Feb 2025",
+    desc: "Led technical infrastructure and web development for the university TEDx event over 7 months.",
+    status: "COMPLETED"
+  },
+  {
+    role: "Tech Team Member",
+    org: "siNUsoid",
+    when: "Aug 2024 – Jan 2025",
+    desc: "Event operations, competition infrastructure, and technical support at university tech fest.",
     status: "COMPLETED"
   },
 ]
 
+/* ───────────────────────────────────────────────
+   SKILLS — reordered: security-first, generic-last
+   ─────────────────────────────────────────────── */
+
 export const skillsData = [
-  "Threat Intel", "Cybersecurity", "Vulnerability Management", "Web Application Security", 
-  "Artificial Intelligence", "Github", "Cloud Security", "Incident Response", "Linux", 
-  "Python", "DSA", "Collaboration", "Networking", "Cloud Computing", "Project Management",
-  "OOPs", "AI tools & Frameworks", "Network Security", "Security Operations", 
-  "Cisco Packet Tracer", "Kali Linux", "OWASP"
+  "Threat Intelligence", "Vulnerability Management", "Incident Response",
+  "Security Operations", "Network Security", "Web Application Security",
+  "Cloud Security", "OWASP", "Kali Linux", "Cisco Packet Tracer",
+  "Python", "Linux", "AI & LLM Security", "DevSecOps",
+  "DSA", "Github", "Cloud Computing", "Networking",
+  "AI Tools & Frameworks", "Collaboration", "Project Management",
 ]
+
+/* ───────────────────────────────────────────────
+   WRITE-UPS — NEW
+   ─────────────────────────────────────────────── */
+
+export const writeupsData = [
+  {
+    title: "John the Ripper: The Basics — Cracking Hashes Like a Pro",
+    platform: "Medium",
+    tag: "THM Room Writeup",
+    description: "Step-by-step writeup covering NTLM & Linux shadow hash cracking, ZIP/RAR archive breaking, SSH key cracking using custom rules and single crack mode with tools like zip2john, rar2john, and ssh2john.",
+    url: "https://medium.com/@paarthbhatt37/tryhackme-john-the-ripper-the-basics-cyber-security-101-thm-1be625362fa3",
+  },
+  {
+    title: "\"The Game\" CTF — Reverse Engineering a Godot Tetris",
+    platform: "X Thread",
+    tag: "CTF Walkthrough",
+    description: "Solved a TryHackMe CTF by reverse engineering a Tetris game built with Godot Engine to extract a hidden flag. Game hacking meets binary analysis.",
+    url: "https://x.com/thatsparthbhatt/status/1929926261595316517",
+  },
+]
+
+/* ───────────────────────────────────────────────
+   CTF PROFILES — NEW
+   ─────────────────────────────────────────────── */
+
+export const ctfProfiles = {
+  tryhackme: "https://tryhackme.com/p/paarthbhatt37",
+  medium: "https://medium.com/@paarthbhatt37",
+  github: "https://github.com/paarthbhatt",
+}

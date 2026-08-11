@@ -63,12 +63,12 @@ export function HeroSection({
         <div className="hero-stagger-3 mb-6 sm:mb-7 md:mb-8 lg:mb-10">
           <RotatingGlitchText
             items={[
-              "Cyber Threat Intelligence Analyst",
-              "Translating noise into signal • building secure tools",
-              "Security is a process, not a product. — Schneier",
-              "The Best Offense is the Best Defense",
-              "Google Developer Certified",
-              "Curiosity-driven. Reliable. Security-first.",
+              "Security Architect • AI Safety Engineer",
+              "Building self-defending pipelines at DRDO (SAG)",
+              "I don't just find vulnerabilities — I architect the defenses.",
+              "Entropy Firewall • Robin Agent • SecretVault",
+              "Top 1% TryHackMe • 4× Hackathon Winner",
+              "DRDO SAG Intern • Cisco Certified • arcX Analyst",
             ]}
           />
         </div>
@@ -76,14 +76,14 @@ export function HeroSection({
         {/* Typewriter lines — stagger 4 */}
         <div className="hero-stagger-4 space-y-1 sm:space-y-1.5 md:space-y-2 mb-6 sm:mb-7 md:mb-8 lg:mb-10 px-2">
           <Typewriter
-            text="[✓] handshake complete • secure session established"
+            text="[✓] clearance verified • DRDO_SAG session active"
             delay={200}
             speed={18}
             className="font-mono text-emerald-400 text-[10px] sm:text-xs md:text-sm"
           />
           <br />
           <Typewriter
-            text="[INFO] tech-savvy • driven • adaptive • security-focused"
+            text="[INFO] AppSec • AI Safety • DevSecOps • Threat Intelligence"
             delay={700}
             speed={18}
             className="font-mono text-cyan-400 text-[10px] sm:text-xs md:text-sm"

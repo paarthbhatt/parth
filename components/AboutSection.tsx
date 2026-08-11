@@ -33,20 +33,20 @@ export function AboutSection() {
                 <div className="flex items-start gap-2 sm:gap-3">
                   <span className="text-emerald-500 flex-shrink-0">[✦]</span>
                   <p className="text-gray-300 leading-relaxed">
-                    I'm Parth Bhatt, a cybersecurity enthusiast and B.Tech student from New Delhi who loves solving digital puzzles and outsmarting threats. Ever since I got my first computer at age 7, I've been fascinated by how systems work—and how to secure them.
+                    I build self-defending software pipelines and automated security agents. Currently interning at <span className="text-cyan-400 font-semibold">DRDO (SAG)</span>, I specialize in identifying execution flaws in AI/LLM integrations and building low-latency defensive tooling. <span className="text-emerald-400">4× hackathon winner</span>. <span className="text-emerald-400">Top 1% on TryHackMe</span>.
                   </p>
                 </div>
                 <div className="flex items-start gap-2 sm:gap-3">
                   <span className="text-emerald-500 flex-shrink-0">[✦]</span>
                   <p className="text-gray-300 leading-relaxed">
-                    From ethical hacking to defensive security, I thrive on challenges that blend logic, strategy, and creativity. My goal? To turn passion into impact by protecting digital spaces and building smarter, safer systems.
+                    From enterprise LLM firewalls to autonomous vulnerability scanners, I engineer systems that are unexploitable and self-improving. I don't just find vulnerabilities — I architect the defenses.
                   </p>
                 </div>
               </div>
 
               <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-emerald-500/30">
                 <p className="text-[10px] sm:text-xs font-mono text-emerald-500/70">
-                  <span className="animate-pulse">●</span> STATUS: [ACTIVE] | MODE: [SECURITY-FIRST] | LOCATION: [NEW_DELHI]
+                  <span className="animate-pulse">●</span> STATUS: [ACTIVE] | MODE: [SECURITY-ARCHITECT] | CLEARANCE: [DRDO_SAG]
                 </p>
               </div>
             </div>
