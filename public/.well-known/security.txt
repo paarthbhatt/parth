@@ -1,0 +1,6 @@
+# parthbhatt.me security contact
+# Please report vulnerabilities privately — no public disclosure until resolved.
+
+Contact: mailto:paarthbhatt37@gmail.com
+Preferred-Languages: en
+Expires: 2027-08-15T00:00:00.000Z
