@@ -61,7 +61,7 @@ export function Footer({ introDone }: { introDone: boolean }) {
 
         <div className="text-center mt-4 pt-4 border-t border-white/20">
           <p className="text-xs sm:text-sm opacity-90">
-            © 2025 Parth Bhatt • terminal-mode online • building secure, human‑centered software
+            © 2026 Parth Bhatt • terminal-mode online • building secure, human‑centered software
           </p>
         </div>
       </div>
