@@ -5,12 +5,11 @@ import { RotatingGlitchText } from "./RotatingGlitchText"
 import { Typewriter } from "./Typewriter"
 
 export function HeroSection({
-  isPitchOpen,
   setIsPitchOpen,
   setIsContactOpen,
-}: { isPitchOpen: boolean; setIsPitchOpen: (open: boolean) => void; setIsContactOpen: (open: boolean) => void }) {
+}: { setIsPitchOpen: (open: boolean) => void; setIsContactOpen: (open: boolean) => void }) {
   return (
-    <section className="crt-flicker relative min-h-[85vh] sm:min-h-[90vh] md:min-h-[92vh] lg:min-h-[105vh] xl:min-h-[115vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-black to-slate-950 px-3 sm:px-4 md:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
+    <section className="crt-flicker relative min-h-[85vh] sm:min-h-[90vh] md:min-h-[92vh] lg:min-h-screen xl:min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-black to-slate-950 px-3 sm:px-4 md:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 

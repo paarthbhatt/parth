@@ -28,7 +28,7 @@ export function ContactSection() {
                 <span className="text-emerald-500">[AVAILABLE]</span>
               </div>
               <p className="text-sm text-gray-300 font-mono leading-relaxed">
-                Open to internships &amp; part-time remote roles (Cybersecurity, AI). I'm flexible for collaborations, part-time work, and knowledge-sharing initiatives.
+                Open to internships &amp; part-time remote roles (Cybersecurity, AI). I&apos;m flexible for collaborations, part-time work, and knowledge-sharing initiatives.
               </p>
             </div>
 

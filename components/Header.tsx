@@ -1,8 +1,4 @@
-export function Header({
-  isContactOpen,
-  setIsContactOpen,
-  introDone,
-}: { isContactOpen: boolean; setIsContactOpen: (open: boolean) => void; introDone: boolean }) {
+export function Header({ introDone }: { introDone: boolean }) {
   return (
     <header
       className={[

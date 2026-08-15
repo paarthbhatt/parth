@@ -16,12 +16,25 @@ import { ContactSection } from "@/components/ContactSection"
 import { ContactModal } from "@/components/ContactModal"
 import { PitchModal } from "@/components/PitchModal"
 
+const BOOT_SEEN_KEY = "boot_seen"
+
 export default function App() {
   const [isContactOpen, setIsContactOpen] = useState(false)
   const [isPitchOpen, setIsPitchOpen] = useState(false)
   const [isDark, setIsDark] = useState(false)
   const [showIntro, setShowIntro] = useState(true)
   const [introDissolve, setIntroDissolve] = useState(false)
+
+  // Don't replay the boot sequence for the rest of the session once it's been seen.
+  useEffect(() => {
+    let seen = false
+    try {
+      seen = sessionStorage.getItem(BOOT_SEEN_KEY) === "1"
+    } catch {
+      // storage unavailable (private mode, etc.) — just show the boot
+    }
+    if (seen) setShowIntro(false)
+  }, [])
 
   useEffect(() => {
     const updateTheme = () => {
@@ -43,37 +56,26 @@ export default function App() {
     }
   }, [])
 
+  const proceedFromIntro = () => {
+    try {
+      sessionStorage.setItem(BOOT_SEEN_KEY, "1")
+    } catch {
+      // ignore — the boot will simply show again next session
+    }
+    setIntroDissolve(true)
+    setTimeout(() => setShowIntro(false), 400)
+  }
+
   return (
     <div className={`min-h-screen transition-colors duration-300 cursor-dollar ${isDark ? "dark" : ""}`}>
       {showIntro && (
-        <HackerBootSequence
-          introDissolve={introDissolve}
-          onProceed={() => {
-            setIntroDissolve(true)
-            setTimeout(() => setShowIntro(false), 400)
-          }}
-          onCancel={() => {
-            try {
-              window.close()
-              setTimeout(() => {
-                try {
-                  // @ts-ignore
-                  window.open("", "_self")?.close()
-                } catch {}
-                window.location.href = "about:blank"
-              }, 150)
-            } catch {
-              window.location.href = "about:blank"
-            }
-          }}
-        />
+        <HackerBootSequence introDissolve={introDissolve} onProceed={proceedFromIntro} />
       )}
 
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-black to-slate-950 px-4 sm:px-6 lg:px-8">
-        <Header isContactOpen={isContactOpen} setIsContactOpen={setIsContactOpen} introDone={!showIntro} />
+        <Header introDone={!showIntro} />
         <main className="pt-20 space-y-12 md:space-y-14">
           <HeroSection
-            isPitchOpen={isPitchOpen}
             setIsPitchOpen={setIsPitchOpen}
             setIsContactOpen={setIsContactOpen}
           />

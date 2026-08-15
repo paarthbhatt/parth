@@ -2,30 +2,28 @@
 
 import { useState, useEffect } from "react"
 
+const bootSequence = [
+  { delay: 0, kind: "cmd", text: "whoami" },
+  { delay: 300, kind: "out", text: "parth_bhatt" },
+  { delay: 600, kind: "cmd", text: "hostname" },
+  { delay: 900, kind: "out", text: "parth-bhatt.dev" },
+  { delay: 1200, kind: "cmd", text: "uname -srv" },
+  { delay: 1500, kind: "out", text: "Linux 6.x #1337 SMP x86_64" },
+  { delay: 1800, kind: "cmd", text: "ls modules" },
+  { delay: 2100, kind: "out", text: "skills.sys  certs.sys  projects.sys" },
+  { delay: 2400, kind: "cmd", text: "./scanner --capabilities --fast" },
+  { delay: 2700, kind: "out", text: "capabilities: ThreatIntel ✓  Cybersecurity ✓  WebSec ✓" },
+] as Array<{ delay: number; kind: "cmd" | "out"; text: string }>
+
 export function HackerBootSequence({
   introDissolve,
   onProceed,
-  onCancel,
-}: { introDissolve: boolean; onProceed: () => void; onCancel: () => void }) {
+}: { introDissolve: boolean; onProceed: () => void }) {
   const [currentLine, setCurrentLine] = useState(0)
   const [glitchActive, setGlitchActive] = useState(false)
   const [codeFalls, setCodeFalls] = useState<Array<{ left: number; delay: number; duration: number; text: string }>>([])
-  const [showBanner, setShowBanner] = useState(true)
   const [showDisclaimer, setShowDisclaimer] = useState(true)
   const [awaitingInput, setAwaitingInput] = useState(false)
-
-  const bootSequence = [
-    { delay: 0, kind: "cmd", text: "whoami" },
-    { delay: 300, kind: "out", text: "parth_bhatt" },
-    { delay: 600, kind: "cmd", text: "hostname" },
-    { delay: 900, kind: "out", text: "parth-bhatt.dev" },
-    { delay: 1200, kind: "cmd", text: "uname -srv" },
-    { delay: 1500, kind: "out", text: "Linux 6.x #1337 SMP x86_64" },
-    { delay: 1800, kind: "cmd", text: "ls modules" },
-    { delay: 2100, kind: "out", text: "skills.sys  certs.sys  projects.sys" },
-    { delay: 2400, kind: "cmd", text: "./scanner --capabilities --fast" },
-    { delay: 2700, kind: "out", text: "capabilities: ThreatIntel ✓  Cybersecurity ✓  WebSec ✓" },
-  ] as Array<{ delay: number; kind: "cmd" | "out"; text: string }>
 
   useEffect(() => {
     const falls = Array.from({ length: 20 }, () => ({
@@ -66,13 +64,11 @@ export function HackerBootSequence({
       const key = e.key.toLowerCase()
       if (key === "y" || key === "enter") {
         onProceed()
-      } else if (key === "n") {
-        onCancel()
       }
     }
     window.addEventListener("keydown", handler)
     return () => window.removeEventListener("keydown", handler)
-  }, [awaitingInput, onProceed, onCancel])
+  }, [awaitingInput, onProceed])
 
   return (
     <div
@@ -106,16 +102,23 @@ export function HackerBootSequence({
             <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
           </div>
           <span className="text-[10px] sm:text-xs font-mono text-emerald-400 ml-1 sm:ml-2 truncate">root@parth-bhatt:~</span>
+          <button
+            type="button"
+            onClick={onProceed}
+            className="ml-auto shrink-0 text-[10px] sm:text-xs font-mono text-emerald-400/80 hover:text-emerald-300 border border-emerald-500/40 rounded px-2 py-0.5 bg-emerald-500/10 hover:bg-emerald-500/20 transition-colors"
+          >
+            SKIP INTRO »
+          </button>
         </div>
 
         {showDisclaimer && (
           <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20">
             <div className="group relative rounded-lg border-2 border-emerald-500/50 bg-black/85 px-3 py-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] backdrop-blur">
-              <div className="absolute -inset-0.5 rounded-lg bg-[conic-gradient(from_180deg_at_50%_50%,rgba(16,185,129,0.2),rgba(6,182,212,0.2),rgba(59,130,246,0.2),rgba(16,185,129,0.2))] blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="absolute -inset-0.5 rounded-lg bg-[conic-gradient(from_180deg_at_50%_50%,rgba(16,185,129,0.2),rgba(6,212,212,0.2),rgba(59,130,246,0.2),rgba(16,185,129,0.2))] blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="relative z-10 flex items-center gap-2">
                 <span className="text-[10px] sm:text-xs font-mono text-emerald-400">[NOTICE]</span>
                 <span className="text-[10px] sm:text-xs font-mono text-emerald-200 whitespace-nowrap">
-                  Best experienced on <span className="text-cyan-400 font-semibold">desktop/laptop</span> 💻
+                  Press <span className="text-cyan-400 font-semibold">Y</span> to continue — buttons work on any device
                 </span>
                 <button
                   type="button"
@@ -131,21 +134,19 @@ export function HackerBootSequence({
         )}
 
         <div className="p-3 sm:p-4 md:p-6 font-mono text-[10px] sm:text-xs md:text-sm overflow-y-auto overflow-x-auto max-h-[75vh] sm:max-h-[70vh]">
-          {showBanner && (
-            <div className={`mb-2 sm:mb-4 text-center ${glitchActive ? "animate-pulse" : ""}`}>
-              <pre className="hidden sm:block text-[7px] md:text-[9px] lg:text-[11px] xl:text-[12px] text-emerald-500 dark:text-emerald-400 whitespace-pre overflow-x-auto">
-                {`██████╗  █████╗ ██████╗ ████████╗██╗  ██╗    ██████╗ ██╗  ██╗ █████╗ ████████╗████████╗
+          <div className={`mb-2 sm:mb-4 text-center ${glitchActive ? "animate-pulse" : ""}`}>
+            <pre className="hidden sm:block text-[7px] md:text-[9px] lg:text-[11px] xl:text-[12px] text-emerald-500 dark:text-emerald-400 whitespace-pre overflow-x-auto">
+              {`██████╗  █████╗ ██████╗ ████████╗██╗  ██╗    ██████╗ ██╗  ██╗ █████╗ ████████╗████████╗
 ██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██║  ██║    ██╔══██╗██║  ██║██╔══██╗╚══██╔══╝╚══██╔══╝
 ██████╔╝███████║██████╔╝   ██║   ███████║    ██████╔╝███████║███████║   ██║      ██║   
 ██╔═══╝ ██╔══██║██╔══██╗   ██║   ██╔══██║    ██╔══██╗██╔══██║██╔══██║   ██║      ██║   
 ██║     ██║  ██║██║  ██║   ██║   ██║  ██║    ██████╔╝██║  ██║██║  ██║   ██║      ██║   
 ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝      ╚═╝    `}
-              </pre>
-              <div className="block sm:hidden">
-                <p className="font-mono text-[11px] text-emerald-400">[boot] Parth Bhatt Portfolio</p>
-              </div>
+            </pre>
+            <div className="block sm:hidden">
+              <p className="font-mono text-[11px] text-emerald-400">[boot] Parth Bhatt Portfolio</p>
             </div>
-          )}
+          </div>
 
           <div className="space-y-0.5 sm:space-y-1">
             {bootSequence.slice(0, currentLine + 1).map((item, index) => {
@@ -179,7 +180,7 @@ export function HackerBootSequence({
                   <span className="text-cyan-400">open portfolio? (y/n)</span>
                   <span className="animate-pulse text-emerald-500 inline-block ml-1">▊</span>
                 </div>
-                <div className="text-emerald-500/70">press Y or Enter to continue, N to close</div>
+                <div className="text-emerald-500/70">press Y or Enter to continue — or tap SKIP INTRO</div>
                 <div className="mt-2 flex items-center gap-2">
                   <button
                     type="button"
@@ -188,14 +189,6 @@ export function HackerBootSequence({
                     aria-label="Yes, open portfolio"
                   >
                     Y / ENTER
-                  </button>
-                  <button
-                    type="button"
-                    onClick={onCancel}
-                    className="px-3 py-1 rounded border border-emerald-500/40 bg-transparent text-emerald-400 hover:bg-emerald-500/10 transition-colors"
-                    aria-label="No, close tab"
-                  >
-                    N
                   </button>
                 </div>
               </div>

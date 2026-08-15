@@ -4,11 +4,9 @@ import { useState, useEffect } from "react"
 
 export function RotatingGlitchText({
   items,
-  interval = 2400,
   className = "",
 }: {
   items: string[]
-  interval?: number
   className?: string
 }) {
   const typeMs = 32

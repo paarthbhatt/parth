@@ -1,7 +1,6 @@
 import {
   Shield,
   Eye,
-  GitBranch,
   Building,
   Award,
   Users

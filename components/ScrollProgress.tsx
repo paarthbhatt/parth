@@ -6,15 +6,28 @@ export function ScrollProgress() {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    const handleScroll = () => {
+    let rafId = 0
+
+    const update = () => {
+      rafId = 0
       const scrollTop = window.scrollY
       const docHeight = document.documentElement.scrollHeight - window.innerHeight
       const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
       setProgress(Math.min(pct, 100))
     }
+
+    const handleScroll = () => {
+      // Coalesce scroll events to one state update per animation frame.
+      if (!rafId) rafId = window.requestAnimationFrame(update)
+    }
+
     window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll()
-    return () => window.removeEventListener("scroll", handleScroll)
+    update()
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      if (rafId) window.cancelAnimationFrame(rafId)
+    }
   }, [])
 
   return (

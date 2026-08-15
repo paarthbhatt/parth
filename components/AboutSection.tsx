@@ -39,7 +39,7 @@ export function AboutSection() {
                 <div className="flex items-start gap-2 sm:gap-3">
                   <span className="text-emerald-500 flex-shrink-0">[✦]</span>
                   <p className="text-gray-300 leading-relaxed">
-                    From enterprise LLM firewalls to autonomous vulnerability scanners, I engineer systems that are unexploitable and self-improving. I don't just find vulnerabilities — I architect the defenses.
+                    From enterprise LLM firewalls to autonomous vulnerability scanners, I engineer systems that are unexploitable and self-improving. I don&apos;t just find vulnerabilities — I architect the defenses.
                   </p>
                 </div>
               </div>

@@ -9,7 +9,7 @@ import { useScrollReveal } from "../hooks/useScrollReveal"
 export function ProjectsSection() {
   const ref = useScrollReveal<HTMLElement>()
 
-  const HackerProjectCard = ({ project, index }: { project: any; index: number }) => {
+  const HackerProjectCard = ({ project, index }: { project: (typeof securityProjectsData)[number]; index: number }) => {
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {

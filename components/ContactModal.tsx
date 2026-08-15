@@ -1,13 +1,29 @@
+"use client"
+
 import { Mail, Phone, MapPin, Clock, X } from "lucide-react"
+import { useModalA11y } from "@/hooks/useModalA11y"
 
 export function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const dialogRef = useModalA11y(isOpen, onClose)
+
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md">
-      <div className="relative bg-black border-2 border-emerald-500/30 rounded-lg shadow-[0_0_40px_rgba(16,185,129,0.2)] p-6 sm:p-8 max-w-md w-full mx-4 transform animate-scale-in group overflow-hidden">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md"
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) onClose()
+      }}
+    >
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Contact information"
+        className="relative bg-black border-2 border-emerald-500/30 rounded-lg shadow-[0_0_40px_rgba(16,185,129,0.2)] p-6 sm:p-8 max-w-md w-full mx-4 transform animate-scale-in group overflow-hidden"
+      >
         <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
-        
+
         <div className="relative z-10 flex justify-between items-start mb-6 border-b border-emerald-500/30 pb-4">
           <div className="flex flex-col">
             <span className="text-emerald-500/70 font-mono text-xs mb-1">[SYSTEM.COMM: PORT_443]</span>
@@ -56,7 +72,7 @@ export function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: ()
               <p className="font-mono text-emerald-300 text-sm">Available for immediate start</p>
             </div>
           </div>
-          
+
           <div className="pt-2 text-xs font-mono text-emerald-500/50 flex justify-end">
              <span>[CONNECTION_SECURE]</span>
           </div>

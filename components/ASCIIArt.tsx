@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 
 export function ASCIIArt({ text, delay = 0 }: { text: string; delay?: number }) {
   const [displayedText, setDisplayedText] = useState("")
-  const [isComplete, setIsComplete] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -16,7 +15,6 @@ export function ASCIIArt({ text, delay = 0 }: { text: string; delay?: number }) 
           currentIndex++
         } else {
           clearInterval(interval)
-          setIsComplete(true)
         }
       }, 8)
       return () => clearInterval(interval)
