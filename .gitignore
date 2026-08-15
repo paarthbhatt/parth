@@ -22,6 +22,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# package manager lockfiles (npm is canonical in this repo)
+pnpm-lock.yaml
+yarn.lock
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
