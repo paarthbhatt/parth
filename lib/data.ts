@@ -292,6 +292,13 @@ export const skillsData = [
 
 export const writeupsData = [
   {
+    title: "I Broke Into an AI Employee's Brain — Here's What It Told Me",
+    platform: "Medium",
+    tag: "AI Agent Security",
+    description: "It had access to secrets, discounts, refunds, and the internet. All I had to do was ask nicely. Breakdown of breaking a hackable AI ticketing agent in HackTheAgent — where every exploit traced back to the agent trusting unverified input.",
+    url: "https://medium.com/@paarthbhatt37/i-broke-into-an-ai-employees-brain-here-s-what-it-told-me-9d3973785638",
+  },
+  {
     title: "John the Ripper: The Basics — Cracking Hashes Like a Pro",
     platform: "Medium",
     tag: "THM Room Writeup",
