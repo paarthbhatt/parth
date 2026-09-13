@@ -67,7 +67,7 @@ export default function App() {
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 cursor-pickaxe ${isDark ? "dark" : ""}`}>
+    <div className={`min-h-screen transition-colors duration-300 cursor-hacked ${isDark ? "dark" : ""}`}>
       {showIntro && (
         <HackerBootSequence introDissolve={introDissolve} onProceed={proceedFromIntro} />
       )}
