@@ -367,8 +367,15 @@ html {
 
 /* Dollar sign cursor utility. Source is 32x32 -- browsers cap cursor
    bitmaps near 128px and ignore anything larger. */
-.cursor-dollar {
-  cursor: url("/cursor-dollar.png") 16 16, auto;
+/* Minecraft diamond pickaxe cursor. Source is a 32×32 pixel-art PNG. */
+.cursor-pickaxe {
+  cursor: url("/cursor-pickaxe.png") 14 4, crosshair;
+}
+
+/* Dark-mode override for the background gradient in HeroSection. */
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
 }
 
 
