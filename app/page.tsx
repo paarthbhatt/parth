@@ -73,8 +73,14 @@ export default function App() {
       )}
 
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-black to-slate-950 px-4 sm:px-6 lg:px-8">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded focus:border-2 focus:border-emerald-400 focus:bg-black focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-emerald-300 focus:outline-none"
+        >
+          Skip to main content
+        </a>
         <Header introDone={!showIntro} />
-        <main className="pt-20 space-y-12 md:space-y-14">
+        <main id="main-content" className="pt-20 space-y-12 md:space-y-14">
           <HeroSection
             setIsPitchOpen={setIsPitchOpen}
             setIsContactOpen={setIsContactOpen}

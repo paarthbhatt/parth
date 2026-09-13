@@ -116,7 +116,7 @@ export const securityProjectsData = [
   {
     title: "Entropy Firewall",
     tag: "AI Security & Firewall",
-    img: "/entropy-firewall.png",
+    img: "/entropy-firewall.webp",
     description: "Advanced LLM firewall solution offering proactive defense for autonomous agents and large language models.",
     url: "https://github.com/paarthbhatt/entropy-firewall",
     sourceUrl: "https://github.com/paarthbhatt/entropy-firewall",
@@ -124,7 +124,7 @@ export const securityProjectsData = [
   {
     title: "Robin Security Agent",
     tag: "Autonomous AI Agent",
-    img: "/robin-security.png",
+    img: "/robin-security.webp",
     description: "Autonomous AI security agent designed for proactive vulnerability assessment and threat mitigation.",
     url: "https://github.com/paarthbhatt/robin-security-agent",
     sourceUrl: "https://github.com/paarthbhatt/robin-security-agent",
@@ -132,7 +132,7 @@ export const securityProjectsData = [
   {
     title: "Atreides Framework",
     tag: "AI Agent Architecture",
-    img: "/atreides-preview.png",
+    img: "/atreides-preview.webp",
     description: "Autonomous agent execution framework featuring long-context memory compaction and threat-resilient workflow isolation.",
     url: "https://atreides-web-liard.vercel.app/",
     sourceUrl: "https://github.com/paarthbhatt/Atreides",
@@ -140,7 +140,7 @@ export const securityProjectsData = [
   {
     title: "Guardiant Security",
     tag: "AppSec & Active Shield",
-    img: "/guardiant-preview.png",
+    img: "/guardiant-preview.webp",
     description: "Enterprise vulnerability monitoring & threat intelligence platform for active application defense.",
     url: "https://guardiant-website.vercel.app/",
     sourceUrl: "https://github.com/paarthbhatt/Guardiant",
@@ -148,7 +148,7 @@ export const securityProjectsData = [
   {
     title: "Agentyc Framework",
     tag: "AI Security & Agent Ops",
-    img: "/agentyc-preview.png",
+    img: "/agentyc-preview.webp",
     description: "Security-first agentic automation framework designed for agent workflow orchestration and threat containment.",
     url: "https://github.com/paarthbhatt/Agentyc",
     sourceUrl: "https://github.com/paarthbhatt/Agentyc",
@@ -156,7 +156,7 @@ export const securityProjectsData = [
   {
     title: "Batcomputer",
     tag: "Security Command Center",
-    img: "/batcomputer.png",
+    img: "/batcomputer.webp",
     description: "Centralized security command center and dashboard for analyzing and responding to threat telemetry.",
     url: "https://github.com/paarthbhatt/Batcomputer",
     sourceUrl: "https://github.com/paarthbhatt/Batcomputer",
@@ -164,7 +164,7 @@ export const securityProjectsData = [
   {
     title: "SecretVault",
     tag: "Security & Encryption",
-    img: "/secure-app-prototype.png",
+    img: "/secure-app-prototype.webp",
     description: "Enterprise-grade API key management with AES encryption and zero-knowledge architecture.",
     url: "https://github.com/paarthbhatt/SecretVault",
     sourceUrl: "https://github.com/paarthbhatt/SecretVault",
@@ -172,7 +172,7 @@ export const securityProjectsData = [
   {
     title: "WHOIS Lookup Tool",
     tag: "Threat Intelligence",
-    img: "/threat-intel-parser.png",
+    img: "/threat-intel-parser.webp",
     description: "Python CLI for bulk domain WHOIS lookups with parallel processing and rate-limiting.",
     url: "https://github.com/paarthbhatt/Whois-Lookup-Terminal-Tool",
     sourceUrl: "https://github.com/paarthbhatt/Whois-Lookup-Terminal-Tool",
@@ -180,7 +180,7 @@ export const securityProjectsData = [
   {
     title: "SurveillanceOps",
     tag: "Security Monitoring",
-    img: "/ai-camera.png",
+    img: "/ai-camera.webp",
     description: "Enterprise surveillance platform with real-time detection and encrypted analytics.",
     url: "https://surveillance-platform-updated.vercel.app/",
     sourceUrl: "https://surveillance-platform-updated.vercel.app/",
@@ -323,3 +323,40 @@ export const ctfProfiles = {
   medium: "https://medium.com/@paarthbhatt37",
   github: "https://github.com/paarthbhatt",
 }
+
+/* ───────────────────────────────────────────────
+   CONTACT & SOCIAL — single source of truth
+   ─────────────────────────────────────────────── */
+
+export const contactInfo = {
+  name: "Parth Bhatt",
+  jobTitle: "Security Architect & AI Safety Engineer",
+  email: "paarthbhatt37@gmail.com",
+  /** E.164, used for the tel: href */
+  phone: "+918920948990",
+  /** Human-readable form shown in the UI */
+  phoneDisplay: "+91 8920948990",
+  location: "New Delhi, INDIA",
+  availability: "Available for immediate start",
+  resume: "/Resume_PARTH.pdf",
+} as const
+
+export const socialLinks = {
+  linkedin: "https://www.linkedin.com/in/parth-bhatt-07bb36310/",
+  github: ctfProfiles.github,
+  twitter: "https://x.com/thatsparthbhatt",
+  medium: ctfProfiles.medium,
+  tryhackme: ctfProfiles.tryhackme,
+} as const
+
+export const contactInterests = [
+  "Ethical Hacking",
+  "Security Operations",
+  "AI in Cybersecurity",
+  "Hackathons & CTF",
+]
+
+/** Shown in the "My pitch" modal. */
+export const pitchStatement =
+  "In a landscape of rapidly evolving AI risks, I bring a lethal combination of offensive security auditing and proactive infrastructure engineering. I specialize in developing resilient agentic workflows — implementing custom Write-Ahead Logging (WAL) and memory-compaction protocols for long-context stability. My philosophy is rooted in sovereignty: building systems that are unignorable, unexploitable, and self-improving. I don't just prompt; I architect the backbone of the next generation of autonomous intelligence."
+

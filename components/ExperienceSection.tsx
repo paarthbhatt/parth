@@ -5,7 +5,8 @@ import { useScrollReveal } from "../hooks/useScrollReveal"
 export function ExperienceSection() {
   const ref = useScrollReveal<HTMLElement>()
   return (
-    <section ref={ref} id="experience" className="relative py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden">
+    <section ref={ref}       id="experience"
+      aria-labelledby="experience-heading" className="relative py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.02)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
       </div>
@@ -19,8 +20,10 @@ export function ExperienceSection() {
           <div className="relative z-10">
             <div className="flex flex-wrap items-center justify-between gap-2 mb-4 sm:mb-6 border-b border-emerald-500/20 pb-3">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                <h3 className="text-base sm:text-xl font-bold font-mono text-emerald-400">$ cat experience.log</h3>
+                <span className="w-2 h-2 bg-emerald-500 rounded-full motion-safe:animate-pulse" aria-hidden="true"></span>
+                <h2 id="experience-heading" className="text-base sm:text-xl font-bold font-mono text-emerald-400">
+                  <span aria-hidden="true">$ cat </span>experience<span aria-hidden="true">.log</span>
+                </h2>
               </div>
               <span className="text-xs font-mono text-cyan-400 border border-cyan-500/40 bg-cyan-500/10 px-2.5 py-0.5 rounded">
                 [TOP DEFENCE EXPERIENCE LOADED]
@@ -60,7 +63,7 @@ export function ExperienceSection() {
                       <span className={`font-bold ${isCrown ? "text-cyan-300 text-base sm:text-lg" : "text-emerald-400"}`}>
                         {e.role}
                       </span>
-                      <span className={`font-mono ${isCrown ? "text-cyan-200 font-semibold" : "text-emerald-500/70"}`}>
+                      <span className={`font-mono ${isCrown ? "text-cyan-200 font-semibold" : "text-emerald-400/90"}`}>
                         @ {e.org}
                       </span>
                     </div>
@@ -73,7 +76,7 @@ export function ExperienceSection() {
                     </div>
 
                     <div className="mt-3 flex items-center gap-2">
-                      <span className={`inline-block w-2 h-2 ${isCrown ? "bg-cyan-400 shadow-[0_0_8px_#22d3ee]" : "bg-emerald-500"} rounded-full animate-pulse`}></span>
+                      <span className={`inline-block w-2 h-2 ${isCrown ? "bg-cyan-400 shadow-[0_0_8px_#22d3ee]" : "bg-emerald-500"} rounded-full motion-safe:animate-pulse`}></span>
                       <span className={`text-xs font-mono ${isCrown ? "text-cyan-300 font-bold" : "text-emerald-400"}`}>
                         {e.status}
                       </span>
@@ -84,7 +87,7 @@ export function ExperienceSection() {
             </div>
 
             <div className="mt-4 sm:mt-6 pt-4 border-t border-emerald-500/30">
-              <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-emerald-500/70">
+              <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-emerald-400/90">
                 <span>[*]</span>
                 <span>Total entries: {experienceData.length}</span>
                 <span>|</span>

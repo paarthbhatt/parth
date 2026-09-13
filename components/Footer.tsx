@@ -1,4 +1,8 @@
 import { Mail, Linkedin, Github, Twitter } from "lucide-react"
+import { contactInfo, socialLinks } from "../lib/data"
+
+const socialIconClass =
+  "grid place-items-center w-11 h-11 bg-white/15 hover:bg-white/25 rounded-full shadow-lg hover:scale-110 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-cyan-600"
 
 export function Footer({ introDone }: { introDone: boolean }) {
   return (
@@ -9,7 +13,7 @@ export function Footer({ introDone }: { introDone: boolean }) {
       ].join(" ")}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-5">
-        <div className="scroll-reveal mb-2 sm:mb-3 flex flex-wrap items-center gap-1.5 sm:gap-2">
+        <div className="scroll-reveal mb-2 sm:mb-3 flex flex-wrap items-center gap-1.5 sm:gap-2" aria-hidden="true">
           <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-emerald-300" />
           <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-cyan-300" />
           <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-blue-300" />
@@ -18,50 +22,50 @@ export function Footer({ introDone }: { introDone: boolean }) {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/15 text-white text-xs sm:text-sm font-bold flex items-center justify-center shadow-lg border border-white/20">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/15 text-white text-xs sm:text-sm font-bold flex items-center justify-center shadow-lg border border-white/20" aria-hidden="true">
               PB
             </div>
-            <span className="text-base sm:text-lg font-semibold">Parth Bhatt</span>
+            <span className="text-base sm:text-lg font-semibold">{contactInfo.name}</span>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
-            <span className="text-xs sm:text-sm opacity-90 mr-0.5 sm:mr-1">Connect:</span>
-            <a
-              href="mailto:paarthbhatt37@gmail.com"
-              className="group p-2 bg-white/15 hover:bg-white/25 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
-            >
-              <Mail className="w-4 h-4 text-white" />
+          <nav aria-label="Social links" className="flex items-center gap-2 sm:gap-3">
+            <span className="text-xs sm:text-sm opacity-90 mr-0.5 sm:mr-1" aria-hidden="true">Connect:</span>
+            <a href={`mailto:${contactInfo.email}`} className={socialIconClass} aria-label="Email Parth Bhatt">
+              <Mail className="w-4 h-4 text-white" aria-hidden="true" />
             </a>
             <a
-              href="https://www.linkedin.com/in/parth-bhatt-07bb36310/"
+              href={socialLinks.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="group p-2 bg-white/15 hover:bg-white/25 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
+              className={socialIconClass}
+              aria-label="Parth Bhatt on LinkedIn (opens in a new tab)"
             >
-              <Linkedin className="w-4 h-4 text-white" />
+              <Linkedin className="w-4 h-4 text-white" aria-hidden="true" />
             </a>
             <a
-              href="https://github.com/paarthbhatt"
+              href={socialLinks.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="group p-2 bg-white/15 hover:bg-white/25 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
+              className={socialIconClass}
+              aria-label="Parth Bhatt on GitHub (opens in a new tab)"
             >
-              <Github className="w-4 h-4 text-white" />
+              <Github className="w-4 h-4 text-white" aria-hidden="true" />
             </a>
             <a
-              href="https://x.com/thatsparthbhatt"
+              href={socialLinks.twitter}
               target="_blank"
               rel="noopener noreferrer"
-              className="group p-2 bg-white/15 hover:bg-white/25 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
+              className={socialIconClass}
+              aria-label="Parth Bhatt on X (opens in a new tab)"
             >
-              <Twitter className="w-4 h-4 text-white" />
+              <Twitter className="w-4 h-4 text-white" aria-hidden="true" />
             </a>
-          </div>
+          </nav>
         </div>
 
         <div className="text-center mt-4 pt-4 border-t border-white/20">
           <p className="text-xs sm:text-sm opacity-90">
-            © 2026 Parth Bhatt • terminal-mode online • building secure, human‑centered software
+            © {new Date().getFullYear()} {contactInfo.name} • terminal-mode online • building secure, human‑centered software
           </p>
         </div>
       </div>

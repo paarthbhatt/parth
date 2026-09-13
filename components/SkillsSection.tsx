@@ -19,6 +19,7 @@ export function SkillsSection() {
     <section
       ref={ref}
       id="skills"
+      aria-labelledby="skills-heading"
       className="relative py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950 overflow-hidden"
     >
       <div className="absolute inset-0 pointer-events-none">
@@ -34,7 +35,7 @@ export function SkillsSection() {
           <div className="relative z-10">
             {isScanning && (
               <div className="text-center py-6 sm:py-8">
-                <p className="text-emerald-500 font-mono animate-pulse text-xs sm:text-sm">
+                <p className="text-emerald-500 font-mono motion-safe:animate-pulse text-xs sm:text-sm">
                   [*] Scanning capabilities...
                 </p>
               </div>
@@ -43,8 +44,10 @@ export function SkillsSection() {
             {!isScanning && (
               <>
                 <div className="flex items-center gap-2 mb-3 sm:mb-4">
-                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                  <h3 className="text-base sm:text-xl font-bold font-mono text-emerald-400">$ ./skills --list-all</h3>
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full motion-safe:animate-pulse" aria-hidden="true"></span>
+                  <h2 id="skills-heading" className="text-base sm:text-xl font-bold font-mono text-emerald-400">
+                    <span aria-hidden="true">$ ./</span>skills<span aria-hidden="true"> --list-all</span>
+                  </h2>
                 </div>
 
                 <div className="flex flex-wrap gap-2 sm:gap-3">
@@ -60,7 +63,7 @@ export function SkillsSection() {
                   ))}
                 </div>
 
-                <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-emerald-500/30 text-xs font-mono text-emerald-500/70">
+                <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-emerald-500/30 text-xs font-mono text-emerald-400/90">
                   <p>[*] Total skill sets loaded: {skillsData.length} | Status: ✓ OPERATIONAL</p>
                 </div>
               </>

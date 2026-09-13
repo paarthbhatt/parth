@@ -73,7 +73,11 @@
 }
 
 @theme inline {
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
+  /* Wired to the next/font variables set on <body> in app/layout.tsx.
+     Without these, every `font-mono` utility silently fell back to the
+     browser default monospace instead of Geist Mono. */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -121,12 +125,6 @@
   }
 }
 
-/* Enhanced star-shaped cursor with Google colors - kept as utility class for other elements */
-.star-cursor {
-  cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2L14.09 8.26L20 10L14.09 11.74L12 18L9.91 11.74L4 10L9.91 8.26L12 2Z' fill='url(%23starGradient)'/%3E%3Cdefs%3E%3ClinearGradient id='starGradient' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%234285F4'/%3E%3Cstop offset='25%25' style='stop-color:%23EA4335'/%3E%3Cstop offset='50%25' style='stop-color:%23FBBC04'/%3E%3Cstop offset='75%25' style='stop-color:%2334A853'/%3E%3Cstop offset='100%25' style='stop-color:%238B5CF6'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E")
-    12 12, auto;
-}
-
 /* Added missing pitch modal animation */
 @keyframes pitch-modal-in {
   from {
@@ -155,27 +153,6 @@
   }
 }
 
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(50px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes fade-in-delayed {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 @keyframes scale-in {
   from {
@@ -188,47 +165,6 @@
   }
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(180deg);
-  }
-}
-
-@keyframes float-delayed {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-15px) rotate(-180deg);
-  }
-}
-
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes pulse-glow {
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
-  }
-}
 
 @keyframes dissolve-out {
   0% {
@@ -252,33 +188,39 @@
   animation: fade-in 1s ease-out;
 }
 
-.animate-fade-in-up {
-  animation: fade-in-up 1.2s ease-out;
+/* Staggered card entrance. Replaces the per-card setTimeout + state that the
+   project and writeup grids used to run; the delay comes from an inline
+   animation-delay and the reduced-motion block below neutralises it. */
+.card-rise {
+  opacity: 0;
+  animation: card-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.animate-fade-in-delayed {
-  animation: fade-in-delayed 1.5s ease-out;
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Matrix-rain columns in the boot sequence. Applied from an inline style in
+   components/HackerBootSequence.tsx, so keep this even though no class here
+   references it. */
+@keyframes fall {
+  from {
+    transform: translateY(-100vh);
+  }
+  to {
+    transform: translateY(100vh);
+  }
 }
 
 .animate-scale-in {
   animation: scale-in 0.3s ease-out;
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-float-delayed {
-  animation: float-delayed 8s ease-in-out infinite;
-}
-
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient-shift 3s ease infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
 }
 
 .dissolve-out {
@@ -357,12 +299,6 @@
   width: 0;
   animation: typing-steps 1.6s steps(40, end) forwards;
 }
-.typing-wide {
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-  animation: typing-wide 2s steps(50, end) forwards;
-}
 @keyframes typing-steps {
   from {
     width: 0;
@@ -371,51 +307,7 @@
     width: 28ch;
   }
 }
-@keyframes typing-wide {
-  from {
-    width: 0;
-  }
-  to {
-    width: 46ch; /* increased from 36ch for longer lines */
-  }
-}
-.caret {
-  display: inline-block;
-  margin-left: 4px;
-  width: 8px;
-  animation: caret-blink 0.8s steps(1, end) infinite;
-  color: #34d399;
-}
-@keyframes caret-blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
 
-/* 3D Card Effects */
-.card-3d {
-  transform-style: preserve-3d;
-  perspective: 1000px;
-}
-
-.card-3d:hover {
-  transform: rotateX(5deg) rotateY(5deg) translateZ(20px);
-}
-
-/* Gradient Border Effect */
-.border-gradient {
-  border: 3px solid;
-  border-image: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b, #10b981) 1;
-  border-radius: 50%;
-}
-
-.border-gradient:hover {
-  border-image: linear-gradient(45deg, #2563eb, #7c3aed) 1;
-}
 
 /* Smooth scrolling */
 html {
@@ -463,98 +355,22 @@ html {
   }
 }
 
-/* Interactive elements */
-.interactive-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.interactive-hover:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-/* Glowing text effect */
-.glow-text {
-  text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
-}
-
-/* Particle effect background */
-.particles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.8) 50%, transparent 70%);
-  border-radius: 50%;
-  animation: float 8s linear infinite;
-}
-
 /* Responsive design enhancements */
 @media (max-width: 768px) {
-  .card-3d:hover {
-    transform: translateY(-10px) scale(1.02);
-  }
+
 }
 
 /* Print styles */
 @media print {
-  .no-print {
-    display: none !important;
-  }
+
 }
 
-/* Penguin cursor utility */
-.cursor-penguin {
-  cursor: url("/cursor-penguin.png") 16 16, auto;
-}
-
-/* Dollar sign cursor utility */
+/* Dollar sign cursor utility. Source is 32x32 -- browsers cap cursor
+   bitmaps near 128px and ignore anything larger. */
 .cursor-dollar {
-  cursor: url("/cursor-dollar.png") 10 10, auto;
+  cursor: url("/cursor-dollar.png") 16 16, auto;
 }
 
-/* Starfield background layers for intro */
-.starfield,
-.starfield-2 {
-  background: radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.9) 50%, transparent 51%) repeat,
-    radial-gradient(1.5px 1.5px at 150px 80px, rgba(255, 255, 255, 0.8) 50%, transparent 51%) repeat,
-    radial-gradient(1.2px 1.2px at 90px 120px, rgba(255, 255, 255, 0.7) 50%, transparent 51%) repeat, transparent;
-  background-size: 200px 200px, 260px 260px, 300px 300px, 100% 100%;
-  animation: star-pan 60s linear infinite;
-}
-.starfield-2 {
-  opacity: 0.6;
-  animation-duration: 100s;
-}
-@keyframes star-pan {
-  0% {
-    background-position: 0 0, 0 0, 0 0, 0 0;
-  }
-  100% {
-    background-position: 200px -200px, -260px 260px, 300px -300px, 0 0;
-  }
-}
-
-/* Holo card overlays for cyber visual feel */
-.holo::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: 1rem;
-  background: linear-gradient(120deg, rgba(34, 197, 94, 0.15), rgba(6, 182, 212, 0.15), rgba(59, 130, 246, 0.15));
-  filter: blur(10px);
-  opacity: 0;
-  transition: opacity .4s ease;
-}
-.holo:hover::before {
-  opacity: 1;
-}
 
 .scanlines {
   position: absolute;
@@ -571,44 +387,6 @@ html {
   opacity: 0.4;
 }
 
-.sweep,
-.radar,
-.radar-sweep {
-  display: none !important;
-}
-
-/* helper: subtle grid background reused in sections */
-.subtle-grid {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-.dark .subtle-grid {
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-/* helper: soft orbs for colorful cyber feel */
-.orb {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(28px);
-  animation: orb-float 8s ease-in-out infinite;
-}
-@keyframes orb-float {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: translateY(-14px) scale(1.05);
-    opacity: 1;
-  }
-}
 
 /* hero name: make glitch run once then stop for readability */
 .glitch-once.glitch::before,
@@ -617,41 +395,8 @@ html {
   animation-duration: 1.1s;
 }
 
-/* helper to tint section containers slightly on hover to add life */
-.section-hover-tint:hover {
-  background-color: rgba(16, 185, 129, 0.03);
-}
-
 /* Vortex-out transition for the loading overlay */
-@keyframes fall {
-  from {
-    transform: translateY(-100vh);
-  }
-  to {
-    transform: translateY(100vh);
-  }
-}
 
-@keyframes vortex-out {
-  0% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-    filter: blur(0px);
-  }
-  60% {
-    opacity: 0.8;
-    transform: scale(0.6) rotate(120deg);
-    filter: blur(2px);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0) rotate(360deg);
-    filter: blur(6px);
-  }
-}
-.vortex-out {
-  animation: vortex-out 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
 
 /* Cyber tool button style (neon terminal chrome, subtle scanline and hover typing vibe) */
 .cyber-btn {
@@ -871,15 +616,7 @@ html {
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .drift-1, .drift-2, .drift-3, .drift-4,
-  .hero-stagger-1, .hero-stagger-2, .hero-stagger-3,
-  .hero-stagger-4, .hero-stagger-5,
-  .crt-flicker, .avatar-outer-ring, .avatar-outer-ring-2 {
-    animation: none !important;
-    opacity: 1 !important;
-  }
-}
+/* Reduced-motion handling lives in one place at the end of this file. */
 
 
 /* =====================================================
@@ -966,40 +703,36 @@ html {
 .scroll-reveal.delay-3 { transition-delay: 0.28s; }
 .scroll-reveal.delay-4 { transition-delay: 0.38s; }
 
-.scroll-reveal-left {
-  opacity: 0;
-  transform: translateX(-48px) scale(0.98);
-  transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.scroll-reveal-left.scroll-revealed {
-  opacity: 1;
-  transform: translateX(0) scale(1);
-}
-
-.scroll-reveal-right {
-  opacity: 0;
-  transform: translateX(48px) scale(0.98);
-  transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.scroll-reveal-right.scroll-revealed {
-  opacity: 1;
-  transform: translateX(0) scale(1);
-}
-
+/* =====================================================
+   REDUCED MOTION
+   Single authoritative guard. Everything animated in this
+   file is decorative, so for users who ask for reduced
+   motion we stop all of it and force the end state to be
+   visible rather than leaving content stuck at opacity 0.
+   ===================================================== */
 @media (prefers-reduced-motion: reduce) {
-  .scroll-reveal,
-  .scroll-reveal-left,
-  .scroll-reveal-right {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  /* Purely ornamental layers that only exist to move. */
+  .scanlines::after,
+  .avatar-outer-ring,
+  .avatar-outer-ring-2,
+  .progress-shimmer,
+  .scroll-progress-comet {
+    display: none !important;
   }
 }
 
-
-/* Optional subtle bracket edges (disabled for simplicity)
-   could be added via clip-path if you want sharper “tool” edges */

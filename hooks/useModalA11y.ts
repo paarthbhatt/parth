@@ -19,6 +19,14 @@ const FOCUSABLE_SELECTOR = [
 export function useModalA11y(isOpen: boolean, onClose: () => void) {
   const dialogRef = useRef<HTMLDivElement>(null)
 
+  // Keep the latest onClose in a ref so an inline arrow function from the
+  // parent doesn't re-run the effect below. Re-running it would restore focus
+  // to the background and then yank it back into the dialog on every render.
+  const onCloseRef = useRef(onClose)
+  useEffect(() => {
+    onCloseRef.current = onClose
+  }, [onClose])
+
   useEffect(() => {
     if (!isOpen) return
 
@@ -33,7 +41,7 @@ export function useModalA11y(isOpen: boolean, onClose: () => void) {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault()
-        onClose()
+        onCloseRef.current()
         return
       }
 
@@ -45,7 +53,11 @@ export function useModalA11y(isOpen: boolean, onClose: () => void) {
       const first = focusable[0]
       const last = focusable[focusable.length - 1]
 
-      if (event.shiftKey && document.activeElement === first) {
+      if (!dialog.contains(document.activeElement)) {
+        // Focus escaped the dialog (e.g. it sat on the document body).
+        event.preventDefault()
+        first.focus()
+      } else if (event.shiftKey && document.activeElement === first) {
         event.preventDefault()
         last.focus()
       } else if (!event.shiftKey && document.activeElement === last) {
@@ -66,7 +78,7 @@ export function useModalA11y(isOpen: boolean, onClose: () => void) {
       document.body.style.overflow = previousOverflow
       previouslyFocused?.focus()
     }
-  }, [isOpen, onClose])
+  }, [isOpen])
 
   return dialogRef
 }

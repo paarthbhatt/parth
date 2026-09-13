@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion"
 
 export function Typewriter({
   text,
@@ -14,7 +15,14 @@ export function Typewriter({
   className?: string
 }) {
   const [out, setOut] = useState("")
+  const prefersReducedMotion = usePrefersReducedMotion()
+
   useEffect(() => {
+    if (prefersReducedMotion) {
+      setOut(text)
+      return
+    }
+
     let i = 0
     let intervalId: number | undefined
     const startId = window.setTimeout(() => {
@@ -31,11 +39,16 @@ export function Typewriter({
       window.clearTimeout(startId)
       if (intervalId) window.clearInterval(intervalId)
     }
-  }, [text, speed, delay])
+  }, [text, speed, delay, prefersReducedMotion])
 
   return (
-    <span aria-live="polite" className={className} style={{ whiteSpace: "nowrap" }}>
-      {out}
-    </span>
+    <>
+      {/* The animated copy is decorative -- announcing it would read the string
+          back one character at a time. Screen readers get the finished text. */}
+      <span aria-hidden="true" className={className}>
+        {out}
+      </span>
+      <span className="sr-only">{text}</span>
+    </>
   )
 }

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion"
 
 export function RotatingGlitchText({
   items,
@@ -16,8 +17,11 @@ export function RotatingGlitchText({
   const [index, setIndex] = useState(0)
   const [phase, setPhase] = useState<"typing" | "holding" | "deleting">("typing")
   const [text, setText] = useState("")
+  const prefersReducedMotion = usePrefersReducedMotion()
 
   useEffect(() => {
+    if (prefersReducedMotion) return
+
     let id: number | undefined
 
     if (phase === "typing") {
@@ -41,18 +45,23 @@ export function RotatingGlitchText({
     return () => {
       if (id) window.clearTimeout(id)
     }
-  }, [phase, text, index, items])
+  }, [phase, text, index, items, prefersReducedMotion])
 
   return (
-    <span
-      aria-live="polite"
-      className={[
-        "font-mono font-semibold text-lg sm:text-xl md:text-2xl bg-clip-text text-transparent",
-        className,
-      ].join(" ")}
-      style={{ backgroundImage: "linear-gradient(90deg,#22c55e,#06b6d4,#60a5fa)" }}
-    >
-      {text}
-    </span>
+    <>
+      {/* Decorative rotation. Announcing it would read a new partial string on
+          every keystroke, so assistive tech gets the full list once instead. */}
+      <span
+        aria-hidden="true"
+        className={[
+          "font-mono font-semibold text-lg sm:text-xl md:text-2xl bg-clip-text text-transparent",
+          className,
+        ].join(" ")}
+        style={{ backgroundImage: "linear-gradient(90deg,#22c55e,#06b6d4,#60a5fa)" }}
+      >
+        {prefersReducedMotion ? items[0] : text}
+      </span>
+      <span className="sr-only">{items.join(". ")}</span>
+    </>
   )
 }

@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { NameDisplay } from "./NameDisplay"
 import { RotatingGlitchText } from "./RotatingGlitchText"
 import { Typewriter } from "./Typewriter"
@@ -30,9 +31,9 @@ export function HeroSection({
         </div>
 
         {/* Ambient orbs */}
-        <div className="absolute top-1/4 left-1/5 w-32 sm:w-52 h-32 sm:h-52 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-2/3 right-1/4 w-36 sm:w-60 h-36 sm:h-60 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-1/3 left-1/3 w-28 sm:w-48 h-28 sm:h-48 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        <div className="absolute top-1/4 left-1/5 w-32 sm:w-52 h-32 sm:h-52 bg-emerald-500/10 rounded-full blur-3xl motion-safe:animate-pulse"></div>
+        <div className="absolute top-2/3 right-1/4 w-36 sm:w-60 h-36 sm:h-60 bg-cyan-500/10 rounded-full blur-3xl motion-safe:animate-pulse delay-1000"></div>
+        <div className="absolute bottom-1/3 left-1/3 w-28 sm:w-48 h-28 sm:h-48 bg-blue-500/10 rounded-full blur-3xl motion-safe:animate-pulse delay-2000"></div>
       </div>
 
       <div className="relative z-10 text-center max-w-6xl mx-auto w-full">
@@ -44,10 +45,15 @@ export function HeroSection({
             <div className="avatar-outer-ring-2" />
             <div className="avatar-outer-ring" />
             {/* Inner emerald pulse halo */}
-            <div className="absolute -inset-1 sm:-inset-1.5 md:-inset-2 bg-emerald-500 rounded-full blur-lg opacity-50 group-hover:opacity-75 transition-opacity animate-pulse"></div>
-            <img
-              src="/parth-bhatt-portrait.png"
-              alt="Parth Bhatt portrait"
+            <div className="absolute -inset-1 sm:-inset-1.5 md:-inset-2 bg-emerald-500 rounded-full blur-lg opacity-50 group-hover:opacity-75 transition-opacity motion-safe:animate-pulse"></div>
+            <Image
+              src="/parth-bhatt-portrait.webp"
+              alt="Parth Bhatt"
+              width={400}
+              height={400}
+              sizes="(min-width: 1024px) 160px, (min-width: 768px) 128px, (min-width: 640px) 112px, 96px"
+              priority
+              fetchPriority="high"
               className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full border-2 border-emerald-500 shadow-[0_0_40px_rgba(16,185,129,0.5)]"
             />
           </div>

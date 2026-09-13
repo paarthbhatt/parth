@@ -10,6 +10,7 @@ export function AchievementsSection() {
     <section
       ref={ref}
       id="achievements"
+      aria-labelledby="achievements-heading"
       className="relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950"
     >
       <div className="absolute inset-0 pointer-events-none">
@@ -19,6 +20,9 @@ export function AchievementsSection() {
       <TerminalStrip label="[ACHIEVEMENT.DAT]" meta="unlocked • trophy_scan" />
 
       <div className="container mx-auto max-w-7xl relative z-10">
+        <h2 id="achievements-heading" className="sr-only">
+          Achievements
+        </h2>
         <div className="scroll-reveal text-center mb-6 sm:mb-8 mt-4 sm:mt-6 px-2">
           <ASCIIArt
             text={` █████╗  ██████╗██╗  ██╗██╗███████╗██╗   ██╗███████╗███╗   ███╗███████╗███╗   ██╗████████╗███████╗
@@ -39,7 +43,7 @@ export function AchievementsSection() {
               return (
                 <div
                   key={index}
-                  className={`group relative snap-start min-w-[300px] sm:min-w-[420px] lg:min-w-[550px] bg-black border-2 rounded-lg p-4 sm:p-6 mr-3 transition-all duration-300 overflow-hidden ${
+                  className={`group relative snap-start w-[min(100%,550px)] min-w-[260px] sm:min-w-[420px] lg:min-w-[550px] bg-black border-2 rounded-lg p-4 sm:p-6 mr-3 transition-all duration-300 overflow-hidden ${
                     isCrown
                       ? "border-cyan-400 shadow-[0_0_35px_rgba(6,182,212,0.35)] hover:shadow-[0_0_45px_rgba(6,182,212,0.5)] bg-gradient-to-br from-cyan-950/30 via-slate-950 to-black"
                       : "border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:border-emerald-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]"
@@ -64,7 +68,7 @@ export function AchievementsSection() {
                               [ACHIEVEMENT]
                             </span>
                           )}
-                          <span className="text-xs font-mono text-emerald-500/70">{achievement.date}</span>
+                          <span className="text-xs font-mono text-emerald-400/90">{achievement.date}</span>
                         </div>
                         <h3 className={`font-bold font-mono ${isCrown ? "text-xl text-cyan-300" : "text-lg text-emerald-400"} mb-1`}>
                           {achievement.title}
@@ -72,7 +76,7 @@ export function AchievementsSection() {
                         <p className={`text-xs font-mono mb-2 ${isCrown ? "text-cyan-200 font-semibold" : "text-cyan-400"}`}>
                           {achievement.subtitle}
                         </p>
-                        <p className="text-xs text-emerald-500/70 font-mono">@ {achievement.issuer}</p>
+                        <p className="text-xs text-emerald-400/90 font-mono">@ {achievement.issuer}</p>
                       </div>
                     </div>
 
@@ -84,19 +88,19 @@ export function AchievementsSection() {
                       <div className="mt-4 flex flex-wrap gap-2 pt-3 border-t border-emerald-500/20">
                         {"hackathon" in achievement.links && achievement.links.hackathon && (
                           <a href={achievement.links.hackathon} target="_blank" rel="noopener noreferrer"
-                            className="text-[10px] font-mono px-2 py-1 border border-cyan-500/40 text-cyan-400 hover:bg-cyan-500/10 transition-colors">
+                            className="text-[10px] font-mono px-2 py-1 border border-cyan-500/40 text-cyan-400 hover:bg-cyan-500/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400">
                             [HACKATHON]
                           </a>
                         )}
                         {"github" in achievement.links && achievement.links.github && (
                           <a href={achievement.links.github} target="_blank" rel="noopener noreferrer"
-                            className="text-[10px] font-mono px-2 py-1 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+                            className="text-[10px] font-mono px-2 py-1 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400">
                             [SOURCE]
                           </a>
                         )}
                         {"live" in achievement.links && achievement.links.live && (
                           <a href={achievement.links.live} target="_blank" rel="noopener noreferrer"
-                            className="text-[10px] font-mono px-2 py-1 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+                            className="text-[10px] font-mono px-2 py-1 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400">
                             [LIVE_DEMO]
                           </a>
                         )}
@@ -105,7 +109,7 @@ export function AchievementsSection() {
                   </div>
 
                   <div className="absolute top-2 right-2 opacity-80 group-hover:opacity-100 transition-opacity">
-                    <div className="text-base font-mono text-cyan-300 animate-pulse">🏆</div>
+                    <div className="text-base font-mono text-cyan-300 motion-safe:animate-pulse">🏆</div>
                   </div>
                 </div>
               )
@@ -114,7 +118,7 @@ export function AchievementsSection() {
         </div>
 
         <div className="text-center mt-6 sm:mt-8 px-2">
-          <p className="text-xs font-mono text-emerald-500/50">
+          <p className="text-xs font-mono text-emerald-400/80">
             [*] Total achievements unlocked: {achievementsData.length} | Status: ✓ VERIFIED
           </p>
         </div>

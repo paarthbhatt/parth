@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useModalA11y } from "../hooks/useModalA11y"
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion"
 
 const bootSequence = [
   { delay: 0, kind: "cmd", text: "whoami" },
@@ -13,7 +15,7 @@ const bootSequence = [
   { delay: 2100, kind: "out", text: "skills.sys  certs.sys  projects.sys" },
   { delay: 2400, kind: "cmd", text: "./scanner --capabilities --fast" },
   { delay: 2700, kind: "out", text: "capabilities: ThreatIntel ✓  Cybersecurity ✓  WebSec ✓" },
-] as Array<{ delay: number; kind: "cmd" | "out"; text: string }>
+] satisfies Array<{ delay: number; kind: "cmd" | "out"; text: string }>
 
 export function HackerBootSequence({
   introDissolve,
@@ -25,7 +27,17 @@ export function HackerBootSequence({
   const [showDisclaimer, setShowDisclaimer] = useState(true)
   const [awaitingInput, setAwaitingInput] = useState(false)
 
+  const prefersReducedMotion = usePrefersReducedMotion()
+  // The boot screen is a modal over the page: trap focus, close on Escape,
+  // and lock background scroll while it's up.
+  const dialogRef = useModalA11y(true, onProceed)
+
   useEffect(() => {
+    if (prefersReducedMotion) {
+      setCodeFalls([])
+      return
+    }
+
     const falls = Array.from({ length: 20 }, () => ({
       left: Math.random() * 100,
       delay: Math.random() * 2,
@@ -42,9 +54,16 @@ export function HackerBootSequence({
     return () => {
       clearInterval(glitchInterval)
     }
-  }, [])
+  }, [prefersReducedMotion])
 
   useEffect(() => {
+    // Reduced motion: skip the staggered typing and show the whole log at once.
+    if (prefersReducedMotion) {
+      setCurrentLine(bootSequence.length - 1)
+      setAwaitingInput(true)
+      return
+    }
+
     const timers: NodeJS.Timeout[] = []
     bootSequence.forEach((item, index) => {
       const timer = setTimeout(() => {
@@ -52,11 +71,11 @@ export function HackerBootSequence({
       }, item.delay)
       timers.push(timer)
     })
-    const lastDelay = bootSequence[bootSequence.length - 1]?.delay ?? 0
+    const lastDelay = bootSequence[bootSequence.length - 1].delay
     const afterId = setTimeout(() => setAwaitingInput(true), lastDelay + 150)
     timers.push(afterId)
     return () => timers.forEach((timer) => clearTimeout(timer))
-  }, [])
+  }, [prefersReducedMotion])
 
   useEffect(() => {
     if (!awaitingInput) return
@@ -72,13 +91,25 @@ export function HackerBootSequence({
 
   return (
     <div
+      ref={dialogRef}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="boot-sequence-title"
+      aria-describedby="boot-sequence-hint"
       className={`fixed inset-0 z-[60] bg-black flex items-center justify-center overflow-hidden ${introDissolve ? "dissolve-out" : ""}`}
     >
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:20px_20px] animate-pulse"></div>
+      <h2 id="boot-sequence-title" className="sr-only">
+        Terminal boot sequence
+      </h2>
+      <p id="boot-sequence-hint" className="sr-only">
+        Decorative intro animation. Press Y, Enter, or Escape to skip it and open the portfolio.
+      </p>
+
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:20px_20px] motion-safe:animate-pulse"></div>
       </div>
 
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         {codeFalls.map((fall, i) => (
           <div
             key={i}
@@ -105,28 +136,30 @@ export function HackerBootSequence({
           <button
             type="button"
             onClick={onProceed}
-            className="ml-auto shrink-0 text-[10px] sm:text-xs font-mono text-emerald-400/80 hover:text-emerald-300 border border-emerald-500/40 rounded px-2 py-0.5 bg-emerald-500/10 hover:bg-emerald-500/20 transition-colors"
+            className="ml-auto shrink-0 text-[10px] sm:text-xs font-mono text-emerald-300 hover:text-emerald-200 border border-emerald-500/40 rounded px-3 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
           >
             SKIP INTRO »
           </button>
         </div>
 
+        <div className="absolute inset-0 scanlines opacity-10 pointer-events-none" aria-hidden="true"></div>
+
         {showDisclaimer && (
-          <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20">
+          <div className="absolute top-12 right-2 sm:top-14 sm:right-3 z-20 max-w-[calc(100%-1rem)]">
             <div className="group relative rounded-lg border-2 border-emerald-500/50 bg-black/85 px-3 py-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] backdrop-blur">
               <div className="absolute -inset-0.5 rounded-lg bg-[conic-gradient(from_180deg_at_50%_50%,rgba(16,185,129,0.2),rgba(6,212,212,0.2),rgba(59,130,246,0.2),rgba(16,185,129,0.2))] blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="relative z-10 flex items-center gap-2">
-                <span className="text-[10px] sm:text-xs font-mono text-emerald-400">[NOTICE]</span>
-                <span className="text-[10px] sm:text-xs font-mono text-emerald-200 whitespace-nowrap">
+              <div className="relative z-10 flex items-start gap-2">
+                <span className="text-[10px] sm:text-xs font-mono text-emerald-400 shrink-0">[NOTICE]</span>
+                <span className="text-[10px] sm:text-xs font-mono text-emerald-200">
                   Press <span className="text-cyan-400 font-semibold">Y</span> to continue — buttons work on any device
                 </span>
                 <button
                   type="button"
                   aria-label="Dismiss notice"
-                  className="ml-1 text-emerald-500/70 hover:text-emerald-300 text-[10px] sm:text-xs"
+                  className="-my-2 -mr-1 shrink-0 grid place-items-center w-11 h-11 text-emerald-400/90 hover:text-emerald-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 rounded"
                   onClick={() => setShowDisclaimer(false)}
                 >
-                  ×
+                  <span aria-hidden="true" className="text-sm leading-none">×</span>
                 </button>
               </div>
             </div>
@@ -134,7 +167,7 @@ export function HackerBootSequence({
         )}
 
         <div className="p-3 sm:p-4 md:p-6 font-mono text-[10px] sm:text-xs md:text-sm overflow-y-auto overflow-x-auto max-h-[75vh] sm:max-h-[70vh]">
-          <div className={`mb-2 sm:mb-4 text-center ${glitchActive ? "animate-pulse" : ""}`}>
+          <div className={`mb-2 sm:mb-4 text-center ${glitchActive ? "motion-safe:animate-pulse" : ""}`} aria-hidden="true">
             <pre className="hidden sm:block text-[7px] md:text-[9px] lg:text-[11px] xl:text-[12px] text-emerald-500 dark:text-emerald-400 whitespace-pre overflow-x-auto">
               {`██████╗  █████╗ ██████╗ ████████╗██╗  ██╗    ██████╗ ██╗  ██╗ █████╗ ████████╗████████╗
 ██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██║  ██║    ██╔══██╗██║  ██║██╔══██╗╚══██╔══╝╚══██╔══╝
@@ -161,7 +194,7 @@ export function HackerBootSequence({
                     <>
                       <span className="text-cyan-500 text-[10px] sm:text-xs">root@parth-bhatt:~$</span>{" "}
                       <span className="text-[10px] sm:text-xs text-cyan-400">{item.text}</span>
-                      {index === currentLine && <span className="animate-pulse text-emerald-500 inline-block ml-1">▊</span>}
+                      {index === currentLine && <span aria-hidden="true" className="motion-safe:animate-pulse text-emerald-500 inline-block ml-1">▊</span>}
                     </>
                   ) : (
                     <span className="pl-4 text-[10px] sm:text-xs text-emerald-400/80 block">{item.text}</span>
@@ -178,25 +211,22 @@ export function HackerBootSequence({
                 <div>
                   <span className="text-cyan-500">root@parth-bhatt:~$</span>{" "}
                   <span className="text-cyan-400">open portfolio? (y/n)</span>
-                  <span className="animate-pulse text-emerald-500 inline-block ml-1">▊</span>
+                  <span aria-hidden="true" className="motion-safe:animate-pulse text-emerald-500 inline-block ml-1">▊</span>
                 </div>
-                <div className="text-emerald-500/70">press Y or Enter to continue — or tap SKIP INTRO</div>
+                <div className="text-emerald-400/90">press Y or Enter to continue — or tap SKIP INTRO</div>
                 <div className="mt-2 flex items-center gap-2">
                   <button
                     type="button"
                     onClick={onProceed}
-                    className="px-3 py-1 rounded border border-emerald-500/60 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 transition-colors"
-                    aria-label="Yes, open portfolio"
+                    className="min-h-11 px-4 py-2 rounded border border-emerald-500/60 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                   >
-                    Y / ENTER
+                    Y / ENTER — open portfolio
                   </button>
                 </div>
               </div>
             </div>
           )}
         </div>
-
-        <div className="absolute inset-0 scanlines opacity-10 pointer-events-none"></div>
       </div>
     </div>
   )

@@ -10,6 +10,7 @@ export function CertificationsSection() {
     <section
       ref={ref}
       id="certifications"
+      aria-labelledby="certifications-heading"
       className="relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-black to-slate-950"
     >
       <div className="absolute inset-0 pointer-events-none">
@@ -19,6 +20,9 @@ export function CertificationsSection() {
       <TerminalStrip label="[CREDENTIALS.SCAN]" meta="verifying • certification_store" />
 
       <div className="container mx-auto max-w-7xl relative z-10">
+        <h2 id="certifications-heading" className="sr-only">
+          Certifications
+        </h2>
         <div className="scroll-reveal text-center mb-6 sm:mb-8 mt-4 sm:mt-6 px-2">
           <ASCIIArt
             text={` ██████╗███████╗██████╗ ████████╗██╗███████╗██╗ ██████╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗███████╗
@@ -37,7 +41,7 @@ export function CertificationsSection() {
             {certificationsHighlight.map((cert, index) => (
               <div
                 key={index}
-                className="group relative snap-start min-w-[280px] sm:min-w-[380px] lg:min-w-[450px] bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 mr-3 shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:border-emerald-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] transition-all duration-300 overflow-hidden"
+                className="group relative snap-start w-[min(100%,450px)] min-w-[260px] sm:min-w-[380px] lg:min-w-[450px] bg-black border-2 border-emerald-500/30 rounded-lg p-4 sm:p-6 mr-3 shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:border-emerald-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] transition-all duration-300 overflow-hidden"
               >
                 <div className="absolute inset-0 scanlines opacity-20 pointer-events-none"></div>
 
@@ -51,7 +55,7 @@ export function CertificationsSection() {
                       <span className="text-xs font-mono bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded border border-emerald-500/30">
                         [{cert.date}]
                       </span>
-                      <span className="text-xs font-mono text-emerald-500/70">@ {cert.issuer}</span>
+                      <span className="text-xs font-mono text-emerald-400/90">@ {cert.issuer}</span>
                     </div>
                     <h3 className="text-base font-bold font-mono text-emerald-400 mb-2 leading-tight">
                       {cert.title}
@@ -75,7 +79,7 @@ export function CertificationsSection() {
           <div className="scroll-reveal delay-2 mt-6 sm:mt-8 bg-black border border-emerald-500/20 rounded-lg p-4 sm:p-5">
             <div className="flex items-center gap-2 mb-3">
               <span className="w-1.5 h-1.5 bg-emerald-500/70 rounded-full"></span>
-              <span className="text-xs font-mono text-emerald-500/70">[OTHER_CREDENTIALS]</span>
+              <span className="text-xs font-mono text-emerald-400/90">[OTHER_CREDENTIALS]</span>
             </div>
             <div className="flex flex-wrap gap-2">
               {certificationsOther.map((cert, i) => (
@@ -83,9 +87,9 @@ export function CertificationsSection() {
                   key={i}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-emerald-500/25 bg-emerald-500/5 text-emerald-400/80 font-mono text-[10px] sm:text-xs hover:bg-emerald-500/10 hover:border-emerald-500/40 transition-all"
                 >
-                  <span className="text-emerald-500/50">✓</span>
+                  <span className="text-emerald-400/80">✓</span>
                   {cert.title}
-                  <span className="text-emerald-500/40">({cert.issuer})</span>
+                  <span className="text-emerald-400/80">({cert.issuer})</span>
                 </span>
               ))}
             </div>
@@ -93,7 +97,7 @@ export function CertificationsSection() {
         )}
 
         <div className="text-center mt-6 sm:mt-8 px-2">
-          <p className="text-xs font-mono text-emerald-500/50">
+          <p className="text-xs font-mono text-emerald-400/80">
             [*] Total certificates verified: {certificationsHighlight.length + certificationsOther.length} | Status: ✓ AUTHENTICATED
           </p>
         </div>
