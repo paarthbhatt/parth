@@ -3,7 +3,11 @@ import {
   Eye,
   Building,
   Award,
-  Users
+  Users,
+  BrainCircuit,
+  Crosshair,
+  Radar,
+  Github
 } from "lucide-react"
 
 /* ───────────────────────────────────────────────
@@ -12,14 +16,6 @@ import {
 
 /** Top-tier certifications shown as full slider cards */
 export const certificationsHighlight = [
-  {
-    title: "Foundation Level Threat Intelligence Analyst",
-    issuer: "arcX",
-    date: "2025",
-    icon: Eye,
-    bgGradient: "from-red-500 to-pink-600",
-    description: "Specialized training in threat intelligence analysis, cyber threat hunting, and security intelligence frameworks.",
-  },
   {
     title: "ICS Cybersecurity Risks, Vulnerabilities and Threats (3 certs)",
     issuer: "CISA",
@@ -44,14 +40,27 @@ export const certificationsHighlight = [
     bgGradient: "from-blue-600 to-indigo-600",
     description: "Completed 24 cyber security challenges demonstrating consistency, tenacity & continuous learning across offensive and defensive domains.",
   },
+  {
+    title: "Introduction to Cybersecurity",
+    issuer: "Cisco",
+    date: "2025",
+    icon: Shield,
+    bgGradient: "from-cyan-500 to-sky-600",
+    description: "Completed Cisco's introduction to cybersecurity covering the current threat landscape, common attack vectors, and the business impact of cyber threats.",
+  },
+  {
+    title: "Pre-Security Certificate",
+    issuer: "TryHackMe",
+    date: "2025",
+    icon: Shield,
+    bgGradient: "from-emerald-500 to-teal-600",
+    description: "Completed TryHackMe's foundational path covering networking, web, and Linux security fundamentals before offensive and defensive specialisation.",
+  },
 ]
 
 /** Other certifications shown as compact badges */
 export const certificationsOther = [
-  { title: "GitHub Foundations", issuer: "GitHub" },
   { title: "Cybersecurity 101", issuer: "TryHackMe" },
-  { title: "Pre-Security Certificate", issuer: "TryHackMe" },
-  { title: "Introduction to Cybersecurity", issuer: "Cisco" },
   { title: "XSS Defense Bootcamp", issuer: "DevTown" },
 ]
 
@@ -105,6 +114,59 @@ export const achievementsData = [
     icon: Award,
     bgGradient: "from-purple-500 to-violet-600",
     description: "Achieved a top-tier ranking in this unique 'vibe-coding' competition. Recognized for maintaining exceptional development flow and code quality while delivering a creative solution under pressure.",
+  },
+  {
+    title: "CAISO — Certified AI Security Officer",
+    subtitle: "Executive-Level AI Security Program Governance",
+    issuer: "CISO Network Academy",
+    date: "2026",
+    icon: BrainCircuit,
+    bgGradient: "from-cyan-500 to-blue-600",
+    badge: "CERTIFIED",
+    description: "Passed the executive-level AI security officer assessment: architecting enterprise AI security programs, third-party AI vendor risk, AI ethics & regulatory compliance, and board-level incident response briefings.",
+    verify: "https://cisonetwork.com/verify/caiso/285df881-d1a9-4fce-8cd2-95986e72c828",
+  },
+  {
+    title: "CAIT — Certified AI Threat Hunter",
+    subtitle: "Adversarial ML Detection & Hunt Methodology",
+    issuer: "CISO Network Academy",
+    date: "2026",
+    icon: Crosshair,
+    bgGradient: "from-cyan-500 to-indigo-600",
+    badge: "CERTIFIED",
+    description: "Passed the AI threat hunting assessment: LLM-assisted intrusion detection, model poisoning, prompt injection forensics, and deepfake / synthetic identity detection under a timed tabletop format.",
+    verify: "https://cisonetwork.com/verify/cait/e7832d56-4b94-40f6-ba32-e655ac3b7069",
+  },
+  {
+    title: "CATP — Certified AI Trust Practitioner",
+    subtitle: "AI Incident Response Under Pressure",
+    issuer: "CISO Network Academy",
+    date: "2026",
+    icon: Radar,
+    bgGradient: "from-cyan-500 to-teal-600",
+    badge: "CERTIFIED",
+    description: "Passed the practitioner-level AI trust assessment: prompt injection in production, poisoned training data, adversarial input attacks, and AI-assisted phishing response playbooks.",
+    verify: "https://cisonetwork.com/verify/70ebf952-79bd-40ff-82d4-e8ebf1de632f",
+  },
+  {
+    title: "arcX Foundation Level Threat Intelligence Analyst",
+    subtitle: "Threat Intelligence Analysis & CTI Frameworks",
+    issuer: "arcX",
+    date: "2025",
+    icon: Eye,
+    bgGradient: "from-red-500 to-pink-600",
+    badge: "CERTIFIED",
+    description: "Cleared the arcX foundation exam in threat intelligence analysis, cyber threat hunting, and security intelligence frameworks.",
+  },
+  {
+    title: "GitHub Foundations",
+    subtitle: "GitHub Platform, Workflows & Collaboration",
+    issuer: "GitHub",
+    date: "2025",
+    icon: Github,
+    bgGradient: "from-slate-500 to-gray-700",
+    badge: "CERTIFIED",
+    description: "Cleared the official GitHub Foundations exam covering GitHub platform fundamentals, repository management, Actions & CI/CD workflows, and secure collaborative development.",
   },
 ]
 
