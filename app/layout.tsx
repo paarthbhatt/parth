@@ -10,7 +10,7 @@ import './globals.css'
 
 const TITLE = 'Parth Bhatt | Security Architect & AI Safety Engineer'
 const DESCRIPTION =
-  'Portfolio of Parth Bhatt – Security Architect, AI Safety Engineer, and DRDO (SAG) Intern. Building self-defending software pipelines, LLM firewalls, and autonomous security agents. B.Tech student from New Delhi.'
+  'Portfolio of Parth Bhatt – Security Architect, AI Safety Engineer, and ex-DRDO (SAG) Security Intern. Building self-defending software pipelines, LLM firewalls, and autonomous security agents. CAISO & CAIT certified. B.Tech student from New Delhi.'
 
 export const viewport: Viewport = {
   themeColor: '#000000',
@@ -33,6 +33,13 @@ export const metadata: Metadata = {
     'Penetration Testing',
     'DRDO',
     'SAG',
+    'CAISO',
+    'Certified AI Security Officer',
+    'CAIT',
+    'Certified AI Threat Hunter',
+    'CATP',
+    'arcX Threat Intelligence',
+    'GitHub Foundations',
     'LLM Firewall',
     'Autonomous Security Agent',
     'New Delhi',
@@ -91,10 +98,51 @@ const personJsonLd = {
     addressLocality: 'New Delhi',
     addressCountry: 'IN',
   },
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Defence Research and Development Organisation (DRDO) — SAG',
-  },
+  alumniOf: [
+    {
+      '@type': 'Organization',
+      name: 'Defence Research and Development Organisation (DRDO) — SAG',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Cisco Networking Academy',
+    },
+  ],
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'CAISO — Certified AI Security Officer',
+      credentialCategory: 'certification',
+      recognizedBy: { '@type': 'Organization', name: 'CISO Network Academy' },
+      url: 'https://cisonetwork.com/verify/caiso/285df881-d1a9-4fce-8cd2-95986e72c828',
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'CAIT — Certified AI Threat Hunter',
+      credentialCategory: 'certification',
+      recognizedBy: { '@type': 'Organization', name: 'CISO Network Academy' },
+      url: 'https://cisonetwork.com/verify/cait/e7832d56-4b94-40f6-ba32-e655ac3b7069',
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'CATP — Certified AI Trust Practitioner',
+      credentialCategory: 'certification',
+      recognizedBy: { '@type': 'Organization', name: 'CISO Network Academy' },
+      url: 'https://cisonetwork.com/verify/70ebf952-79bd-40ff-82d4-e8ebf1de632f',
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'Foundation Level Threat Intelligence Analyst',
+      credentialCategory: 'certification',
+      recognizedBy: { '@type': 'Organization', name: 'arcX' },
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'GitHub Foundations',
+      credentialCategory: 'certification',
+      recognizedBy: { '@type': 'Organization', name: 'GitHub' },
+    },
+  ],
   knowsAbout: [
     'Application Security',
     'AI Safety',

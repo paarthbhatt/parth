@@ -77,7 +77,7 @@ export default function OpengraphImage() {
             marginTop: 28,
           }}
         >
-          DRDO (SAG) Intern · 4× Hackathon Winner · Top 6% TryHackMe
+          CAISO Certified · Ex-DRDO (SAG) · 4× Hackathon Winner · Top 6% TryHackMe
         </div>
 
         <div
