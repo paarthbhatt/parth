@@ -41,7 +41,7 @@ export function AboutSection() {
                 <div className="flex items-start gap-2 sm:gap-3">
                   <span className="text-emerald-500 flex-shrink-0">[✦]</span>
                   <p className="text-gray-300 leading-relaxed">
-                    I build self-defending software pipelines and automated security agents. Currently interning at <span className="text-cyan-400 font-semibold">DRDO (SAG)</span>, I specialize in identifying execution flaws in AI/LLM integrations and building low-latency defensive tooling. <span className="text-emerald-400">4× hackathon winner</span>. <span className="text-emerald-400">Top 6% on TryHackMe</span>.
+                    I build self-defending software pipelines and automated security agents. A former <span className="text-cyan-400 font-semibold">DRDO (SAG)</span> intern, I specialize in identifying execution flaws in AI/LLM integrations and building low-latency defensive tooling. <span className="text-emerald-400">Certified AI Security Officer (CAISO)</span> · <span className="text-emerald-400">Certified AI Threat Hunter</span>. <span className="text-emerald-400">4× hackathon winner</span>. <span className="text-emerald-400">Top 6% on TryHackMe</span>.
                   </p>
                 </div>
                 <div className="flex items-start gap-2 sm:gap-3">
@@ -54,7 +54,7 @@ export function AboutSection() {
 
               <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-emerald-500/30">
                 <p className="text-[10px] sm:text-xs font-mono text-emerald-400/90">
-                  <span className="motion-safe:animate-pulse">●</span> STATUS: [ACTIVE] | MODE: [SECURITY-ARCHITECT] | CLEARANCE: [DRDO_SAG]
+                  <span className="motion-safe:animate-pulse">●</span> STATUS: [ACTIVE] | MODE: [SECURITY-ARCHITECT] | CERTIFIED: [CAISO · CAIT · CATP]
                 </p>
               </div>
             </div>

@@ -69,11 +69,12 @@ export function HeroSection({
           <RotatingGlitchText
             items={[
               "Security Architect • AI Safety Engineer",
-              "Building self-defending pipelines at DRDO (SAG)",
+              "Ex-DRDO (SAG) • Built self-defending pipelines",
+              "Certified AI Security Officer • AI Threat Hunter • AI Trust Practitioner",
               "I don't just find vulnerabilities — I architect the defenses.",
               "Entropy Firewall • Robin Agent • SecretVault",
               "Top 6% TryHackMe • 4× Hackathon Winner",
-              "DRDO SAG Intern • Cisco Certified • arcX Analyst",
+              "arcX Threat Intel Analyst • Cisco Certified • GitHub Certified",
             ]}
           />
         </div>
@@ -81,7 +82,7 @@ export function HeroSection({
         {/* Typewriter lines — stagger 4 */}
         <div className="hero-stagger-4 space-y-1 sm:space-y-1.5 md:space-y-2 mb-6 sm:mb-7 md:mb-8 lg:mb-10 px-2">
           <Typewriter
-            text="[✓] clearance verified • DRDO_SAG session active"
+            text="[✓] certs verified • CAISO • CAIT • CATP • arcX • GitHub Foundations"
             delay={200}
             speed={18}
             className="font-mono text-emerald-400 text-[10px] sm:text-xs md:text-sm"
