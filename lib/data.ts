@@ -301,9 +301,9 @@ export const experienceData = [
   {
     role: "Cyber Security Intern",
     org: "DRDO — Ministry of Defence, Govt. of India",
-    when: "Jun 2026 – Present",
+    when: "Jun 2026 – Jul 2026",
     desc: "Conducted whitebox and blackbox web application penetration testing for SAG division; identified vulnerabilities and executed successful PoC exploits.",
-    status: "ACTIVE"
+    status: "COMPLETED"
   },
   {
     role: "Cybersecurity & AI Intern",
