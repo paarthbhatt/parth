@@ -29,3 +29,11 @@ yarn.lock
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local AI assistant tooling (installed skills, agent configs)
+.agents/
+.claude/
+skills-lock.json
+
+# local visual-inspection harnesses (machine-specific chromium paths)
+/scripts/
