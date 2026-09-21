@@ -400,7 +400,7 @@ export const contactInfo = {
   phoneDisplay: "+91 8920948990",
   location: "New Delhi, INDIA",
   availability: "Available for immediate start",
-  resume: "/Resume_PARTH.pdf",
+  resume: "/Parth_Resume.pdf",
 } as const
 
 export const socialLinks = {

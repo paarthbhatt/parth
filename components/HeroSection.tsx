@@ -99,7 +99,7 @@ export function HeroSection({
         {/* Buttons — stagger 5 */}
         <div className="hero-stagger-5 flex flex-col sm:flex-row gap-3 sm:gap-3.5 md:gap-4 justify-center items-center px-2">
           <a
-            href="/Resume_PARTH.pdf"
+            href="/Parth_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="cyber-btn group"
