@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { HackerBootSequence } from "@/components/HackerBootSequence"
+import { ScrollWorld } from "@/components/ScrollWorld"
 import { HeroSection } from "@/components/HeroSection"
 import { AboutSection } from "@/components/AboutSection"
 import { ProjectsSection } from "@/components/ProjectsSection"
@@ -23,7 +24,7 @@ export default function App() {
   const [isPitchOpen, setIsPitchOpen] = useState(false)
   const [isDark, setIsDark] = useState(false)
   const [showIntro, setShowIntro] = useState(true)
-  const [introDissolve, setIntroDissolve] = useState(false)
+  const [worldDone, setWorldDone] = useState(false)
 
   // Don't replay the boot sequence for the rest of the session once it's been seen.
   useEffect(() => {
@@ -35,6 +36,14 @@ export default function App() {
     }
     if (seen) setShowIntro(false)
   }, [])
+
+  // When the flight is skipped or already seen this session, jump straight
+  // to the terminal so no scroll-through stands between the visitor and the
+  // content.
+  useEffect(() => {
+    if (!worldDone) return
+    document.getElementById("main-terminal")?.scrollIntoView({ behavior: "auto", block: "start" })
+  }, [worldDone])
 
   useEffect(() => {
     const updateTheme = () => {
@@ -56,21 +65,21 @@ export default function App() {
     }
   }, [])
 
+  // The boot sequence runs its own exit animation (CRT power-off) and calls
+  // this at the black frame — unmount immediately so the site is revealed
+  // without a visible seam.
   const proceedFromIntro = () => {
     try {
       sessionStorage.setItem(BOOT_SEEN_KEY, "1")
     } catch {
       // ignore — the boot will simply show again next session
     }
-    setIntroDissolve(true)
-    setTimeout(() => setShowIntro(false), 400)
+    setShowIntro(false)
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 cursor-hacked ${isDark ? "dark" : ""}`}>
-      {showIntro && (
-        <HackerBootSequence introDissolve={introDissolve} onProceed={proceedFromIntro} />
-      )}
+    <div className={`transition-colors duration-300 cursor-hacked ${isDark ? "dark" : ""}`}>
+      {showIntro && <HackerBootSequence onProceed={proceedFromIntro} />}
 
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-black to-slate-950 px-4 sm:px-6 lg:px-8">
         <a
@@ -80,21 +89,27 @@ export default function App() {
           Skip to main content
         </a>
         <Header introDone={!showIntro} />
-        <main id="main-content" className="pt-20 space-y-12 md:space-y-14">
-          <HeroSection
-            setIsPitchOpen={setIsPitchOpen}
-            setIsContactOpen={setIsContactOpen}
-          />
-          <AboutSection />
-          <ProjectsSection />
-          <WriteupsSection />
-          <ExperienceSection />
-          <SkillsSection />
-          <CertificationsSection />
-          <AchievementsSection />
-          <ContactSection />
-        </main>
-        <Footer introDone={!showIntro} />
+
+        {!worldDone && <ScrollWorld onEnterTerminal={() => setWorldDone(true)} />}
+
+        <div id="main-terminal">
+          <main id="main-content" className="pt-20 space-y-12 md:space-y-14">
+            <HeroSection
+              setIsPitchOpen={setIsPitchOpen}
+              setIsContactOpen={setIsContactOpen}
+            />
+            <AboutSection />
+            <ProjectsSection />
+            <WriteupsSection />
+            <ExperienceSection />
+            <SkillsSection />
+            <CertificationsSection />
+            <AchievementsSection />
+            <ContactSection />
+          </main>
+          <Footer introDone={!showIntro} />
+        </div>
+
         <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
         <PitchModal isOpen={isPitchOpen} onClose={() => setIsPitchOpen(false)} />
       </div>

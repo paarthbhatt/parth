@@ -227,6 +227,37 @@
   animation: dissolve-out 0.9s ease forwards;
 }
 
+/* Boot intro exit — CRT power-off: the screen collapses into a bright
+   horizontal line, the line shrinks to a dot, then darkness. Forward-fill
+   keeps it black until the component unmounts. */
+@keyframes boot-out {
+  0% {
+    opacity: 1;
+    transform: scaleY(1) scaleX(1);
+    filter: brightness(1);
+  }
+  55% {
+    opacity: 1;
+    transform: scaleY(0.012) scaleX(1.03);
+    filter: brightness(2);
+  }
+  80% {
+    opacity: 0.9;
+    transform: scaleY(0.008) scaleX(0.35);
+    filter: brightness(2.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(0.004) scaleX(0.001);
+    filter: brightness(3);
+  }
+}
+
+.boot-out {
+  animation: boot-out 0.65s cubic-bezier(0.6, 0, 0.9, 0.4) forwards;
+  pointer-events: none;
+}
+
 /* Glitch effect for hero name */
 .glitch {
   position: relative;
@@ -309,9 +340,13 @@
 }
 
 
-/* Smooth scrolling */
+/* Smooth scrolling — Lenis drives the page when active; the global CSS
+   smooth behavior must step aside or every native jump double-animates. */
 html {
   scroll-behavior: smooth;
+}
+html.lenis-on {
+  scroll-behavior: auto;
 }
 
 /* Enhanced dark mode scrollbar styles */
@@ -743,3 +778,646 @@ html {
   }
 }
 
+
+/* =====================================================
+   SCROLL WORLD — scroll-scrubbed flight + sticky panels
+   The canvas sky and HUD are fixed; .sw-track supplies
+   the virtual scroll length. Each .sw-seg is a 100vh
+   segment with a sticky inner panel that holds dead-
+   center while you scroll; fades are CSS-driven by the
+   .sw-seg-active flag, keeping panels and the 3D camera
+   perfectly in sync from one scroll value.
+   ===================================================== */
+
+.sw-wrap {
+  position: relative;
+}
+
+.sw-canvas,
+.sw-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  background: #000;
+}
+
+.sw-stage-paused {
+  visibility: hidden;
+}
+
+/* R3F canvas always fills the stage, even if ResizeObserver is throttled. */
+.sw-stage canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* Cinematic dressing over the flight: vignette + faint CRT scanlines.
+   Pure decoration — screen-reader inert, zero pointer interference. */
+.sw-stage-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 120% 90% at 50% 42%, transparent 55%, rgba(0, 0, 0, 0.42) 100%);
+}
+.sw-stage-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.1;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.5) 0px,
+    rgba(0, 0, 0, 0.5) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .boot-out {
+    animation: fade-in 0.3s ease reverse forwards;
+  }
+  .sw-stage-scanlines {
+    opacity: 0.05;
+  }
+}
+
+.sw-static-stage {
+  height: 150px;
+  pointer-events: none;
+}
+
+.sw-chrome {
+  position: fixed;
+  top: 3.75rem;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sw-chrome-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+.sw-chrome-brand {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(16, 185, 129, 0.75);
+}
+
+.sw-skip {
+  pointer-events: auto;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: #67e8f9;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.sw-skip:hover {
+  background: rgba(6, 182, 212, 0.12);
+  border-color: rgba(6, 182, 212, 0.8);
+  color: #a5f3fc;
+}
+
+.sw-skip:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 2px;
+}
+
+.sw-progress {
+  height: 2px;
+  width: 100%;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.sw-progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #10b981, #06b6d4);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+  transition: width 0.1s linear;
+}
+
+.sw-track {
+  position: relative;
+  z-index: 10;
+}
+
+/* One full-viewport segment per scene. The sticky inner panel holds
+   dead-center while the segment scrolls past — text never drifts. */
+.sw-seg {
+  height: 100vh;
+}
+
+.sw-seg-inner {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 84px 16px 48px;
+}
+
+/* Panel crossfade — driven by .sw-seg-active, zero per-frame JS.
+   The incoming panel slides up into place as the outgoing drifts back. */
+.sw-seg .sw-panel,
+.sw-seg .sw-boot {
+  opacity: 0;
+  transform: translateY(40px) scale(0.97);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+.sw-seg-active .sw-panel,
+.sw-seg-active .sw-boot {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Lenis keeps native scrolling underneath; only hint the compositor. */
+html.lenis-on {
+  scroll-behavior: auto;
+}
+html.lenis-on,
+html.lenis-on body {
+  overscroll-behavior-y: none;
+}
+
+/* Touch devices: no pinned flight — static, tappable stack.
+   Sticky centering stays, but panels are always interactive. */
+@media (hover: none), (max-width: 767px) {
+  .sw-canvas,
+  .sw-stage,
+  .sw-float,
+  .sw-giant {
+    display: none;
+  }
+  .sw-seg {
+    height: 78vh;
+  }
+  .sw-seg-inner {
+    padding: 36px 14px;
+  }
+  .sw-seg .sw-panel,
+  .sw-seg .sw-boot {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+  .sw-chrome {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sw-seg .sw-panel,
+  .sw-seg .sw-boot {
+    transition: opacity 0.3s ease;
+    transform: none;
+  }
+}
+
+/* ---- Boot scene ---- */
+
+.sw-panel {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.sw-boot {
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+.sw-boot-avatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 9999px;
+  border: 2px solid rgba(16, 185, 129, 0.7);
+  box-shadow: 0 0 34px rgba(16, 185, 129, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  color: #34d399;
+  background: radial-gradient(circle at 35% 30%, rgba(16, 185, 129, 0.25), rgba(0, 0, 0, 0.9));
+}
+
+.sw-boot-name {
+  font-size: clamp(30px, 6vw, 56px);
+  font-weight: 700;
+  color: #ecfdf5;
+  text-shadow: 0 0 24px rgba(16, 185, 129, 0.5);
+  letter-spacing: 0.02em;
+}
+
+.sw-boot-role {
+  font-size: clamp(12px, 1.6vw, 15px);
+  letter-spacing: 0.3em;
+  color: #22d3ee;
+}
+
+.sw-boot-sub {
+  font-size: 11px;
+  color: rgba(167, 243, 208, 0.85);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+.sw-boot-hint {
+  margin-top: 18px;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: rgba(16, 185, 129, 0.8);
+  animation: sw-breathe 2.6s ease-in-out infinite;
+}
+
+@keyframes sw-breathe {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+/* ---- HUD / giant numeral / cards ---- */
+
+.sw-hud {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: #34d399;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 4px;
+  padding: 5px 10px;
+  width: fit-content;
+}
+
+.sw-hud-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.sw-hud-sys { color: #34d399; }
+.sw-hud-sep { color: rgba(52, 211, 153, 0.5); }
+.sw-hud-name { color: #22d3ee; font-weight: 700; }
+.sw-hud-status { color: rgba(167, 243, 208, 0.8); }
+
+.sw-giant {
+  position: absolute;
+  right: -6px;
+  top: 34px;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.sw-giant-num {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: clamp(110px, 18vw, 230px);
+  font-weight: 700;
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(16, 185, 129, 0.28);
+}
+
+.sw-giant-label {
+  font-size: 10px;
+  letter-spacing: 0.5em;
+  color: rgba(16, 185, 129, 0.4);
+}
+
+.sw-card {
+  position: relative;
+  max-width: 620px;
+  background: rgba(0, 0, 0, 0.72);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 10px;
+  padding: 22px 24px;
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.14);
+  backdrop-filter: blur(6px);
+}
+
+.sw-card-final {
+  border-color: rgba(6, 182, 212, 0.55);
+  box-shadow: 0 0 50px rgba(6, 182, 212, 0.2);
+}
+
+.sw-card-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: #22d3ee;
+  margin-bottom: 10px;
+}
+
+.sw-card-title {
+  font-size: clamp(20px, 3vw, 30px);
+  font-weight: 700;
+  color: #a7f3d0;
+  line-height: 1.2;
+}
+
+.sw-card-when {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #67e8f9;
+}
+
+.sw-card-body {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.75;
+  color: rgba(209, 250, 229, 0.88);
+}
+
+.sw-cta {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #67e8f9;
+  border: 1px solid rgba(6, 182, 212, 0.5);
+  border-radius: 4px;
+  padding: 8px 14px;
+  background: rgba(6, 182, 212, 0.06);
+  transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.sw-cta:hover {
+  background: rgba(6, 182, 212, 0.14);
+  border-color: #22d3ee;
+  color: #cffafe;
+  box-shadow: 0 0 18px rgba(6, 182, 212, 0.35);
+}
+
+.sw-cta:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 2px;
+}
+
+.sw-cta-ghost {
+  color: #6ee7b7;
+  border-color: rgba(16, 185, 129, 0.5);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.sw-cta-ghost:hover {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: #34d399;
+  color: #d1fae5;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.3);
+}
+
+.sw-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sw-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 720px;
+}
+
+.sw-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 6px;
+  padding: 10px 14px;
+}
+
+.sw-chip-key {
+  font-size: 12px;
+  font-weight: 700;
+  color: #a7f3d0;
+}
+
+.sw-chip-val {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: rgba(103, 232, 249, 0.85);
+}
+
+.sw-tagwrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 720px;
+}
+
+.sw-tag {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.05);
+  border-radius: 9999px;
+  padding: 6px 12px;
+}
+
+.sw-link-hint {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: rgba(16, 185, 129, 0.65);
+}
+
+/* ---- Floating position readout ---- */
+
+.sw-float {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 30;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  pointer-events: none;
+}
+
+.sw-float-num {
+  font-size: 10px;
+  color: rgba(103, 232, 249, 0.8);
+}
+
+.sw-float-name {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: rgba(16, 185, 129, 0.85);
+}
+
+/* ---- Skip / revisit static card ---- */
+
+.sw-static {
+  position: relative;
+  z-index: 10;
+  min-height: 42vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px 8px;
+}
+
+.sw-static-card {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 760px;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.15);
+}
+
+.sw-rain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.sw-static-inner {
+  position: relative;
+  z-index: 1;
+  padding: 30px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.sw-static-sys {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #22d3ee;
+}
+
+.sw-static-title {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  color: #a7f3d0;
+}
+
+.sw-static-sub {
+  font-size: 12px;
+  color: rgba(209, 250, 229, 0.8);
+  max-width: 460px;
+}
+
+.sw-static-inner .sw-cta-row {
+  margin-top: 10px;
+  justify-content: center;
+}
+
+/* Terminal anchor lands below the fixed header. */
+#main-terminal {
+  scroll-margin-top: 76px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sw-boot-hint {
+    animation: none;
+    opacity: 0.8;
+  }
+  .sw-progress-fill {
+    transition: none;
+  }
+}
+
+/* World scrolled out of view — drop the fixed sky/HUD layers. */
+.sw-wrap.sw-offstage .sw-canvas,
+.sw-wrap.sw-offstage .sw-stage,
+.sw-wrap.sw-offstage .sw-chrome,
+.sw-wrap.sw-offstage .sw-float {
+  display: none;
+}
+
+/* ---- CSS sky fallback (WebGL unavailable) ---- */
+.sw-sky-fallback {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 32% at 50% 62%, rgba(16, 185, 129, 0.16), transparent 70%),
+    radial-gradient(ellipse 45% 24% at 78% 22%, rgba(6, 182, 212, 0.10), transparent 70%),
+    linear-gradient(#010604 0%, #010604 54%, rgba(16, 185, 129, 0.05) 58%, #010604 100%);
+}
+
+.sw-sky-fallback::before {
+  /* retro perspective grid */
+  content: "";
+  position: absolute;
+  inset: 62% 0 0 0;
+  background-image:
+    linear-gradient(rgba(16, 185, 129, 0.13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 185, 129, 0.10) 1px, transparent 1px);
+  background-size: 90px 44px;
+  transform: perspective(340px) rotateX(58deg);
+  transform-origin: top center;
+}
+
+.sw-sky-fallback::after {
+  /* drifting scanline sun */
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  width: 220px;
+  height: 220px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(6, 182, 212, 0.22) 0 10px,
+    transparent 10px 18px
+  );
+  -webkit-mask-image: radial-gradient(circle, #000 0 62%, transparent 70%);
+  mask-image: radial-gradient(circle, #000 0 62%, transparent 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sw-sky-fallback::after {
+    animation: none;
+    opacity: 0.7;
+  }
+}
