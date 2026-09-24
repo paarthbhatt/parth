@@ -2,7 +2,7 @@
 
 > **Security Architect & AI Safety Engineer** | **Cyber Security Intern @ DRDO (SAG)** | **4× Hackathon Winner** | **Top 6% TryHackMe**
 
-Live Portfolio: [https://parthbhatt.me](https://parthbhatt.me)
+Live Portfolio: [https://parth-xi.vercel.app](https://parth-xi.vercel.app)
 
 ---
 

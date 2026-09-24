@@ -89,7 +89,7 @@ export default function OpengraphImage() {
             color: '#22d3ee',
           }}
         >
-          parthbhatt.me
+          parth-xi.vercel.app
         </div>
       </div>
     ),
