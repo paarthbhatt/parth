@@ -31,6 +31,8 @@ export default function IntroScene({ sectionRef, onFallback }: Props) {
   const captionRef = useRef<HTMLParagraphElement>(null)
   const engineRef = useRef<Engine | null>(null)
   const graphRef = useRef(0)
+  /** Label boxes are measured once; re-measured after a resize. */
+  const labelSize = useRef<({ w: number; h: number } | undefined)[]>([])
   const [ready, setReady] = useState(false)
   const [active, setActive] = useState<number | null>(null)
 
@@ -59,13 +61,33 @@ export default function IntroScene({ sectionRef, onFallback }: Props) {
       graphRef.current = f.graph
       const show = sstep(0.62, 0.95, f.graph)
       const labels = labelRefs.current
+      // Place labels beside their nodes, then settle collisions top-down: the
+      // graph slowly turns, so any static layout would let names cross.
+      const boxes: { i: number; x0: number; x1: number; y: number; h: number; left: boolean }[] = []
       for (let i = 0; i < f.nodes.length; i++) {
         const el = labels[i]
         if (!el) continue
         const n = f.nodes[i]
+        const w = labelSize.current[i]?.w ?? el.offsetWidth
+        const h = labelSize.current[i]?.h ?? el.offsetHeight
+        labelSize.current[i] = { w, h }
         const left = n.x > f.width * 0.66
-        const x = left ? n.x - 10 : n.x + 10
-        el.style.transform = `translate3d(${x.toFixed(1)}px, ${n.y.toFixed(1)}px, 0) translate(${left ? "-100%" : "0"}, -50%)`
+        const x0 = left ? n.x - 10 - w : n.x + 10
+        boxes.push({ i, x0, x1: x0 + w, y: n.y - h / 2, h, left })
+      }
+      boxes.sort((a, b) => a.y - b.y)
+      for (let k = 0; k < boxes.length; k++) {
+        const b = boxes[k]
+        for (let j = 0; j < k; j++) {
+          const o = boxes[j]
+          const overlapX = b.x0 < o.x1 + 6 && o.x0 < b.x1 + 6
+          if (overlapX && b.y < o.y + o.h + 2) b.y = o.y + o.h + 2
+        }
+      }
+      for (const b of boxes) {
+        const el = labels[b.i]!
+        const n = f.nodes[b.i]
+        el.style.transform = `translate3d(${b.x0.toFixed(1)}px, ${b.y.toFixed(1)}px, 0)`
         // Nodes at the back of the graph read a little quieter.
         el.style.opacity = String(show * (0.72 + 0.28 * clamp01(0.5 - n.depth * 0.5)))
         el.style.pointerEvents = show > 0.5 && n.visible ? "auto" : "none"
@@ -81,33 +103,97 @@ export default function IntroScene({ sectionRef, onFallback }: Props) {
         // system face it is
       }
       if (cancelled) return
-      try {
-        engine = await createEngine({
-          canvas,
-          graph,
-          fontFamily: family,
-          mobile,
-          finePointer,
-          forceWebGL,
-          onFrame,
+
+      // WebGPU first; if it fails to start, or breaks mid-run (lost device, driver
+      // bug), rebuild on the WebGL2 backend. If that fails too, show the poster.
+      // A canvas that has held a WebGPU context can't give out a WebGL one, so a
+      // fallback after a WebGPU failure renders into a fresh sibling canvas.
+      let surface = canvas
+      const freshSurface = () => {
+        const next = canvas.cloneNode(false) as HTMLCanvasElement
+        surface.after(next)
+        surface.style.display = "none"
+        if (surface !== canvas) surface.remove()
+        surface = next
+        // React only tracks the original canvas; mirror its fade-in on this one.
+        const mirror = new MutationObserver(() => {
+          next.dataset.ready = canvas.dataset.ready ?? "false"
         })
-      } catch (err) {
-        if (!cancelled) {
+        mirror.observe(canvas, { attributes: true, attributeFilter: ["data-ready"] })
+        cleanups.push(() => {
+          mirror.disconnect()
+          next.remove()
+        })
+      }
+
+      const start = async (useGL: boolean, attempt = 0): Promise<Engine | null> => {
+        let e: Engine
+        try {
+          e = await createEngine({
+            canvas: surface,
+            graph,
+            fontFamily: family,
+            mobile,
+            finePointer,
+            forceWebGL: useGL,
+            onFrame,
+            onError: (err) => {
+              if (cancelled) return
+              console.warn(`[intro] ${e.backend} rendering failed.`, err)
+              e.dispose()
+              if (engine === e) engine = null
+              if (e.backend === "webgpu") void swapIn(true)
+              else onFallback()
+            },
+          })
+        } catch (err) {
+          if (cancelled) return null
+          if (!useGL) {
+            console.warn("[intro] WebGPU unavailable, trying WebGL2.", err)
+            freshSurface()
+            return start(true)
+          }
+          // Right after a WebGPU device loss the browser may be restarting its GPU
+          // process and refuse new contexts for a moment: give it two retries.
+          if (attempt < 2) {
+            await new Promise((r) => setTimeout(r, 400 * (attempt + 1)))
+            if (cancelled) return null
+            freshSurface()
+            return start(true, attempt + 1)
+          }
           console.warn("[intro] 3D scene unavailable, showing the static graph.", err)
           onFallback()
+          return null
         }
-        return
+        if (cancelled) {
+          e.dispose()
+          return null
+        }
+        return e
       }
-      if (cancelled) {
-        engine.dispose()
-        return
+
+      const swapIn = async (useGL: boolean) => {
+        freshSurface()
+        const next = await start(useGL)
+        if (!next) return
+        engine = next
+        engineRef.current = next
+        section.dataset.backend = next.backend
+        section.dataset.particles = String(next.particles)
+        next.resize(stage.clientWidth, stage.clientHeight)
+        next.setProgress(progressOf())
+        next.setRunning(document.visibilityState === "visible")
       }
+
+      engine = await start(forceWebGL)
+      if (!engine) return
       engineRef.current = engine
       section.dataset.backend = engine.backend
       section.dataset.particles = String(engine.particles)
 
       // Size
       const ro = new ResizeObserver(() => {
+        labelSize.current = []
         engine?.resize(stage.clientWidth, stage.clientHeight)
       })
       ro.observe(stage)

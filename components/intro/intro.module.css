@@ -153,7 +153,10 @@
   left: 0;
   top: 0;
   display: block;
-  padding: 6px 8px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  /* A quiet backing so names stay legible over bright node clusters. */
+  background: rgb(0 0 0 / 0.62);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   font-size: 13px;
   font-weight: 500;
@@ -205,7 +208,7 @@
 
 .posterName {
   margin: 0;
-  font-family: var(--font-intro-display), system-ui, sans-serif;
+  font-family: var(--font-bricolage), system-ui, sans-serif;
   font-size: clamp(56px, 13vw, 168px);
   font-weight: 760;
   font-stretch: 88%;
@@ -258,7 +261,10 @@
 .posterLabel {
   position: absolute;
   display: block;
-  padding: 6px 8px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  /* A quiet backing so names stay legible over bright node clusters. */
+  background: rgb(0 0 0 / 0.62);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   font-size: 13px;
   font-weight: 500;

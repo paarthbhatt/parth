@@ -1,26 +1,11 @@
 import type { Metadata, Viewport } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
-import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import { SITE_URL } from '@/lib/site'
+import { bricolage } from '@/lib/fonts'
 import { contactInfo, socialLinks } from '@/lib/data'
 import './globals.css'
-
-/**
- * Bricolage Grotesque, display only. This latin file carries both the wght
- * (200–800) and wdth (75–100) axes; the page animates both. The opsz axis
- * lives in a heavier file and is not needed at display sizes.
- */
-const bricolage = localFont({
-  src: '../node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wdth-normal.woff2',
-  variable: '--font-bricolage',
-  weight: '200 800',
-  style: 'normal',
-  display: 'swap',
-  declarations: [{ prop: 'font-stretch', value: '75% 100%' }],
-  fallback: ['Arial Narrow', 'Arial', 'sans-serif'],
-})
 
 const TITLE = 'Parth Bhatt | Security Architect & AI Safety Engineer'
 const DESCRIPTION =

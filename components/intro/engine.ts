@@ -2,6 +2,7 @@ import {
   AdditiveBlending,
   BufferAttribute,
   BufferGeometry,
+  StorageInstancedBufferAttribute,
   Color,
   LineBasicNodeMaterial,
   LineSegments,
@@ -27,6 +28,7 @@ import {
   hash,
   instanceIndex,
   instancedArray,
+  bufferAttribute,
   length,
   max,
   mix,
@@ -61,6 +63,8 @@ export interface EngineOptions {
   mobile: boolean
   finePointer: boolean
   forceWebGL?: boolean
+  /** Called once if rendering fails after start-up (e.g. a lost or broken GPU device). */
+  onError?: (err: unknown) => void
   /** Called every frame with projected node positions (CSS px) for the HTML labels. */
   onFrame: (frame: FrameInfo) => void
 }
@@ -246,10 +250,26 @@ export async function createEngine(opts: EngineOptions): Promise<Engine> {
 
   const posBuf = instancedArray(pos, "vec3")
   const velBuf = instancedArray(vel, "vec3")
-  const homeBuf = instancedArray(home, "vec3")
-  const gaBuf = instancedArray(ga, "vec3")
-  const gbBuf = instancedArray(gb, "vec3")
-  const prmBuf = instancedArray(prm, "vec4")
+  /* Read-only per-particle data. WebGPU reads it as storage buffers. The WebGL2
+     backend emulates compute with transform feedback, which turns every storage
+     buffer a kernel touches into an output, and WebGL allows only 4. So on WebGL
+     the read-only data goes in as plain attributes and only pos/vel are written
+     back. They must still be *instanced* attributes: the backend dispatches the
+     kernel as an instanced draw when its first attribute is a storage-instanced
+     one and as a plain draw otherwise, so every attribute has to be the same
+     kind (StorageInstancedBufferAttribute) for either branch to index them
+     per particle. The same nodes then feed the instanced sprites. */
+  const isGL = backend === "webgl2"
+  const homeAttr = new StorageInstancedBufferAttribute(home, 3)
+  const homeNode = isGL ? bufferAttribute(homeAttr) : instancedArray(home, "vec3")
+  const readVec3 = (arr: Float32Array) =>
+    (isGL ? bufferAttribute(new StorageInstancedBufferAttribute(arr, 3)) : instancedArray(arr, "vec3").element(instanceIndex)) as unknown as Node<"vec3">
+  const prmStorage = isGL ? null : instancedArray(prm, "vec4")
+  const prmAttr = isGL ? (bufferAttribute(new StorageInstancedBufferAttribute(prm, 4)) as unknown as Node<"vec4">) : null
+  const markHomeDirty = () => {
+    if (isGL) homeAttr.needsUpdate = true
+    else (homeNode as ReturnType<typeof instancedArray>).value.needsUpdate = true
+  }
 
   /* ---------- uniforms ---------- */
   const uTime = uniform(0)
@@ -272,14 +292,17 @@ export async function createEngine(opts: EngineOptions): Promise<Engine> {
   /** Per-particle graph progress: staggered by seed so the name streams away, not snaps. */
   const graphProgress = (seed: Node<"float">) => smoothstep(0, 1, clamp(uGraph.mul(1.5).sub(seed.mul(0.5)), 0, 1))
 
+  const gaNode = readVec3(ga)
+  const gbNode = readVec3(gb)
+
   /* ---------- compute: one integration step per frame ---------- */
   const update = Fn(() => {
     const p = posBuf.element(instanceIndex)
     const v = velBuf.element(instanceIndex)
-    const home = homeBuf.element(instanceIndex)
-    const a = gaBuf.element(instanceIndex)
-    const b = gbBuf.element(instanceIndex)
-    const q = prmBuf.element(instanceIndex)
+    const home = (isGL ? homeNode : (homeNode as ReturnType<typeof instancedArray>).element(instanceIndex)) as unknown as Node<"vec3">
+    const a = gaNode
+    const b = gbNode
+    const q = (isGL ? prmAttr! : prmStorage!.element(instanceIndex)) as Node<"vec4">
 
     const seed = q.x
     const kind = q.y
@@ -342,7 +365,7 @@ export async function createEngine(opts: EngineOptions): Promise<Engine> {
   material.positionNode = posBuf.toAttribute()
   material.sizeNode = uSize
 
-  const q = prmBuf.toAttribute()
+  const q = (isGL ? prmAttr! : prmStorage!.toAttribute()) as Node<"vec4">
   const qSeed = q.x
   const qKind = q.y
   const rIsAmbient = step(qKind, -0.5).mul(step(-1.5, qKind))
@@ -417,11 +440,15 @@ export async function createEngine(opts: EngineOptions): Promise<Engine> {
         home[i * 3 + 1] = pts[i * 3 + 1]
         home[i * 3 + 2] = pts[i * 3 + 2]
       }
-      homeBuf.value.needsUpdate = true
+      markHomeDirty()
     }
     dText = fitDistance(nameRaster.width / 2, nameRaster.height / 2, wide ? 0.8 : 0.84)
     // Leave room for labels to the right of nodes.
-    dGraph = fitDistance(GRAPH_RADIUS * 1.18 + (wide ? 0.9 : 0.6), GRAPH_RADIUS * 1.1, 0.92)
+    // Portrait screens are width-bound: let the graph fill more of it, since the
+    // label solver keeps names apart vertically.
+    dGraph = wide
+      ? fitDistance(GRAPH_RADIUS * 1.18 + 0.9, GRAPH_RADIUS * 1.1, 0.92)
+      : fitDistance(GRAPH_RADIUS * 0.98, GRAPH_RADIUS * 1.1, 0.98)
   }
 
   const resize = (w: number, h: number) => {
@@ -455,12 +482,26 @@ export async function createEngine(opts: EngineOptions): Promise<Engine> {
     return t * t * (3 - 2 * t)
   }
 
+  let failed = false
+  const fail = (err: unknown) => {
+    if (failed || disposed) return
+    failed = true
+    cancelAnimationFrame(raf)
+    running = false
+    opts.onError?.(err)
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ;(renderer as any).onDeviceLost = (info: unknown) => fail(info)
+
   const frame = (now: number) => {
     if (!running || disposed) return
     raf = requestAnimationFrame(frame)
-    const dt = Math.min(1 / 30, Math.max(0.001, (now - last) / 1000))
+    const realDt = Math.max(0.001, (now - last) / 1000)
+    const dt = Math.min(1 / 30, realDt)
     last = now
-    elapsed += dt
+    // The timeline follows the wall clock so the name forms on time even on slow
+    // GPUs; only the physics step is clamped.
+    elapsed += Math.min(1, realDt)
     simTime += dt
 
     // The name resolves on its own within ~2.4s; scroll then takes it into the graph.
@@ -485,8 +526,13 @@ export async function createEngine(opts: EngineOptions): Promise<Engine> {
     camera.updateMatrixWorld()
     edgeGroup.rotation.y = uAngle.value
 
-    renderer.compute(update)
-    pipeline.render()
+    try {
+      renderer.compute(update)
+      pipeline.render()
+    } catch (err) {
+      fail(err)
+      return
+    }
 
     // Project nodes for the HTML labels.
     const c = Math.cos(uAngle.value)

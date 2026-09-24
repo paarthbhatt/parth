@@ -125,6 +125,52 @@ function layout(count: number, edges: GraphEdge[]): [number, number, number][] {
     q[2] = (q[2] - c[2]) * 0.7
     max = Math.max(max, Math.hypot(q[0], q[1], q[2]))
   }
+  const out = p.map((q) => [q[0] / max, q[1] / max, q[2] / max] as [number, number, number])
+  return spread(out)
+}
+
+/**
+ * Force layouts pack a connected cluster tight and fling unconnected projects to
+ * the rim, which piles labels on top of each other. Keep each node's direction
+ * but hand out radii evenly by rank, then push apart any pair that is still
+ * closer than a label-friendly gap.
+ */
+function spread(p: [number, number, number][]): [number, number, number][] {
+  const n = p.length
+  if (n < 3) return p
+  const order = p.map((q, i) => ({ i, r: Math.hypot(q[0], q[1], q[2]) })).sort((a, b) => a.r - b.r)
+  order.forEach(({ i, r }, rank) => {
+    const target = 0.3 + 0.7 * Math.pow(rank / (n - 1), 0.8)
+    const s = r > 1e-6 ? target / r : 0
+    if (s === 0) {
+      p[i] = [target, 0, 0]
+    } else {
+      p[i] = [p[i][0] * s, p[i][1] * s, p[i][2] * s]
+    }
+  })
+  const minGap = 1.1 / Math.sqrt(n)
+  for (let it = 0; it < 60; it++) {
+    let moved = false
+    for (let a = 0; a < n; a++) {
+      for (let b = a + 1; b < n; b++) {
+        // Labels live in screen space, so measure the gap mostly in x/y.
+        const dx = p[a][0] - p[b][0]
+        const dy = p[a][1] - p[b][1]
+        const dz = (p[a][2] - p[b][2]) * 0.35
+        const d = Math.max(1e-4, Math.hypot(dx, dy, dz))
+        if (d >= minGap) continue
+        const push = (minGap - d) / 2 / d
+        p[a][0] += dx * push
+        p[a][1] += dy * push
+        p[b][0] -= dx * push
+        p[b][1] -= dy * push
+        moved = true
+      }
+    }
+    if (!moved) break
+  }
+  let max = 1e-6
+  for (const q of p) max = Math.max(max, Math.hypot(q[0], q[1], q[2]))
   return p.map((q) => [q[0] / max, q[1] / max, q[2] / max])
 }
 
