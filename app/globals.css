@@ -853,7 +853,8 @@ html.lenis-on {
 
 .sw-chrome {
   position: fixed;
-  top: 3.75rem;
+  /* Clear the fixed site header (h-16 + border + gradient rule). */
+  top: 4.75rem;
   left: 0;
   right: 0;
   z-index: 30;
@@ -966,9 +967,13 @@ html.lenis-on body {
   overscroll-behavior-y: none;
 }
 
-/* Touch devices: no pinned flight — static, tappable stack.
-   Sticky centering stays, but panels are always interactive. */
+/* Touch devices: no 3D flight, and its panels only repeat the sections
+   below — drop the world entirely so visitors land on the content. */
 @media (hover: none), (max-width: 767px) {
+  .sw-wrap,
+  .sw-static {
+    display: none;
+  }
   .sw-canvas,
   .sw-stage,
   .sw-float,
@@ -1050,6 +1055,10 @@ html.lenis-on body {
   color: rgba(167, 243, 208, 0.85);
   max-width: 560px;
   line-height: 1.7;
+}
+
+.sw-boot-skip {
+  margin-top: 10px;
 }
 
 .sw-boot-hint {
@@ -1356,7 +1365,11 @@ html.lenis-on body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sw-boot-hint {
+  .sw-boot-skip {
+  margin-top: 10px;
+}
+
+.sw-boot-hint {
     animation: none;
     opacity: 0.8;
   }

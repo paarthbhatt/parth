@@ -420,5 +420,5 @@ export const contactInterests = [
 
 /** Shown in the "My pitch" modal. */
 export const pitchStatement =
-  "In a landscape of rapidly evolving AI risks, I bring a lethal combination of offensive security auditing and proactive infrastructure engineering. I specialize in developing resilient agentic workflows — implementing custom Write-Ahead Logging (WAL) and memory-compaction protocols for long-context stability. My philosophy is rooted in sovereignty: building systems that are unignorable, unexploitable, and self-improving. I don't just prompt; I architect the backbone of the next generation of autonomous intelligence."
+  "In a landscape of rapidly evolving AI risks, I combine offensive security auditing with proactive infrastructure engineering. I specialize in developing resilient agentic workflows — implementing custom Write-Ahead Logging (WAL) and memory-compaction protocols for long-context stability. My focus is building systems that are hardened by design, observable, and self-improving. I don't just prompt; I architect the backbone of the next generation of autonomous intelligence."
 

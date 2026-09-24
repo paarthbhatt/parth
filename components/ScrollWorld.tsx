@@ -96,7 +96,7 @@ function SceneGiant({ scene, index }: { scene: WorldScene; index: number }) {
 
 /* ── Scene panels (HTML layer floating over the 3D flight) ── */
 
-function BootScene() {
+function BootScene({ onSkip }: { onSkip?: () => void }) {
   return (
     <div className="sw-panel sw-boot">
       <SceneHud scene={SCENES[0]} />
@@ -107,7 +107,12 @@ function BootScene() {
       <p className="sw-boot-sub">
         Ex-DRDO (SAG) · CAISO · CAIT · CATP · arcX · 4× Hackathon Winner · Top 6% TryHackMe
       </p>
-      <p className="sw-boot-hint">scroll to fly ↓</p>
+      {onSkip && (
+        <button type="button" className="sw-cta sw-boot-skip" onClick={onSkip}>
+          [VIEW_PORTFOLIO ↓]
+        </button>
+      )}
+      <p className="sw-boot-hint">or scroll to fly ↓</p>
     </div>
   )
 }
@@ -358,7 +363,7 @@ function ContactScene() {
   )
 }
 
-const PANELS = [
+const PANELS: Array<(props: { onSkip?: () => void }) => ReactNode> = [
   BootScene,
   ExperienceScene,
   ProjectsScene,
@@ -651,14 +656,14 @@ export function ScrollWorld({ onEnterTerminal }: { onEnterTerminal: () => void }
       </div>
 
       {/* Fixed HUD chrome */}
-      <div className="sw-chrome" aria-hidden="true">
+      <div className="sw-chrome">
         <div className="sw-chrome-top">
-          <span className="sw-chrome-brand">PB://WORLD.SCAN</span>
+          <span className="sw-chrome-brand" aria-hidden="true">PB://WORLD.SCAN</span>
           <button type="button" className="sw-skip" onClick={enterTerminal}>
             SKIP_FLIGHT [ESC]
           </button>
         </div>
-        <div className="sw-progress">
+        <div className="sw-progress" aria-hidden="true">
           <div ref={progressFillRef} className="sw-progress-fill" style={{ width: "0%" }} />
         </div>
       </div>
@@ -678,7 +683,7 @@ export function ScrollWorld({ onEnterTerminal }: { onEnterTerminal: () => void }
               style={{ zIndex: index === active ? 2 : 1 }}
             >
               <div className="sw-seg-inner">
-                <Panel />
+                <Panel onSkip={index === 0 ? enterTerminal : undefined} />
               </div>
             </div>
           )

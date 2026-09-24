@@ -6,23 +6,23 @@ import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion"
 
 const bootSequence = [
   { delay: 0, kind: "cmd", text: "whoami" },
-  { delay: 300, kind: "out", text: "parth_bhatt" },
-  { delay: 600, kind: "cmd", text: "hostname" },
-  { delay: 900, kind: "out", text: "parth-bhatt.dev" },
-  { delay: 1200, kind: "cmd", text: "uname -srv" },
-  { delay: 1500, kind: "out", text: "Linux 6.x #1337 SMP x86_64" },
-  { delay: 1800, kind: "cmd", text: "ls modules" },
-  { delay: 2100, kind: "out", text: "skills.sys  certs.sys  projects.sys" },
-  { delay: 2400, kind: "cmd", text: "./scanner --capabilities --fast" },
-  { delay: 2700, kind: "out", text: "capabilities: ThreatIntel ✓  Cybersecurity ✓  WebSec ✓" },
-  { delay: 3100, kind: "cmd", text: "systemctl start portfolio.target" },
-  { delay: 3500, kind: "out", text: "mounting world.......... [ OK ]" },
-  { delay: 3900, kind: "out", text: "launching experience.... [ OK ]" },
+  { delay: 150, kind: "out", text: "parth_bhatt" },
+  { delay: 300, kind: "cmd", text: "hostname" },
+  { delay: 450, kind: "out", text: "parth-bhatt.dev" },
+  { delay: 600, kind: "cmd", text: "uname -srv" },
+  { delay: 750, kind: "out", text: "Linux 6.x #1337 SMP x86_64" },
+  { delay: 900, kind: "cmd", text: "ls modules" },
+  { delay: 1050, kind: "out", text: "skills.sys  certs.sys  projects.sys" },
+  { delay: 1200, kind: "cmd", text: "./scanner --capabilities --fast" },
+  { delay: 1350, kind: "out", text: "capabilities: ThreatIntel ✓  Cybersecurity ✓  WebSec ✓" },
+  { delay: 1550, kind: "cmd", text: "systemctl start portfolio.target" },
+  { delay: 1750, kind: "out", text: "mounting world.......... [ OK ]" },
+  { delay: 1950, kind: "out", text: "launching experience.... [ OK ]" },
 ] satisfies Array<{ delay: number; kind: "cmd" | "out"; text: string }>
 
 const LAST_DELAY = bootSequence[bootSequence.length - 1].delay
 /** Status line dwell, then the CRT power-off hands off to the live site. */
-const LAUNCH_DELAY = LAST_DELAY + 750
+const LAUNCH_DELAY = LAST_DELAY + 400
 const EXIT_DURATION = 650
 
 export function HackerBootSequence({ onProceed }: { onProceed: () => void }) {
@@ -91,7 +91,7 @@ export function HackerBootSequence({ onProceed }: { onProceed: () => void }) {
       timers.push(setTimeout(() => setCurrentLine(index), item.delay))
     })
     timers.push(setTimeout(() => setLaunching(true), LAUNCH_DELAY))
-    timers.push(setTimeout(beginExit, LAUNCH_DELAY + 700))
+    timers.push(setTimeout(beginExit, LAUNCH_DELAY + 400))
     return () => timers.forEach((timer) => clearTimeout(timer))
   }, [prefersReducedMotion])
 
@@ -102,13 +102,14 @@ export function HackerBootSequence({ onProceed }: { onProceed: () => void }) {
       aria-modal="true"
       aria-labelledby="boot-sequence-title"
       aria-describedby="boot-sequence-hint"
+      onClick={beginExit}
       className={`fixed inset-0 z-[60] bg-black flex flex-col overflow-hidden ${exiting ? "boot-out" : ""}`}
     >
       <h2 id="boot-sequence-title" className="sr-only">
         Terminal boot sequence
       </h2>
       <p id="boot-sequence-hint" className="sr-only">
-        Decorative intro animation. It plays automatically and opens the portfolio when it ends.
+        Decorative intro animation. It plays automatically and opens the portfolio when it ends. Press Escape or click to skip.
       </p>
 
       {/* Backdrop: pulsing grid + matrix rain */}
@@ -192,6 +193,7 @@ export function HackerBootSequence({ onProceed }: { onProceed: () => void }) {
           <span className={launching ? "text-cyan-300" : "text-emerald-400/80"}>
             {launching ? "status: ALL SYSTEMS OPERATIONAL — LAUNCHING…" : "status: boot in progress…"}
           </span>
+          <span className="hidden sm:inline text-emerald-500/60">[ESC / click to skip]</span>
           <span aria-hidden="true" className={launching ? "text-cyan-300 motion-safe:animate-pulse" : "text-emerald-500"}>
             {launching ? "▮▮▮▮" : "▊"}
           </span>
