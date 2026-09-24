@@ -1,0 +1,74 @@
+import { Mail, Linkedin, Github, Twitter } from "lucide-react"
+import { contactInfo, socialLinks } from "../lib/data"
+
+const socialIconClass =
+  "grid place-items-center w-11 h-11 bg-white/15 hover:bg-white/25 rounded-full shadow-lg hover:scale-110 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-cyan-600"
+
+export function Footer({ introDone }: { introDone: boolean }) {
+  return (
+    <footer
+      className={[
+        "rounded-t-2xl border-t border-emerald-500/25 bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 text-white backdrop-blur-md shadow-[0_-10px_30px_-12px_rgba(34,197,94,0.35)] transition-all duration-700",
+        introDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3",
+      ].join(" ")}
+    >
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-5">
+        <div className="scroll-reveal mb-2 sm:mb-3 flex flex-wrap items-center gap-1.5 sm:gap-2" aria-hidden="true">
+          <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-emerald-300" />
+          <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-cyan-300" />
+          <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-blue-300" />
+          <span className="ml-1 sm:ml-2 font-mono text-[10px] sm:text-xs opacity-80">/dev/portfolio – link-layer</span>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/15 text-white text-xs sm:text-sm font-bold flex items-center justify-center shadow-lg border border-white/20" aria-hidden="true">
+              PB
+            </div>
+            <span className="text-base sm:text-lg font-semibold">{contactInfo.name}</span>
+          </div>
+
+          <nav aria-label="Social links" className="flex items-center gap-2 sm:gap-3">
+            <span className="text-xs sm:text-sm opacity-90 mr-0.5 sm:mr-1" aria-hidden="true">Connect:</span>
+            <a href={`mailto:${contactInfo.email}`} className={socialIconClass} aria-label="Email Parth Bhatt">
+              <Mail className="w-4 h-4 text-white" aria-hidden="true" />
+            </a>
+            <a
+              href={socialLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={socialIconClass}
+              aria-label="Parth Bhatt on LinkedIn (opens in a new tab)"
+            >
+              <Linkedin className="w-4 h-4 text-white" aria-hidden="true" />
+            </a>
+            <a
+              href={socialLinks.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={socialIconClass}
+              aria-label="Parth Bhatt on GitHub (opens in a new tab)"
+            >
+              <Github className="w-4 h-4 text-white" aria-hidden="true" />
+            </a>
+            <a
+              href={socialLinks.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={socialIconClass}
+              aria-label="Parth Bhatt on X (opens in a new tab)"
+            >
+              <Twitter className="w-4 h-4 text-white" aria-hidden="true" />
+            </a>
+          </nav>
+        </div>
+
+        <div className="text-center mt-4 pt-4 border-t border-white/20">
+          <p className="text-xs sm:text-sm opacity-90">
+            © {new Date().getFullYear()} {contactInfo.name} • terminal-mode online • building secure, human‑centered software
+          </p>
+        </div>
+      </div>
+    </footer>
+  )
+}

@@ -8,9 +8,9 @@ Live Portfolio: [https://parth-xi.vercel.app](https://parth-xi.vercel.app)
 
 ## 📌 Overview
 
-This repository contains the source code for my cybersecurity and security engineering portfolio, built with **Next.js 15 (App Router)**, **React 19**, **TypeScript** and **three.js r186 (WebGPU + TSL)**.
+This repository contains the source code for my cybersecurity and security engineering portfolio, built using **Next.js 15 (App Router)**, **React 18**, **TypeScript**, and **Tailwind CSS v4**.
 
-The page opens on **"Signal from noise"**: a GPU particle field of pure entropy that resolves into my name, then, as you scroll, into a live graph of my real projects (linked where their tags share a word). It runs on WebGPU compute shaders, falls back to WebGL2 automatically (including mid-session if the GPU device is lost), and shows a static poster for reduced motion or no GPU. Below it, the content is set as a quiet technical report. It highlights my work in:
+Designed with a high-fidelity **"Hacker Terminal"** aesthetic — featuring interactive terminal boot sequences, Matrix code rain, CRT scanline overlays, responsive visual telemetry, and custom cursor spotlight effects — this platform highlights my work in:
 
 - **AI Safety & Agentic Security Frameworks** (Entropy Firewall, Atreides, Agentyc)
 - **Autonomous Security Agents & Vulnerability Scanners** (Robin Security Agent, Guardiant)
@@ -23,11 +23,11 @@ The page opens on **"Signal from noise"**: a GPU particle field of pure entropy 
 
 | Domain | Technologies |
 |---|---|
-| **Framework** | Next.js 15 (App Router), React 19 |
+| **Framework** | Next.js 15 (App Router) |
 | **Language** | TypeScript (Strict Mode) |
-| **3D** | three.js r186: WebGPURenderer, TSL compute + node materials, bloom via RenderPipeline; WebGL2 fallback |
-| **Motion** | CSS scroll-driven animations, View Transitions API, `motion` for layout animation |
-| **Type** | Bricolage Grotesque (variable wdth/wght), Geist Sans, Geist Mono |
+| **UI & Styling** | Tailwind CSS v4 + 1,000-line Custom Animation System |
+| **Icons & Design** | Lucide React, Geist Sans, Geist Mono |
+| **State & Hooks** | React 18 (`useScrollReveal`, `useIsMobile`) |
 | **Security Headers** | CSP, HSTS, X-Frame-Options, X-Content-Type-Options |
 | **Deployment** | Vercel (Production CI/CD) |
 
