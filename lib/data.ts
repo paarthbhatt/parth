@@ -174,7 +174,23 @@ export const achievementsData = [
    PROJECTS — Security & AI Security Focus
    ─────────────────────────────────────────────── */
 
-export const securityProjectsData = [
+/**
+ * Optional fields on the three featured projects, copied verbatim from the
+ * résumé: `stack` (the résumé's stack line) and `highlights` (its bullets).
+ * The Work section features every project that has `highlights`, in order.
+ */
+export type SecurityProject = {
+  title: string
+  tag: string
+  img: string
+  description: string
+  url: string
+  sourceUrl: string
+  stack?: string
+  highlights?: readonly string[]
+}
+
+export const securityProjectsData: SecurityProject[] = [
   {
     title: "Entropy Firewall",
     tag: "AI Security & Firewall",
@@ -182,6 +198,11 @@ export const securityProjectsData = [
     description: "Advanced LLM firewall solution offering proactive defense for autonomous agents and large language models.",
     url: "https://github.com/paarthbhatt/entropy-firewall",
     sourceUrl: "https://github.com/paarthbhatt/entropy-firewall",
+    stack: "Python | Open Source",
+    highlights: [
+      "Architected a production-ready LLM firewall intercepting AI requests in real time with sub-millisecond latency.",
+      "28+ detection patterns across 8 OWASP categories with a Redis-backed rate limiter and PII redaction engine.",
+    ],
   },
   {
     title: "Robin Security Agent",
@@ -198,6 +219,11 @@ export const securityProjectsData = [
     description: "Autonomous agent execution framework featuring long-context memory compaction and threat-resilient workflow isolation.",
     url: "https://atreides-web-liard.vercel.app/",
     sourceUrl: "https://github.com/paarthbhatt/Atreides",
+    stack: "TypeScript | Agentic AI",
+    highlights: [
+      "Built an autonomous agent execution framework with long-context memory compaction and threat-resilient workflow isolation.",
+      "Engineered for high-reliability agentic pipelines where security guarantees and state continuity are hard requirements.",
+    ],
   },
   {
     title: "Guardiant Security",
@@ -206,6 +232,11 @@ export const securityProjectsData = [
     description: "Enterprise vulnerability monitoring & threat intelligence platform for active application defense.",
     url: "https://guardiant-website.vercel.app/",
     sourceUrl: "https://github.com/paarthbhatt/Guardiant",
+    stack: "TypeScript, Docker, Node.js",
+    highlights: [
+      "Multi-agent vulnerability scanner for AI-generated code that surfaces zero-days traditional static analysis misses.",
+      "8-agent parallel scanning architecture with an orchestrator layer and research-driven analysis engine.",
+    ],
   },
   {
     title: "Agentyc Framework",
@@ -419,6 +450,38 @@ export const contactInterests = [
 ]
 
 /** Shown in the "My pitch" modal. */
+/** Skill groups, verbatim from the résumé. */
+export const capabilitiesData = [
+  {
+    group: "Offensive Security",
+    items: ["Penetration Testing", "Web App Security", "Vulnerability Assessment", "OSINT", "Exploit Development", "OWASP Top 10"],
+  },
+  {
+    group: "Defensive / AI",
+    items: ["LLM Security", "Prompt Injection Mitigation", "Threat Intelligence", "SOC Operations", "Agentic AI", "MCP"],
+  },
+  {
+    group: "Tools",
+    items: ["Burp Suite", "Metasploit", "Nmap", "Wireshark", "Docker", "Linux (Kali/Debian)", "Git", "PostgreSQL", "Redis"],
+  },
+  {
+    group: "Dev Stack",
+    items: ["Python", "TypeScript", "JavaScript", "C++", "Next.js", "React", "Three.js", "Node.js"],
+  },
+] as const
+
+/** Education and platform standing, verbatim from the résumé. */
+export const educationData = {
+  degree: "B.Tech in Computer Science and Engineering",
+  school: "NIIT University",
+  when: "2024 – 2028",
+} as const
+
+export const tryHackMeStanding = {
+  rank: "Top 6% globally",
+  paths: "SOC Level 1 and Junior Pentester paths completed.",
+} as const
+
 export const pitchStatement =
   "In a landscape of rapidly evolving AI risks, I combine offensive security auditing with proactive infrastructure engineering. I specialize in developing resilient agentic workflows — implementing custom Write-Ahead Logging (WAL) and memory-compaction protocols for long-context stability. My focus is building systems that are hardened by design, observable, and self-improving. I don't just prompt; I architect the backbone of the next generation of autonomous intelligence."
 

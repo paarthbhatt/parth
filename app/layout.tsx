@@ -1,20 +1,35 @@
 import type { Metadata, Viewport } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
+import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
-import { ScrollProgress } from '@/components/ScrollProgress'
-import { CursorGlow } from '@/components/CursorGlow'
 import { SITE_URL } from '@/lib/site'
 import { contactInfo, socialLinks } from '@/lib/data'
 import './globals.css'
+
+/**
+ * Bricolage Grotesque, display only. This latin file carries both the wght
+ * (200–800) and wdth (75–100) axes; the page animates both. The opsz axis
+ * lives in a heavier file and is not needed at display sizes.
+ */
+const bricolage = localFont({
+  src: '../node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wdth-normal.woff2',
+  variable: '--font-bricolage',
+  weight: '200 800',
+  style: 'normal',
+  display: 'swap',
+  declarations: [{ prop: 'font-stretch', value: '75% 100%' }],
+  fallback: ['Arial Narrow', 'Arial', 'sans-serif'],
+})
 
 const TITLE = 'Parth Bhatt | Security Architect & AI Safety Engineer'
 const DESCRIPTION =
   'Portfolio of Parth Bhatt – Security Architect, AI Safety Engineer, and ex-DRDO (SAG) Security Intern. Building self-defending software pipelines, LLM firewalls, and autonomous security agents. CAISO & CAIT certified. B.Tech student from New Delhi.'
 
 export const viewport: Viewport = {
-  themeColor: '#000000',
-  colorScheme: 'dark',
+  // Paper: the page color below the intro.
+  themeColor: '#EEF0F2',
+  colorScheme: 'light',
 }
 
 export const metadata: Metadata = {
@@ -166,15 +181,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable} ${bricolage.variable}`}>
+      <body>
         <script
           type="application/ld+json"
           // Serialized from a local literal, not user input.
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        <ScrollProgress />
-        <CursorGlow />
         {children}
         <Analytics />
       </body>
