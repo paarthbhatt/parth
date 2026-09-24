@@ -111,6 +111,8 @@ export default function IntroScene({ sectionRef, onFallback }: Props) {
       let surface = canvas
       const freshSurface = () => {
         const next = canvas.cloneNode(false) as HTMLCanvasElement
+        // The original may already be hidden by an earlier swap; the copy must show.
+        next.style.display = ""
         surface.after(next)
         surface.style.display = "none"
         if (surface !== canvas) surface.remove()

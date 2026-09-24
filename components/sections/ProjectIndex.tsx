@@ -102,21 +102,49 @@ export function ProjectIndex({ items }: { items: IndexItem[] }) {
   }, [])
 
   // Deep links (the intro graph links to #project-…) open the target row.
-  const openFromHash = useCallback(() => {
-    const id = decodeURIComponent(window.location.hash.slice(1))
-    if (!id || !items.some((i) => i.id === id)) return
-    setFilter("all")
-    requestAnimationFrame(() => {
-      const details = document.getElementById(id)?.querySelector("details")
-      if (details) details.open = true
-    })
-  }, [items])
+  /**
+   * Opens a project row targeted by a link (e.g. from the intro graph). The row
+   * may be hidden by the current filter, in which case the browser's own anchor
+   * jump already missed it: reset the filter, then open and scroll ourselves
+   * once the row has rendered.
+   */
+  const openItem = useCallback(
+    (id: string) => {
+      if (!id || !items.some((i) => i.id === id)) return false
+      setFilter("all")
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          const row = document.getElementById(id)
+          if (!row) return
+          const details = row.querySelector("details")
+          if (details) details.open = true
+          row.scrollIntoView({ block: "start" })
+        }),
+      )
+      return true
+    },
+    [items],
+  )
 
   useEffect(() => {
-    openFromHash()
-    window.addEventListener("hashchange", openFromHash)
-    return () => window.removeEventListener("hashchange", openFromHash)
-  }, [openFromHash])
+    const fromHash = () => openItem(decodeURIComponent(window.location.hash.slice(1)))
+    // Clicking a link to the hash that is already in the URL fires no
+    // hashchange, so catch same-page project links directly too.
+    const onClick = (e: globalThis.MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return
+      const a = (e.target as Element | null)?.closest?.('a[href^="#"]')
+      if (!a) return
+      const id = decodeURIComponent(a.getAttribute("href")!.slice(1))
+      if (id === decodeURIComponent(window.location.hash.slice(1))) openItem(id)
+    }
+    fromHash()
+    window.addEventListener("hashchange", fromHash)
+    document.addEventListener("click", onClick)
+    return () => {
+      window.removeEventListener("hashchange", fromHash)
+      document.removeEventListener("click", onClick)
+    }
+  }, [openItem])
 
   const count = (f: Filter) => (f === "all" ? items.length : items.filter((i) => i.group === f).length)
 
